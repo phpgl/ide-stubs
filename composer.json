@@ -1,0 +1,31 @@
+{
+    "name": "phpgl/ide-stubs",
+    "type": "library",
+    "description": "IDE Stubs for PHP-GLFW / OpenGL. (PHPStorm, VSCode, etc.)",
+    "keywords": [
+        "php-glfw",
+        "glfw",
+        "opengl",
+        "3d",
+        "rendering",
+        "PhpStorm",
+        "autocomplete"
+    ],
+    "homepage": "https://phpgl.net",
+    "authors": [
+        {
+            "name": "Mario Döring",
+            "homepage": "https://github.com/mario-deluna"
+        },
+        {
+            "name": "Contributors",
+            "homepage": "https://github.com/phpgl/ide-stubs/graphs/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=8.0"
+    },
+    "autoload-dev": {
+        "files": ["src/phpglfw.php"]
+    }
+}
