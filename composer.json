@@ -11,6 +11,10 @@
         "PhpStorm",
         "autocomplete"
     ],
+     "license": [
+       "MIT",
+       "Apache-2.0"
+    ],
     "homepage": "https://phpgl.net",
     "authors": [
         {
