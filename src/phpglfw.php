@@ -1,48 +1,272 @@
 <?php 
 namespace GL\Math 
 {
- 
-    class Vec2 {
+     
+    class Vec2 
+    {
+        /**
+         * Virtual property for "x" (0)
+         */
+        public float $x;
+
+        /**
+         * Virtual property for "y" (1)
+         */
+        public float $y;
+
+        /**
+         * Virtual property for "r" (0)
+         */
+        public float $r;
+
+        /**
+         * Virtual property for "g" (1)
+         */
+        public float $g;
+
+        
+        /**
+         * Constructor
+         */
         public function __construct(?float $x = null, ?float $y = null) {}
+
+        /**
+         * Returns the length of the vector
+         * 
+         * @return float
+         */
         public function length() : float {}
+        
+        /**
+         * Returns the dot product of this vector and another
+         * 
+         * @return float
+         */
         public function dot(Vec2 $right) : float {}
+
+        /**
+         * Returns the distance between this vector and another
+         * 
+         * @return float
+         */
         public function distance(Vec2 $right) : float {}
+
+        /**
+         * Returns squared distance between this vector and another
+         * 
+         * @return float
+         */
         public function distance2(Vec2 $right) : float {}
+
+        /**
+         * Returns a normalized version of this vector
+         */
         public function normalize() : Vec2 {}
+
+        /**
+         * Creates a new Vec2 where each component is x if x >= 0; otherwise, -x
+         */
         public function abs() : Vec2 {}
         public function __toString() : string {}
     }
  
-    class Vec3 {
+    class Vec3 
+    {
+        /**
+         * Virtual property for "x" (0)
+         */
+        public float $x;
+
+        /**
+         * Virtual property for "y" (1)
+         */
+        public float $y;
+
+        /**
+         * Virtual property for "z" (2)
+         */
+        public float $z;
+
+        /**
+         * Virtual property for "r" (0)
+         */
+        public float $r;
+
+        /**
+         * Virtual property for "g" (1)
+         */
+        public float $g;
+
+        /**
+         * Virtual property for "b" (2)
+         */
+        public float $b;
+
+        
+        /**
+         * Constructor
+         */
         public function __construct(?float $x = null, ?float $y = null, ?float $z = null) {}
+
+        /**
+         * Returns the length of the vector
+         * 
+         * @return float
+         */
         public function length() : float {}
+        
+        /**
+         * Returns the dot product of this vector and another
+         * 
+         * @return float
+         */
         public function dot(Vec3 $right) : float {}
+
+        /**
+         * Returns the distance between this vector and another
+         * 
+         * @return float
+         */
         public function distance(Vec3 $right) : float {}
+
+        /**
+         * Returns squared distance between this vector and another
+         * 
+         * @return float
+         */
         public function distance2(Vec3 $right) : float {}
+
+        /**
+         * Returns a normalized version of this vector
+         */
         public function normalize() : Vec3 {}
+
+        /**
+         * Creates a new Vec3 where each component is x if x >= 0; otherwise, -x
+         */
         public function abs() : Vec3 {}
         public function __toString() : string {}
     }
  
-    class Vec4 {
+    class Vec4 
+    {
+        /**
+         * Virtual property for "x" (0)
+         */
+        public float $x;
+
+        /**
+         * Virtual property for "y" (1)
+         */
+        public float $y;
+
+        /**
+         * Virtual property for "z" (2)
+         */
+        public float $z;
+
+        /**
+         * Virtual property for "w" (3)
+         */
+        public float $w;
+
+        /**
+         * Virtual property for "r" (0)
+         */
+        public float $r;
+
+        /**
+         * Virtual property for "g" (1)
+         */
+        public float $g;
+
+        /**
+         * Virtual property for "b" (2)
+         */
+        public float $b;
+
+        /**
+         * Virtual property for "a" (3)
+         */
+        public float $a;
+
+        
+        /**
+         * Constructor
+         */
         public function __construct(?float $x = null, ?float $y = null, ?float $z = null, ?float $w = null) {}
+
+        /**
+         * Returns the length of the vector
+         * 
+         * @return float
+         */
         public function length() : float {}
+        
+        /**
+         * Returns the dot product of this vector and another
+         * 
+         * @return float
+         */
         public function dot(Vec4 $right) : float {}
+
+        /**
+         * Returns the distance between this vector and another
+         * 
+         * @return float
+         */
         public function distance(Vec4 $right) : float {}
+
+        /**
+         * Returns squared distance between this vector and another
+         * 
+         * @return float
+         */
         public function distance2(Vec4 $right) : float {}
+
+        /**
+         * Returns a normalized version of this vector
+         */
         public function normalize() : Vec4 {}
+
+        /**
+         * Creates a new Vec4 where each component is x if x >= 0; otherwise, -x
+         */
         public function abs() : Vec4 {}
         public function __toString() : string {}
     }
  
-    class Mat4 {
+    class Mat4 
+    {
+        
+        /**
+         * Constructor
+         */
         public function __construct() {}
-        public function length() : float {}
-        public function dot(Mat4 $right) : float {}
-        public function distance(Mat4 $right) : float {}
-        public function distance2(Mat4 $right) : float {}
-        public function normalize() : Mat4 {}
-        public function abs() : Mat4 {}
+
+
+        /**
+         * Constructs and returns a new matrix based on the given array of values
+         */
+        public static function fromArray(array $values) : Mat4 {}
+
+        /**
+         * Creates and returns a copy of the current matrix
+         */
+        public function copy() : Mat4 {}
+        public function row(int $index) : Vec4 {}
+        public function setRow(int $index, Vec4 $row) : void {}
+        public function col(int $index) : Vec4 {}
+        public function setCol(int $index, Vec4 $col) : void {}
+        public function lookAt(Vec3 $eye, Vec3 $center, Vec3 $up) : void {}
+        public function perspective(float $fov, float $aspect, float $near, float $far) : void {}
+        public function ortho(float $left, float $right, float $bottom, float $top, float $near, float $far) : void {}
+        public function transpose() : void {}
+        public function inverse() : void {}
+        public function scale(Vec3 $scale) : void {}
+        public function translate(Vec3 $scale) : void {}
+        public function rotate(float $angle, Vec3 $axis) : void {}
+        public function determinant() : float {}
         public function __toString() : string {}
     }
 };
@@ -75,6 +299,26 @@ namespace GL\Buffer
          * @return void 
          */
         public function push(float $value) : void {}
+
+        /**
+         * Pushes the values of a Vec2 object into the buffer
+         */
+        public function pushVec2(\GL\Math\Vec2 $vec) : void {}
+
+        /**
+         * Pushes the values of a Vec3 object into the buffer
+         */
+        public function pushVec3(\GL\Math\Vec3 $vec) : void {}
+        
+        /**
+         * Pushes the values of a Vec4 object into the buffer
+         */
+        public function pushVec4(\GL\Math\Vec4 $vec) : void {}
+        
+        /**
+         * Pushes the values of a Mat4 (16) object into the buffer
+         */
+        public function pushMat4(\GL\Math\Mat4 $matrix) : void {}
 
         /**
          * Fills the buffer with $count amount of values. The second argument is the value that is filled in.
@@ -136,6 +380,7 @@ namespace GL\Buffer
          */
         public function push(float $value) : void {}
 
+
         /**
          * Fills the buffer with $count amount of values. The second argument is the value that is filled in.
          *
@@ -195,6 +440,7 @@ namespace GL\Buffer
          * @return void 
          */
         public function push(float $value) : void {}
+
 
         /**
          * Fills the buffer with $count amount of values. The second argument is the value that is filled in.
@@ -256,6 +502,7 @@ namespace GL\Buffer
          */
         public function push(int $value) : void {}
 
+
         /**
          * Fills the buffer with $count amount of values. The second argument is the value that is filled in.
          *
@@ -315,6 +562,7 @@ namespace GL\Buffer
          * @return void 
          */
         public function push(int $value) : void {}
+
 
         /**
          * Fills the buffer with $count amount of values. The second argument is the value that is filled in.
@@ -376,6 +624,7 @@ namespace GL\Buffer
          */
         public function push(int $value) : void {}
 
+
         /**
          * Fills the buffer with $count amount of values. The second argument is the value that is filled in.
          *
@@ -435,6 +684,7 @@ namespace GL\Buffer
          * @return void 
          */
         public function push(int $value) : void {}
+
 
         /**
          * Fills the buffer with $count amount of values. The second argument is the value that is filled in.
@@ -496,6 +746,7 @@ namespace GL\Buffer
          */
         public function push(int $value) : void {}
 
+
         /**
          * Fills the buffer with $count amount of values. The second argument is the value that is filled in.
          *
@@ -556,6 +807,7 @@ namespace GL\Buffer
          */
         public function push(int $value) : void {}
 
+
         /**
          * Fills the buffer with $count amount of values. The second argument is the value that is filled in.
          *
@@ -610,6 +862,8 @@ namespace {
      * candidates for culling. Symbolic constants <constant>GL_FRONT</constant>,
      * <constant>GL_BACK</constant>, and <constant>GL_FRONT_AND_BACK</constant> are
      * accepted. The initial value is <constant>GL_BACK</constant>.
+     * 
+     * @return void
      */ 
     function glCullFace(int $mode) : void {};
  
@@ -619,6 +873,8 @@ namespace {
      * @param int $mode Specifies the orientation of front-facing polygons.
      * <constant>GL_CW</constant> and <constant>GL_CCW</constant> are accepted. The
      * initial value is <constant>GL_CCW</constant>.
+     * 
+     * @return void
      */ 
     function glFrontFace(int $mode) : void {};
  
@@ -633,6 +889,8 @@ namespace {
      * @param int $mode Specifies a symbolic constant indicating the desired
      * behavior. <constant>GL_FASTEST</constant>, <constant>GL_NICEST</constant>,
      * and <constant>GL_DONT_CARE</constant> are accepted.
+     * 
+     * @return void
      */ 
     function glHint(int $target, int $mode) : void {};
  
@@ -641,6 +899,8 @@ namespace {
      * 
      * @param float $width Specifies the width of rasterized lines. The initial
      * value is 1.
+     * 
+     * @return void
      */ 
     function glLineWidth(float $width) : void {};
  
@@ -649,6 +909,8 @@ namespace {
      * 
      * @param float $size Specifies the diameter of rasterized points. The initial
      * value is 1.
+     * 
+     * @return void
      */ 
     function glPointSize(float $size) : void {};
  
@@ -661,6 +923,8 @@ namespace {
      * are <constant>GL_POINT</constant>, <constant>GL_LINE</constant>, and
      * <constant>GL_FILL</constant>. The initial value is
      * <constant>GL_FILL</constant> for both front- and back-facing polygons.
+     * 
+     * @return void
      */ 
     function glPolygonMode(int $face, int $mode) : void {};
  
@@ -673,7 +937,9 @@ namespace {
      * @param int $width Specify the width and height of the scissor box. When a GL
      * context is first attached to a window, width and height are set to the
      * dimensions of that window.
-     * @param int $height
+     * @param int $height 
+     * 
+     * @return void
      */ 
     function glScissor(int $x, int $y, int $width, int $height) : void {};
  
@@ -682,7 +948,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $pname 
-     * @param float $param
+     * @param float $param 
+     * 
+     * @return void
      */ 
     function glTexParameterf(int $target, int $pname, float $param) : void {};
  
@@ -691,7 +959,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $pname 
-     * @param \GL\Buffer\FloatBuffer|array $params
+     * @param \GL\Buffer\FloatBuffer|array $params 
+     * 
+     * @return void
      */ 
     function glTexParameterfv(int $target, int $pname, \GL\Buffer\FloatBuffer|array $params) : void {};
  
@@ -700,7 +970,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $pname 
-     * @param int $param
+     * @param int $param 
+     * 
+     * @return void
      */ 
     function glTexParameteri(int $target, int $pname, int $param) : void {};
  
@@ -709,7 +981,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $pname 
-     * @param \GL\Buffer\IntBuffer|array $params
+     * @param \GL\Buffer\IntBuffer|array $params 
+     * 
+     * @return void
      */ 
     function glTexParameteriv(int $target, int $pname, \GL\Buffer\IntBuffer|array $params) : void {};
  
@@ -773,7 +1047,9 @@ namespace {
      * <constant>GL_UNSIGNED_INT_8_8_8_8_REV</constant>,
      * <constant>GL_UNSIGNED_INT_10_10_10_2</constant>, and
      * <constant>GL_UNSIGNED_INT_2_10_10_10_REV</constant>.
-     * @param \GL\Buffer\BufferInterface $data
+     * @param \GL\Buffer\BufferInterface $data 
+     * 
+     * @return void
      */ 
     function glTexImage2D(int $target, int $level, int $internalformat, int $width, int $height, int $border, int $format, int $type, \GL\Buffer\BufferInterface $data) : void {};
  
@@ -793,6 +1069,8 @@ namespace {
      * <constant>GL_COLOR_ATTACHMENT$m$</constant> and <constant>GL_NONE</constant>
      * enums are accepted, where <constant>$m$</constant> is a value between 0 and
      * <constant>GL_MAX_COLOR_ATTACHMENTS</constant>.
+     * 
+     * @return void
      */ 
     function glDrawBuffer(int $buf) : void {};
  
@@ -803,6 +1081,8 @@ namespace {
      * The three masks are <constant>GL_COLOR_BUFFER_BIT</constant>,
      * <constant>GL_DEPTH_BUFFER_BIT</constant>, and
      * <constant>GL_STENCIL_BUFFER_BIT</constant>.
+     * 
+     * @return void
      */ 
     function glClear(int $mask) : void {};
  
@@ -813,7 +1093,9 @@ namespace {
      * the color buffers are cleared. The initial values are all 0.
      * @param float $green 
      * @param float $blue 
-     * @param float $alpha
+     * @param float $alpha 
+     * 
+     * @return void
      */ 
     function glClearColor(float $red, float $green, float $blue, float $alpha) : void {};
  
@@ -822,6 +1104,8 @@ namespace {
      * 
      * @param int $s Specifies the index used when the stencil buffer is cleared.
      * The initial value is 0.
+     * 
+     * @return void
      */ 
     function glClearStencil(int $s) : void {};
  
@@ -830,6 +1114,8 @@ namespace {
      * 
      * @param float $depth Specifies the depth value used when the depth buffer is
      * cleared. The initial value is 1.
+     * 
+     * @return void
      */ 
     function glClearDepth(float $depth) : void {};
  
@@ -838,6 +1124,8 @@ namespace {
      * 
      * @param int $mask Specifies a bit mask to enable and disable writing of
      * individual bits in the stencil planes. Initially, the mask is all 1's.
+     * 
+     * @return void
      */ 
     function glStencilMask(int $mask) : void {};
  
@@ -850,7 +1138,9 @@ namespace {
      * written.
      * @param bool $green 
      * @param bool $blue 
-     * @param bool $alpha
+     * @param bool $alpha 
+     * 
+     * @return void
      */ 
     function glColorMask(bool $red, bool $green, bool $blue, bool $alpha) : void {};
  
@@ -860,13 +1150,17 @@ namespace {
      * @param bool $flag Specifies whether the depth buffer is enabled for writing.
      * If flag is <constant>GL_FALSE</constant>, depth buffer writing is disabled.
      * Otherwise, it is enabled. Initially, depth buffer writing is enabled.
+     * 
+     * @return void
      */ 
     function glDepthMask(bool $flag) : void {};
  
     /**
      * glDisable
      * 
-     * @param int $cap
+     * @param int $cap 
+     * 
+     * @return void
      */ 
     function glDisable(int $cap) : void {};
  
@@ -874,16 +1168,20 @@ namespace {
      * enable or disable server-side GL capabilities
      * 
      * @param int $cap Specifies a symbolic constant indicating a GL capability.
+     * 
+     * @return void
      */ 
     function glEnable(int $cap) : void {};
  
     /**
      * block until all GL execution is complete
+     * @return void
      */ 
     function glFinish() : void {};
  
     /**
      * force execution of GL commands in finite time
+     * @return void
      */ 
     function glFlush() : void {};
  
@@ -909,6 +1207,8 @@ namespace {
      * <constant>GL_CONSTANT_ALPHA</constant>, and
      * <constant>GL_ONE_MINUS_CONSTANT_ALPHA</constant>. The initial value is
      * <constant>GL_ZERO</constant>.
+     * 
+     * @return void
      */ 
     function glBlendFunc(int $sfactor, int $dfactor) : void {};
  
@@ -926,6 +1226,8 @@ namespace {
      * <constant>GL_AND_INVERTED</constant>, <constant>GL_OR_REVERSE</constant>, and
      * <constant>GL_OR_INVERTED</constant>. The initial value is
      * <constant>GL_COPY</constant>.
+     * 
+     * @return void
      */ 
     function glLogicOp(int $opcode) : void {};
  
@@ -944,6 +1246,8 @@ namespace {
      * @param int $mask Specifies a mask that is ANDed with both the reference value
      * and the stored stencil value when the test is done. The initial value is all
      * 1's.
+     * 
+     * @return void
      */ 
     function glStencilFunc(int $func, int $ref, int $mask) : void {};
  
@@ -952,7 +1256,9 @@ namespace {
      * 
      * @param int $fail 
      * @param int $zfail 
-     * @param int $zpass
+     * @param int $zpass 
+     * 
+     * @return void
      */ 
     function glStencilOp(int $fail, int $zfail, int $zpass) : void {};
  
@@ -965,6 +1271,8 @@ namespace {
      * <constant>GL_GREATER</constant>, <constant>GL_NOTEQUAL</constant>,
      * <constant>GL_GEQUAL</constant>, and <constant>GL_ALWAYS</constant> are
      * accepted. The initial value is <constant>GL_LESS</constant>.
+     * 
+     * @return void
      */ 
     function glDepthFunc(int $func) : void {};
  
@@ -972,7 +1280,9 @@ namespace {
      * glPixelStoref
      * 
      * @param int $pname 
-     * @param float $param
+     * @param float $param 
+     * 
+     * @return void
      */ 
     function glPixelStoref(int $pname, float $param) : void {};
  
@@ -980,14 +1290,18 @@ namespace {
      * glPixelStorei
      * 
      * @param int $pname 
-     * @param int $param
+     * @param int $param 
+     * 
+     * @return void
      */ 
     function glPixelStorei(int $pname, int $param) : void {};
  
     /**
      * select a color buffer source for pixels
      * 
-     * @param int $src
+     * @param int $src 
+     * 
+     * @return void
      */ 
     function glReadBuffer(int $src) : void {};
  
@@ -995,7 +1309,9 @@ namespace {
      * glGetBooleanv
      * 
      * @param int $pname 
-     * @param ?bool &...$data
+     * @param ?bool &...$data 
+     * 
+     * @return void
      */ 
     function glGetBooleanv(int $pname, ?bool &...$data) : void {};
  
@@ -1003,12 +1319,15 @@ namespace {
      * glGetDoublev
      * 
      * @param int $pname 
-     * @param ?bool &...$data
+     * @param ?bool &...$data 
+     * 
+     * @return void
      */ 
     function glGetDoublev(int $pname, ?bool &...$data) : void {};
  
     /**
      * return error information
+     * @return int
      */ 
     function glGetError() : int {};
  
@@ -1016,7 +1335,9 @@ namespace {
      * glGetFloatv
      * 
      * @param int $pname 
-     * @param ?bool &...$data
+     * @param ?bool &...$data 
+     * 
+     * @return void
      */ 
     function glGetFloatv(int $pname, ?bool &...$data) : void {};
  
@@ -1024,7 +1345,9 @@ namespace {
      * glGetIntegerv
      * 
      * @param int $pname 
-     * @param ?bool &...$data
+     * @param ?bool &...$data 
+     * 
+     * @return void
      */ 
     function glGetIntegerv(int $pname, ?bool &...$data) : void {};
  
@@ -1036,6 +1359,8 @@ namespace {
      * <constant>GL_VERSION</constant>, or
      * <constant>GL_SHADING_LANGUAGE_VERSION</constant>. Additionally, glGetStringi
      * accepts the <constant>GL_EXTENSIONS</constant> token.
+     * 
+     * @return string
      */ 
     function glGetString(int $name) : string {};
  
@@ -1044,7 +1369,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $pname 
-     * @param ?bool &...$params
+     * @param ?bool &...$params 
+     * 
+     * @return void
      */ 
     function glGetTexParameterfv(int $target, int $pname, ?bool &...$params) : void {};
  
@@ -1053,7 +1380,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $pname 
-     * @param ?bool &...$params
+     * @param ?bool &...$params 
+     * 
+     * @return void
      */ 
     function glGetTexParameteriv(int $target, int $pname, ?bool &...$params) : void {};
  
@@ -1063,7 +1392,9 @@ namespace {
      * @param int $target 
      * @param int $level 
      * @param int $pname 
-     * @param float &$params
+     * @param float &$params 
+     * 
+     * @return void
      */ 
     function glGetTexLevelParameterfv(int $target, int $level, int $pname, float &$params) : void {};
  
@@ -1073,7 +1404,9 @@ namespace {
      * @param int $target 
      * @param int $level 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetTexLevelParameteriv(int $target, int $level, int $pname, int &$params) : void {};
  
@@ -1081,6 +1414,8 @@ namespace {
      * test whether a capability is enabled
      * 
      * @param int $cap Specifies a symbolic constant indicating a GL capability.
+     * 
+     * @return bool
      */ 
     function glIsEnabled(int $cap) : bool {};
  
@@ -1089,7 +1424,9 @@ namespace {
      * coordinates
      * 
      * @param float $n 
-     * @param float $f
+     * @param float $f 
+     * 
+     * @return void
      */ 
     function glDepthRange(float $n, float $f) : void {};
  
@@ -1102,7 +1439,9 @@ namespace {
      * @param int $width Specify the width and height of the viewport. When a GL
      * context is first attached to a window, width and height are set to the
      * dimensions of that window.
-     * @param int $height
+     * @param int $height 
+     * 
+     * @return void
      */ 
     function glViewport(int $x, int $y, int $width, int $height) : void {};
  
@@ -1121,6 +1460,8 @@ namespace {
      * <constant>GL_PATCHES</constant> are accepted.
      * @param int $first Specifies the starting index in the enabled arrays.
      * @param int $count Specifies the number of indices to be rendered.
+     * 
+     * @return void
      */ 
     function glDrawArrays(int $mode, int $first, int $count) : void {};
  
@@ -1131,6 +1472,8 @@ namespace {
      * variable depth offset for each polygon. The initial value is 0.
      * @param float $units Is multiplied by an implementation-specific value to
      * create a constant depth offset. The initial value is 0.
+     * 
+     * @return void
      */ 
     function glPolygonOffset(float $factor, float $units) : void {};
  
@@ -1171,6 +1514,8 @@ namespace {
      * @param int $width Specifies the width of the texture image. The height of the
      * texture image is 1.
      * @param int $border Must be 0.
+     * 
+     * @return void
      */ 
     function glCopyTexImage1D(int $target, int $level, int $internalformat, int $x, int $y, int $width, int $border) : void {};
  
@@ -1217,6 +1562,8 @@ namespace {
      * @param int $width Specifies the width of the texture image.
      * @param int $height Specifies the height of the texture image.
      * @param int $border Must be 0.
+     * 
+     * @return void
      */ 
     function glCopyTexImage2D(int $target, int $level, int $internalformat, int $x, int $y, int $width, int $height, int $border) : void {};
  
@@ -1232,6 +1579,8 @@ namespace {
      * pixels to be copied.
      * @param int $y 
      * @param int $width Specifies the width of the texture subimage.
+     * 
+     * @return void
      */ 
     function glCopyTexSubImage1D(int $target, int $level, int $xoffset, int $x, int $y, int $width) : void {};
  
@@ -1259,6 +1608,8 @@ namespace {
      * @param int $y 
      * @param int $width Specifies the width of the texture subimage.
      * @param int $height Specifies the height of the texture subimage.
+     * 
+     * @return void
      */ 
     function glCopyTexSubImage2D(int $target, int $level, int $xoffset, int $yoffset, int $x, int $y, int $width, int $height) : void {};
  
@@ -1277,6 +1628,8 @@ namespace {
      * <constant>GL_TEXTURE_2D_MULTISAMPLE</constant> or
      * <constant>GL_TEXTURE_2D_MULTISAMPLE_ARRAY</constant>.
      * @param int $texture Specifies the name of a texture.
+     * 
+     * @return void
      */ 
     function glBindTexture(int $target, int $texture) : void {};
  
@@ -1284,7 +1637,9 @@ namespace {
      * delete named textures
      * 
      * @param int $n Specifies the number of textures to be deleted.
-     * @param ?int ...$textures
+     * @param ?int ...$textures 
+     * 
+     * @return void
      */ 
     function glDeleteTextures(int $n, ?int ...$textures) : void {};
  
@@ -1292,7 +1647,9 @@ namespace {
      * generate texture names
      * 
      * @param int $n Specifies the number of texture names to be generated.
-     * @param ?int &...$textures
+     * @param ?int &...$textures 
+     * 
+     * @return void
      */ 
     function glGenTextures(int $n, ?int &...$textures) : void {};
  
@@ -1300,6 +1657,8 @@ namespace {
      * determine if a name corresponds to a texture
      * 
      * @param int $texture Specifies a value that may be the name of a texture.
+     * 
+     * @return bool
      */ 
     function glIsTexture(int $texture) : bool {};
  
@@ -1323,6 +1682,8 @@ namespace {
      * @param int $y 
      * @param int $width Specifies the width of the texture subimage.
      * @param int $height Specifies the height of the texture subimage.
+     * 
+     * @return void
      */ 
     function glCopyTexSubImage3D(int $target, int $level, int $xoffset, int $yoffset, int $zoffset, int $x, int $y, int $width, int $height) : void {};
  
@@ -1334,6 +1695,8 @@ namespace {
      * texture must be one of <constant>GL_TEXTURE</constant>i, where i ranges from
      * zero to the value of <constant>GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS</constant>
      * minus one. The initial value is <constant>GL_TEXTURE0</constant>.
+     * 
+     * @return void
      */ 
     function glActiveTexture(int $texture) : void {};
  
@@ -1346,6 +1709,8 @@ namespace {
      * coverage masks should be inverted.  <constant>GL_TRUE</constant> and
      * <constant>GL_FALSE</constant> are accepted.  The initial value is
      * <constant>GL_FALSE</constant>.
+     * 
+     * @return void
      */ 
     function glSampleCoverage(float $value, bool $invert) : void {};
  
@@ -1355,7 +1720,9 @@ namespace {
      * @param int $sfactorRGB 
      * @param int $dfactorRGB 
      * @param int $sfactorAlpha 
-     * @param int $dfactorAlpha
+     * @param int $dfactorAlpha 
+     * 
+     * @return void
      */ 
     function glBlendFuncSeparate(int $sfactorRGB, int $dfactorRGB, int $sfactorAlpha, int $dfactorAlpha) : void {};
  
@@ -1363,7 +1730,9 @@ namespace {
      * glPointParameterf
      * 
      * @param int $pname 
-     * @param float $param
+     * @param float $param 
+     * 
+     * @return void
      */ 
     function glPointParameterf(int $pname, float $param) : void {};
  
@@ -1371,7 +1740,9 @@ namespace {
      * glPointParameterfv
      * 
      * @param int $pname 
-     * @param \GL\Buffer\FloatBuffer|array $params
+     * @param \GL\Buffer\FloatBuffer|array $params 
+     * 
+     * @return void
      */ 
     function glPointParameterfv(int $pname, \GL\Buffer\FloatBuffer|array $params) : void {};
  
@@ -1379,7 +1750,9 @@ namespace {
      * glPointParameteri
      * 
      * @param int $pname 
-     * @param int $param
+     * @param int $param 
+     * 
+     * @return void
      */ 
     function glPointParameteri(int $pname, int $param) : void {};
  
@@ -1387,7 +1760,9 @@ namespace {
      * glPointParameteriv
      * 
      * @param int $pname 
-     * @param \GL\Buffer\IntBuffer|array $params
+     * @param \GL\Buffer\IntBuffer|array $params 
+     * 
+     * @return void
      */ 
     function glPointParameteriv(int $pname, \GL\Buffer\IntBuffer|array $params) : void {};
  
@@ -1398,7 +1773,9 @@ namespace {
      * <constant>GL_BLEND_COLOR</constant>
      * @param float $green 
      * @param float $blue 
-     * @param float $alpha
+     * @param float $alpha 
+     * 
+     * @return void
      */ 
     function glBlendColor(float $red, float $green, float $blue, float $alpha) : void {};
  
@@ -1411,6 +1788,8 @@ namespace {
      * <constant>GL_FUNC_SUBTRACT</constant>,
      * <constant>GL_FUNC_REVERSE_SUBTRACT</constant>, <constant>GL_MIN</constant>,
      * <constant>GL_MAX</constant>.
+     * 
+     * @return void
      */ 
     function glBlendEquation(int $mode) : void {};
  
@@ -1418,7 +1797,9 @@ namespace {
      * generate query object names
      * 
      * @param int $n Specifies the number of query object names to be generated.
-     * @param ?int &...$ids
+     * @param ?int &...$ids 
+     * 
+     * @return void
      */ 
     function glGenQueries(int $n, ?int &...$ids) : void {};
  
@@ -1426,7 +1807,9 @@ namespace {
      * delete named query objects
      * 
      * @param int $n Specifies the number of query objects to be deleted.
-     * @param ?int ...$ids
+     * @param ?int ...$ids 
+     * 
+     * @return void
      */ 
     function glDeleteQueries(int $n, ?int ...$ids) : void {};
  
@@ -1434,6 +1817,8 @@ namespace {
      * determine if a name corresponds to a query object
      * 
      * @param int $id Specifies a value that may be the name of a query object.
+     * 
+     * @return bool
      */ 
     function glIsQuery(int $id) : bool {};
  
@@ -1449,13 +1834,17 @@ namespace {
      * <constant>GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN</constant>, or
      * <constant>GL_TIME_ELAPSED</constant>.
      * @param int $id Specifies the name of a query object.
+     * 
+     * @return void
      */ 
     function glBeginQuery(int $target, int $id) : void {};
  
     /**
      * glEndQuery
      * 
-     * @param int $target
+     * @param int $target 
+     * 
+     * @return void
      */ 
     function glEndQuery(int $target) : void {};
  
@@ -1473,6 +1862,8 @@ namespace {
      * parameter. Accepted values are <constant>GL_CURRENT_QUERY</constant> or
      * <constant>GL_QUERY_COUNTER_BITS</constant>.
      * @param int &$params Returns the requested data.
+     * 
+     * @return void
      */ 
     function glGetQueryiv(int $target, int $pname, int &$params) : void {};
  
@@ -1481,7 +1872,9 @@ namespace {
      * 
      * @param int $id 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetQueryObjectiv(int $id, int $pname, int &$params) : void {};
  
@@ -1490,7 +1883,9 @@ namespace {
      * 
      * @param int $id 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetQueryObjectuiv(int $id, int $pname, int &$params) : void {};
  
@@ -1500,6 +1895,8 @@ namespace {
      * @param int $target Specifies the target to which the buffer object is bound,
      * which must be one of the buffer binding targets in the following table:
      * @param int $buffer Specifies the name of a buffer object.
+     * 
+     * @return void
      */ 
     function glBindBuffer(int $target, int $buffer) : void {};
  
@@ -1507,7 +1904,9 @@ namespace {
      * delete named buffer objects
      * 
      * @param int $n Specifies the number of buffer objects to be deleted.
-     * @param ?int ...$buffers
+     * @param ?int ...$buffers 
+     * 
+     * @return void
      */ 
     function glDeleteBuffers(int $n, ?int ...$buffers) : void {};
  
@@ -1515,7 +1914,9 @@ namespace {
      * generate buffer object names
      * 
      * @param int $n Specifies the number of buffer object names to be generated.
-     * @param ?int &...$buffers
+     * @param ?int &...$buffers 
+     * 
+     * @return void
      */ 
     function glGenBuffers(int $n, ?int &...$buffers) : void {};
  
@@ -1523,6 +1924,8 @@ namespace {
      * determine if a name corresponds to a buffer object
      * 
      * @param int $buffer Specifies a value that may be the name of a buffer object.
+     * 
+     * @return bool
      */ 
     function glIsBuffer(int $buffer) : bool {};
  
@@ -1533,6 +1936,8 @@ namespace {
      * @param int $target Specifies the target to which the buffer object is bound
      * for glUnmapBuffer, which must be one of the buffer binding targets in the
      * following table:
+     * 
+     * @return bool
      */ 
     function glUnmapBuffer(int $target) : bool {};
  
@@ -1543,7 +1948,9 @@ namespace {
      * for glGetBufferParameteriv and glGetBufferParameteri64v. Must be one of the
      * buffer binding targets in the following table:
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetBufferParameteriv(int $target, int $pname, int &$params) : void {};
  
@@ -1560,6 +1967,8 @@ namespace {
      * <constant>GL_FUNC_ADD</constant>, <constant>GL_FUNC_SUBTRACT</constant>,
      * <constant>GL_FUNC_REVERSE_SUBTRACT</constant>, <constant>GL_MIN</constant>,
      * <constant>GL_MAX</constant>.
+     * 
+     * @return void
      */ 
     function glBlendEquationSeparate(int $modeRGB, int $modeAlpha) : void {};
  
@@ -1584,6 +1993,8 @@ namespace {
      * no depth buffer or depth testing is not enabled. dppass accepts the same
      * symbolic constants as sfail. The initial value is
      * <constant>GL_KEEP</constant>.
+     * 
+     * @return void
      */ 
     function glStencilOpSeparate(int $face, int $sfail, int $dpfail, int $dppass) : void {};
  
@@ -1605,6 +2016,8 @@ namespace {
      * @param int $mask Specifies a mask that is ANDed with both the reference value
      * and the stored stencil value when the test is done. The initial value is all
      * 1's.
+     * 
+     * @return void
      */ 
     function glStencilFuncSeparate(int $face, int $func, int $ref, int $mask) : void {};
  
@@ -1617,6 +2030,8 @@ namespace {
      * <constant>GL_BACK</constant>, and <constant>GL_FRONT_AND_BACK</constant>.
      * @param int $mask Specifies a bit mask to enable and disable writing of
      * individual bits in the stencil planes. Initially, the mask is all 1's.
+     * 
+     * @return void
      */ 
     function glStencilMaskSeparate(int $face, int $mask) : void {};
  
@@ -1626,6 +2041,8 @@ namespace {
      * @param int $program Specifies the program object to which a shader object
      * will be attached.
      * @param int $shader Specifies the shader object that is to be attached.
+     * 
+     * @return void
      */ 
     function glAttachShader(int $program, int $shader) : void {};
  
@@ -1638,6 +2055,8 @@ namespace {
      * bound.
      * @param string $name Specifies a null terminated string containing the name of
      * the vertex shader attribute variable to which index is to be bound.
+     * 
+     * @return void
      */ 
     function glBindAttribLocation(int $program, int $index, string $name) : void {};
  
@@ -1645,18 +2064,23 @@ namespace {
      * Compiles a shader object
      * 
      * @param int $shader Specifies the shader object to be compiled.
+     * 
+     * @return void
      */ 
     function glCompileShader(int $shader) : void {};
  
     /**
      * Creates a program object
+     * @return int
      */ 
     function glCreateProgram() : int {};
  
     /**
      * Creates a shader object
      * 
-     * @param int $type
+     * @param int $type 
+     * 
+     * @return int
      */ 
     function glCreateShader(int $type) : int {};
  
@@ -1664,6 +2088,8 @@ namespace {
      * Deletes a program object
      * 
      * @param int $program Specifies the program object to be deleted.
+     * 
+     * @return void
      */ 
     function glDeleteProgram(int $program) : void {};
  
@@ -1671,6 +2097,8 @@ namespace {
      * Deletes a shader object
      * 
      * @param int $shader Specifies the shader object to be deleted.
+     * 
+     * @return void
      */ 
     function glDeleteShader(int $shader) : void {};
  
@@ -1680,13 +2108,17 @@ namespace {
      * @param int $program Specifies the program object from which to detach the
      * shader object.
      * @param int $shader Specifies the shader object to be detached.
+     * 
+     * @return void
      */ 
     function glDetachShader(int $program, int $shader) : void {};
  
     /**
      * glDisableVertexAttribArray
      * 
-     * @param int $index
+     * @param int $index 
+     * 
+     * @return void
      */ 
     function glDisableVertexAttribArray(int $index) : void {};
  
@@ -1696,6 +2128,8 @@ namespace {
      * 
      * @param int $index Specifies the index of the generic vertex attribute to be
      * enabled or disabled.
+     * 
+     * @return void
      */ 
     function glEnableVertexAttribArray(int $index) : void {};
  
@@ -1708,6 +2142,8 @@ namespace {
      * @param int &$count Returns the number of names actually returned in shaders.
      * @param int &$shaders Specifies an array that is used to return the names of
      * attached shader objects.
+     * 
+     * @return void
      */ 
     function glGetAttachedShaders(int $program, int $maxCount, int &$count, int &$shaders) : void {};
  
@@ -1717,6 +2153,8 @@ namespace {
      * @param int $program Specifies the program object to be queried.
      * @param string $name Points to a null terminated string containing the name of
      * the attribute variable whose location is to be queried.
+     * 
+     * @return int
      */ 
     function glGetAttribLocation(int $program, string $name) : int {};
  
@@ -1725,7 +2163,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetProgramiv(int $program, int $pname, int &$params) : void {};
  
@@ -1739,6 +2179,8 @@ namespace {
      * be queried.
      * @param int $bufSize Specifies the size of the character buffer for storing
      * the returned information log.
+     * 
+     * @return string Returns the information log for the specified object.
      */ 
     function glGetProgramInfoLog(int $program, int $bufSize) : string {};
  
@@ -1747,7 +2189,9 @@ namespace {
      * 
      * @param int $shader 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetShaderiv(int $shader, int $pname, int &$params) : void {};
  
@@ -1761,6 +2205,8 @@ namespace {
      * queried.
      * @param int $bufSize Specifies the size of the character buffer for storing
      * the returned information log.
+     * 
+     * @return string Returns the information log for the specified object.
      */ 
     function glGetShaderInfoLog(int $shader, int $bufSize) : string {};
  
@@ -1770,6 +2216,8 @@ namespace {
      * @param int $program Specifies the program object to be queried.
      * @param string $name Points to a null terminated string containing the name of
      * the uniform variable whose location is to be queried.
+     * 
+     * @return int
      */ 
     function glGetUniformLocation(int $program, string $name) : int {};
  
@@ -1778,7 +2226,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param float &$params
+     * @param float &$params 
+     * 
+     * @return void
      */ 
     function glGetUniformfv(int $program, int $location, float &$params) : void {};
  
@@ -1787,7 +2237,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetUniformiv(int $program, int $location, int &$params) : void {};
  
@@ -1796,7 +2248,9 @@ namespace {
      * 
      * @param int $index 
      * @param int $pname 
-     * @param float &$params
+     * @param float &$params 
+     * 
+     * @return void
      */ 
     function glGetVertexAttribdv(int $index, int $pname, float &$params) : void {};
  
@@ -1805,7 +2259,9 @@ namespace {
      * 
      * @param int $index 
      * @param int $pname 
-     * @param float &$params
+     * @param float &$params 
+     * 
+     * @return void
      */ 
     function glGetVertexAttribfv(int $index, int $pname, float &$params) : void {};
  
@@ -1814,7 +2270,9 @@ namespace {
      * 
      * @param int $index 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetVertexAttribiv(int $index, int $pname, int &$params) : void {};
  
@@ -1822,6 +2280,8 @@ namespace {
      * Determines if a name corresponds to a program object
      * 
      * @param int $program Specifies a potential program object.
+     * 
+     * @return bool
      */ 
     function glIsProgram(int $program) : bool {};
  
@@ -1829,6 +2289,8 @@ namespace {
      * Determines if a name corresponds to a shader object
      * 
      * @param int $shader Specifies a potential shader object.
+     * 
+     * @return bool
      */ 
     function glIsShader(int $shader) : bool {};
  
@@ -1836,6 +2298,8 @@ namespace {
      * Links a program object
      * 
      * @param int $program Specifies the handle of the program object to be linked.
+     * 
+     * @return void
      */ 
     function glLinkProgram(int $program) : void {};
  
@@ -1844,6 +2308,8 @@ namespace {
      * 
      * @param int $program Specifies the handle of the program object whose
      * executables are to be used as part of current rendering state.
+     * 
+     * @return void
      */ 
     function glUseProgram(int $program) : void {};
  
@@ -1851,7 +2317,9 @@ namespace {
      * glUniform1f
      * 
      * @param int $location 
-     * @param float $v0
+     * @param float $v0 
+     * 
+     * @return void
      */ 
     function glUniform1f(int $location, float $v0) : void {};
  
@@ -1860,7 +2328,9 @@ namespace {
      * 
      * @param int $location 
      * @param float $v0 
-     * @param float $v1
+     * @param float $v1 
+     * 
+     * @return void
      */ 
     function glUniform2f(int $location, float $v0, float $v1) : void {};
  
@@ -1870,7 +2340,9 @@ namespace {
      * @param int $location 
      * @param float $v0 
      * @param float $v1 
-     * @param float $v2
+     * @param float $v2 
+     * 
+     * @return void
      */ 
     function glUniform3f(int $location, float $v0, float $v1, float $v2) : void {};
  
@@ -1881,7 +2353,9 @@ namespace {
      * @param float $v0 
      * @param float $v1 
      * @param float $v2 
-     * @param float $v3
+     * @param float $v3 
+     * 
+     * @return void
      */ 
     function glUniform4f(int $location, float $v0, float $v1, float $v2, float $v3) : void {};
  
@@ -1889,7 +2363,9 @@ namespace {
      * glUniform1i
      * 
      * @param int $location 
-     * @param int $v0
+     * @param int $v0 
+     * 
+     * @return void
      */ 
     function glUniform1i(int $location, int $v0) : void {};
  
@@ -1898,7 +2374,9 @@ namespace {
      * 
      * @param int $location 
      * @param int $v0 
-     * @param int $v1
+     * @param int $v1 
+     * 
+     * @return void
      */ 
     function glUniform2i(int $location, int $v0, int $v1) : void {};
  
@@ -1908,7 +2386,9 @@ namespace {
      * @param int $location 
      * @param int $v0 
      * @param int $v1 
-     * @param int $v2
+     * @param int $v2 
+     * 
+     * @return void
      */ 
     function glUniform3i(int $location, int $v0, int $v1, int $v2) : void {};
  
@@ -1919,7 +2399,9 @@ namespace {
      * @param int $v0 
      * @param int $v1 
      * @param int $v2 
-     * @param int $v3
+     * @param int $v3 
+     * 
+     * @return void
      */ 
     function glUniform4i(int $location, int $v0, int $v1, int $v2, int $v3) : void {};
  
@@ -1927,7 +2409,9 @@ namespace {
      * glUniform1fv
      * 
      * @param int $location 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniform1fv(int $location, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -1935,7 +2419,9 @@ namespace {
      * glUniform2fv
      * 
      * @param int $location 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniform2fv(int $location, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -1943,7 +2429,9 @@ namespace {
      * glUniform3fv
      * 
      * @param int $location 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniform3fv(int $location, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -1951,7 +2439,9 @@ namespace {
      * glUniform4fv
      * 
      * @param int $location 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniform4fv(int $location, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -1959,7 +2449,9 @@ namespace {
      * glUniform1iv
      * 
      * @param int $location 
-     * @param \GL\Buffer\IntBuffer|array $value
+     * @param \GL\Buffer\IntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniform1iv(int $location, \GL\Buffer\IntBuffer|array $value) : void {};
  
@@ -1967,7 +2459,9 @@ namespace {
      * glUniform2iv
      * 
      * @param int $location 
-     * @param \GL\Buffer\IntBuffer|array $value
+     * @param \GL\Buffer\IntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniform2iv(int $location, \GL\Buffer\IntBuffer|array $value) : void {};
  
@@ -1975,7 +2469,9 @@ namespace {
      * glUniform3iv
      * 
      * @param int $location 
-     * @param \GL\Buffer\IntBuffer|array $value
+     * @param \GL\Buffer\IntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniform3iv(int $location, \GL\Buffer\IntBuffer|array $value) : void {};
  
@@ -1983,7 +2479,9 @@ namespace {
      * glUniform4iv
      * 
      * @param int $location 
-     * @param \GL\Buffer\IntBuffer|array $value
+     * @param \GL\Buffer\IntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniform4iv(int $location, \GL\Buffer\IntBuffer|array $value) : void {};
  
@@ -1992,7 +2490,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix2fv(int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -2001,7 +2501,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix3fv(int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -2009,17 +2511,20 @@ namespace {
      * glUniformMatrix4fv
      * 
      * @param int $location 
-     * @param int $count 
      * @param bool $transpose 
-     * @param \GL\Buffer\BufferInterface $buffer
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
-    function glUniformMatrix4fv(int $location, int $count, bool $transpose, \GL\Buffer\BufferInterface $buffer) : void {};
+    function glUniformMatrix4fv(int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
     /**
      * Validates a program object
      * 
      * @param int $program Specifies the handle of the program object to be
      * validated.
+     * 
+     * @return void
      */ 
     function glValidateProgram(int $program) : void {};
  
@@ -2027,7 +2532,9 @@ namespace {
      * glVertexAttrib1d
      * 
      * @param int $index 
-     * @param float $x
+     * @param float $x 
+     * 
+     * @return void
      */ 
     function glVertexAttrib1d(int $index, float $x) : void {};
  
@@ -2035,7 +2542,9 @@ namespace {
      * glVertexAttrib1dv
      * 
      * @param int $index 
-     * @param \GL\Buffer\DoubleBuffer|array $v
+     * @param \GL\Buffer\DoubleBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib1dv(int $index, \GL\Buffer\DoubleBuffer|array $v) : void {};
  
@@ -2043,7 +2552,9 @@ namespace {
      * glVertexAttrib1f
      * 
      * @param int $index 
-     * @param float $x
+     * @param float $x 
+     * 
+     * @return void
      */ 
     function glVertexAttrib1f(int $index, float $x) : void {};
  
@@ -2051,7 +2562,9 @@ namespace {
      * glVertexAttrib1fv
      * 
      * @param int $index 
-     * @param \GL\Buffer\FloatBuffer|array $v
+     * @param \GL\Buffer\FloatBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib1fv(int $index, \GL\Buffer\FloatBuffer|array $v) : void {};
  
@@ -2059,7 +2572,9 @@ namespace {
      * glVertexAttrib1s
      * 
      * @param int $index 
-     * @param int $x
+     * @param int $x 
+     * 
+     * @return void
      */ 
     function glVertexAttrib1s(int $index, int $x) : void {};
  
@@ -2067,7 +2582,9 @@ namespace {
      * glVertexAttrib1sv
      * 
      * @param int $index 
-     * @param \GL\Buffer\ShortBuffer|array $v
+     * @param \GL\Buffer\ShortBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib1sv(int $index, \GL\Buffer\ShortBuffer|array $v) : void {};
  
@@ -2076,7 +2593,9 @@ namespace {
      * 
      * @param int $index 
      * @param float $x 
-     * @param float $y
+     * @param float $y 
+     * 
+     * @return void
      */ 
     function glVertexAttrib2d(int $index, float $x, float $y) : void {};
  
@@ -2084,7 +2603,9 @@ namespace {
      * glVertexAttrib2dv
      * 
      * @param int $index 
-     * @param \GL\Buffer\DoubleBuffer|array $v
+     * @param \GL\Buffer\DoubleBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib2dv(int $index, \GL\Buffer\DoubleBuffer|array $v) : void {};
  
@@ -2093,7 +2614,9 @@ namespace {
      * 
      * @param int $index 
      * @param float $x 
-     * @param float $y
+     * @param float $y 
+     * 
+     * @return void
      */ 
     function glVertexAttrib2f(int $index, float $x, float $y) : void {};
  
@@ -2101,7 +2624,9 @@ namespace {
      * glVertexAttrib2fv
      * 
      * @param int $index 
-     * @param \GL\Buffer\FloatBuffer|array $v
+     * @param \GL\Buffer\FloatBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib2fv(int $index, \GL\Buffer\FloatBuffer|array $v) : void {};
  
@@ -2110,7 +2635,9 @@ namespace {
      * 
      * @param int $index 
      * @param int $x 
-     * @param int $y
+     * @param int $y 
+     * 
+     * @return void
      */ 
     function glVertexAttrib2s(int $index, int $x, int $y) : void {};
  
@@ -2118,7 +2645,9 @@ namespace {
      * glVertexAttrib2sv
      * 
      * @param int $index 
-     * @param \GL\Buffer\ShortBuffer|array $v
+     * @param \GL\Buffer\ShortBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib2sv(int $index, \GL\Buffer\ShortBuffer|array $v) : void {};
  
@@ -2128,7 +2657,9 @@ namespace {
      * @param int $index 
      * @param float $x 
      * @param float $y 
-     * @param float $z
+     * @param float $z 
+     * 
+     * @return void
      */ 
     function glVertexAttrib3d(int $index, float $x, float $y, float $z) : void {};
  
@@ -2136,7 +2667,9 @@ namespace {
      * glVertexAttrib3dv
      * 
      * @param int $index 
-     * @param \GL\Buffer\DoubleBuffer|array $v
+     * @param \GL\Buffer\DoubleBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib3dv(int $index, \GL\Buffer\DoubleBuffer|array $v) : void {};
  
@@ -2146,7 +2679,9 @@ namespace {
      * @param int $index 
      * @param float $x 
      * @param float $y 
-     * @param float $z
+     * @param float $z 
+     * 
+     * @return void
      */ 
     function glVertexAttrib3f(int $index, float $x, float $y, float $z) : void {};
  
@@ -2154,7 +2689,9 @@ namespace {
      * glVertexAttrib3fv
      * 
      * @param int $index 
-     * @param \GL\Buffer\FloatBuffer|array $v
+     * @param \GL\Buffer\FloatBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib3fv(int $index, \GL\Buffer\FloatBuffer|array $v) : void {};
  
@@ -2164,7 +2701,9 @@ namespace {
      * @param int $index 
      * @param int $x 
      * @param int $y 
-     * @param int $z
+     * @param int $z 
+     * 
+     * @return void
      */ 
     function glVertexAttrib3s(int $index, int $x, int $y, int $z) : void {};
  
@@ -2172,7 +2711,9 @@ namespace {
      * glVertexAttrib3sv
      * 
      * @param int $index 
-     * @param \GL\Buffer\ShortBuffer|array $v
+     * @param \GL\Buffer\ShortBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib3sv(int $index, \GL\Buffer\ShortBuffer|array $v) : void {};
  
@@ -2180,7 +2721,9 @@ namespace {
      * glVertexAttrib4Nbv
      * 
      * @param int $index 
-     * @param \GL\Buffer\ByteBuffer|array $v
+     * @param \GL\Buffer\ByteBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4Nbv(int $index, \GL\Buffer\ByteBuffer|array $v) : void {};
  
@@ -2188,7 +2731,9 @@ namespace {
      * glVertexAttrib4Niv
      * 
      * @param int $index 
-     * @param \GL\Buffer\IntBuffer|array $v
+     * @param \GL\Buffer\IntBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4Niv(int $index, \GL\Buffer\IntBuffer|array $v) : void {};
  
@@ -2196,7 +2741,9 @@ namespace {
      * glVertexAttrib4Nsv
      * 
      * @param int $index 
-     * @param \GL\Buffer\ShortBuffer|array $v
+     * @param \GL\Buffer\ShortBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4Nsv(int $index, \GL\Buffer\ShortBuffer|array $v) : void {};
  
@@ -2207,7 +2754,9 @@ namespace {
      * @param int $x 
      * @param int $y 
      * @param int $z 
-     * @param int $w
+     * @param int $w 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4Nub(int $index, int $x, int $y, int $z, int $w) : void {};
  
@@ -2215,7 +2764,9 @@ namespace {
      * glVertexAttrib4Nubv
      * 
      * @param int $index 
-     * @param \GL\Buffer\UbyteBuffer|array $v
+     * @param \GL\Buffer\UbyteBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4Nubv(int $index, \GL\Buffer\UbyteBuffer|array $v) : void {};
  
@@ -2223,7 +2774,9 @@ namespace {
      * glVertexAttrib4Nuiv
      * 
      * @param int $index 
-     * @param \GL\Buffer\UIntBuffer|array $v
+     * @param \GL\Buffer\UIntBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4Nuiv(int $index, \GL\Buffer\UIntBuffer|array $v) : void {};
  
@@ -2231,7 +2784,9 @@ namespace {
      * glVertexAttrib4Nusv
      * 
      * @param int $index 
-     * @param \GL\Buffer\UShortBuffer|array $v
+     * @param \GL\Buffer\UShortBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4Nusv(int $index, \GL\Buffer\UShortBuffer|array $v) : void {};
  
@@ -2239,7 +2794,9 @@ namespace {
      * glVertexAttrib4bv
      * 
      * @param int $index 
-     * @param \GL\Buffer\ByteBuffer|array $v
+     * @param \GL\Buffer\ByteBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4bv(int $index, \GL\Buffer\ByteBuffer|array $v) : void {};
  
@@ -2250,7 +2807,9 @@ namespace {
      * @param float $x 
      * @param float $y 
      * @param float $z 
-     * @param float $w
+     * @param float $w 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4d(int $index, float $x, float $y, float $z, float $w) : void {};
  
@@ -2258,7 +2817,9 @@ namespace {
      * glVertexAttrib4dv
      * 
      * @param int $index 
-     * @param \GL\Buffer\DoubleBuffer|array $v
+     * @param \GL\Buffer\DoubleBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4dv(int $index, \GL\Buffer\DoubleBuffer|array $v) : void {};
  
@@ -2269,7 +2830,9 @@ namespace {
      * @param float $x 
      * @param float $y 
      * @param float $z 
-     * @param float $w
+     * @param float $w 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4f(int $index, float $x, float $y, float $z, float $w) : void {};
  
@@ -2277,7 +2840,9 @@ namespace {
      * glVertexAttrib4fv
      * 
      * @param int $index 
-     * @param \GL\Buffer\FloatBuffer|array $v
+     * @param \GL\Buffer\FloatBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4fv(int $index, \GL\Buffer\FloatBuffer|array $v) : void {};
  
@@ -2285,7 +2850,9 @@ namespace {
      * glVertexAttrib4iv
      * 
      * @param int $index 
-     * @param \GL\Buffer\IntBuffer|array $v
+     * @param \GL\Buffer\IntBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4iv(int $index, \GL\Buffer\IntBuffer|array $v) : void {};
  
@@ -2296,7 +2863,9 @@ namespace {
      * @param int $x 
      * @param int $y 
      * @param int $z 
-     * @param int $w
+     * @param int $w 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4s(int $index, int $x, int $y, int $z, int $w) : void {};
  
@@ -2304,7 +2873,9 @@ namespace {
      * glVertexAttrib4sv
      * 
      * @param int $index 
-     * @param \GL\Buffer\ShortBuffer|array $v
+     * @param \GL\Buffer\ShortBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4sv(int $index, \GL\Buffer\ShortBuffer|array $v) : void {};
  
@@ -2312,7 +2883,9 @@ namespace {
      * glVertexAttrib4ubv
      * 
      * @param int $index 
-     * @param \GL\Buffer\UbyteBuffer|array $v
+     * @param \GL\Buffer\UbyteBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4ubv(int $index, \GL\Buffer\UbyteBuffer|array $v) : void {};
  
@@ -2320,7 +2893,9 @@ namespace {
      * glVertexAttrib4uiv
      * 
      * @param int $index 
-     * @param \GL\Buffer\UIntBuffer|array $v
+     * @param \GL\Buffer\UIntBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4uiv(int $index, \GL\Buffer\UIntBuffer|array $v) : void {};
  
@@ -2328,7 +2903,9 @@ namespace {
      * glVertexAttrib4usv
      * 
      * @param int $index 
-     * @param \GL\Buffer\UShortBuffer|array $v
+     * @param \GL\Buffer\UShortBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttrib4usv(int $index, \GL\Buffer\UShortBuffer|array $v) : void {};
  
@@ -2361,7 +2938,9 @@ namespace {
      * @param int $stride Specifies the byte offset between consecutive generic
      * vertex attributes. If stride is 0, the generic vertex attributes are
      * understood to be tightly packed in the array. The initial value is 0.
-     * @param int $offset
+     * @param int $offset 
+     * 
+     * @return void
      */ 
     function glVertexAttribPointer(int $index, int $size, int $type, bool $normalized, int $stride, int $offset) : void {};
  
@@ -2370,7 +2949,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix2x3fv(int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -2379,7 +2960,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix3x2fv(int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -2388,7 +2971,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix2x4fv(int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -2397,7 +2982,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix4x2fv(int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -2406,7 +2993,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix3x4fv(int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -2415,7 +3004,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix4x3fv(int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -2426,7 +3017,9 @@ namespace {
      * @param bool $r 
      * @param bool $g 
      * @param bool $b 
-     * @param bool $a
+     * @param bool $a 
+     * 
+     * @return void
      */ 
     function glColorMaski(int $index, bool $r, bool $g, bool $b, bool $a) : void {};
  
@@ -2435,7 +3028,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $index 
-     * @param ?bool &...$data
+     * @param ?bool &...$data 
+     * 
+     * @return void
      */ 
     function glGetBooleani_v(int $target, int $index, ?bool &...$data) : void {};
  
@@ -2444,7 +3039,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $index 
-     * @param ?bool &...$data
+     * @param ?bool &...$data 
+     * 
+     * @return void
      */ 
     function glGetIntegeri_v(int $target, int $index, ?bool &...$data) : void {};
  
@@ -2452,7 +3049,9 @@ namespace {
      * glEnablei
      * 
      * @param int $target 
-     * @param int $index
+     * @param int $index 
+     * 
+     * @return void
      */ 
     function glEnablei(int $target, int $index) : void {};
  
@@ -2460,7 +3059,9 @@ namespace {
      * glDisablei
      * 
      * @param int $target 
-     * @param int $index
+     * @param int $index 
+     * 
+     * @return void
      */ 
     function glDisablei(int $target, int $index) : void {};
  
@@ -2468,7 +3069,9 @@ namespace {
      * glIsEnabledi
      * 
      * @param int $target 
-     * @param int $index
+     * @param int $index 
+     * 
+     * @return bool
      */ 
     function glIsEnabledi(int $target, int $index) : bool {};
  
@@ -2477,11 +3080,14 @@ namespace {
      * 
      * @param int $primitiveMode Specify the output type of the primitives that will
      * be recorded into the buffer objects that are bound for transform feedback.
+     * 
+     * @return void
      */ 
     function glBeginTransformFeedback(int $primitiveMode) : void {};
  
     /**
      * glEndTransformFeedback
+     * @return void
      */ 
     function glEndTransformFeedback() : void {};
  
@@ -2501,6 +3107,8 @@ namespace {
      * object buffer.
      * @param int $size The amount of data in machine units that can be read from
      * the buffer object while used as an indexed target.
+     * 
+     * @return void
      */ 
     function glBindBufferRange(int $target, int $index, int $buffer, int $offset, int $size) : void {};
  
@@ -2516,6 +3124,8 @@ namespace {
      * specified by target.
      * @param int $buffer The name of a buffer object to bind to the specified
      * binding point.
+     * 
+     * @return void
      */ 
     function glBindBufferBase(int $target, int $index, int $buffer) : void {};
  
@@ -2526,6 +3136,8 @@ namespace {
      * <constant>GL_CLAMP_READ_COLOR</constant>.
      * @param int $clamp Specifies whether to apply color clamping. clamp must be
      * <constant>GL_TRUE</constant> or <constant>GL_FALSE</constant>.
+     * 
+     * @return void
      */ 
     function glClampColor(int $target, int $clamp) : void {};
  
@@ -2536,11 +3148,14 @@ namespace {
      * are used to determine if the rendering commands are discarded.
      * @param int $mode Specifies how glBeginConditionalRender interprets the
      * results of the occlusion query.
+     * 
+     * @return void
      */ 
     function glBeginConditionalRender(int $id, int $mode) : void {};
  
     /**
      * glEndConditionalRender
+     * @return void
      */ 
     function glEndConditionalRender() : void {};
  
@@ -2549,7 +3164,9 @@ namespace {
      * 
      * @param int $index 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetVertexAttribIiv(int $index, int $pname, int &$params) : void {};
  
@@ -2558,7 +3175,9 @@ namespace {
      * 
      * @param int $index 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetVertexAttribIuiv(int $index, int $pname, int &$params) : void {};
  
@@ -2566,7 +3185,9 @@ namespace {
      * glVertexAttribI1i
      * 
      * @param int $index 
-     * @param int $x
+     * @param int $x 
+     * 
+     * @return void
      */ 
     function glVertexAttribI1i(int $index, int $x) : void {};
  
@@ -2575,7 +3196,9 @@ namespace {
      * 
      * @param int $index 
      * @param int $x 
-     * @param int $y
+     * @param int $y 
+     * 
+     * @return void
      */ 
     function glVertexAttribI2i(int $index, int $x, int $y) : void {};
  
@@ -2585,7 +3208,9 @@ namespace {
      * @param int $index 
      * @param int $x 
      * @param int $y 
-     * @param int $z
+     * @param int $z 
+     * 
+     * @return void
      */ 
     function glVertexAttribI3i(int $index, int $x, int $y, int $z) : void {};
  
@@ -2596,7 +3221,9 @@ namespace {
      * @param int $x 
      * @param int $y 
      * @param int $z 
-     * @param int $w
+     * @param int $w 
+     * 
+     * @return void
      */ 
     function glVertexAttribI4i(int $index, int $x, int $y, int $z, int $w) : void {};
  
@@ -2604,7 +3231,9 @@ namespace {
      * glVertexAttribI1ui
      * 
      * @param int $index 
-     * @param int $x
+     * @param int $x 
+     * 
+     * @return void
      */ 
     function glVertexAttribI1ui(int $index, int $x) : void {};
  
@@ -2613,7 +3242,9 @@ namespace {
      * 
      * @param int $index 
      * @param int $x 
-     * @param int $y
+     * @param int $y 
+     * 
+     * @return void
      */ 
     function glVertexAttribI2ui(int $index, int $x, int $y) : void {};
  
@@ -2623,7 +3254,9 @@ namespace {
      * @param int $index 
      * @param int $x 
      * @param int $y 
-     * @param int $z
+     * @param int $z 
+     * 
+     * @return void
      */ 
     function glVertexAttribI3ui(int $index, int $x, int $y, int $z) : void {};
  
@@ -2634,7 +3267,9 @@ namespace {
      * @param int $x 
      * @param int $y 
      * @param int $z 
-     * @param int $w
+     * @param int $w 
+     * 
+     * @return void
      */ 
     function glVertexAttribI4ui(int $index, int $x, int $y, int $z, int $w) : void {};
  
@@ -2642,7 +3277,9 @@ namespace {
      * glVertexAttribI1iv
      * 
      * @param int $index 
-     * @param \GL\Buffer\IntBuffer|array $v
+     * @param \GL\Buffer\IntBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttribI1iv(int $index, \GL\Buffer\IntBuffer|array $v) : void {};
  
@@ -2650,7 +3287,9 @@ namespace {
      * glVertexAttribI2iv
      * 
      * @param int $index 
-     * @param \GL\Buffer\IntBuffer|array $v
+     * @param \GL\Buffer\IntBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttribI2iv(int $index, \GL\Buffer\IntBuffer|array $v) : void {};
  
@@ -2658,7 +3297,9 @@ namespace {
      * glVertexAttribI3iv
      * 
      * @param int $index 
-     * @param \GL\Buffer\IntBuffer|array $v
+     * @param \GL\Buffer\IntBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttribI3iv(int $index, \GL\Buffer\IntBuffer|array $v) : void {};
  
@@ -2666,7 +3307,9 @@ namespace {
      * glVertexAttribI4iv
      * 
      * @param int $index 
-     * @param \GL\Buffer\IntBuffer|array $v
+     * @param \GL\Buffer\IntBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttribI4iv(int $index, \GL\Buffer\IntBuffer|array $v) : void {};
  
@@ -2674,7 +3317,9 @@ namespace {
      * glVertexAttribI1uiv
      * 
      * @param int $index 
-     * @param \GL\Buffer\UIntBuffer|array $v
+     * @param \GL\Buffer\UIntBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttribI1uiv(int $index, \GL\Buffer\UIntBuffer|array $v) : void {};
  
@@ -2682,7 +3327,9 @@ namespace {
      * glVertexAttribI2uiv
      * 
      * @param int $index 
-     * @param \GL\Buffer\UIntBuffer|array $v
+     * @param \GL\Buffer\UIntBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttribI2uiv(int $index, \GL\Buffer\UIntBuffer|array $v) : void {};
  
@@ -2690,7 +3337,9 @@ namespace {
      * glVertexAttribI3uiv
      * 
      * @param int $index 
-     * @param \GL\Buffer\UIntBuffer|array $v
+     * @param \GL\Buffer\UIntBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttribI3uiv(int $index, \GL\Buffer\UIntBuffer|array $v) : void {};
  
@@ -2698,7 +3347,9 @@ namespace {
      * glVertexAttribI4uiv
      * 
      * @param int $index 
-     * @param \GL\Buffer\UIntBuffer|array $v
+     * @param \GL\Buffer\UIntBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttribI4uiv(int $index, \GL\Buffer\UIntBuffer|array $v) : void {};
  
@@ -2706,7 +3357,9 @@ namespace {
      * glVertexAttribI4bv
      * 
      * @param int $index 
-     * @param \GL\Buffer\ByteBuffer|array $v
+     * @param \GL\Buffer\ByteBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttribI4bv(int $index, \GL\Buffer\ByteBuffer|array $v) : void {};
  
@@ -2714,7 +3367,9 @@ namespace {
      * glVertexAttribI4sv
      * 
      * @param int $index 
-     * @param \GL\Buffer\ShortBuffer|array $v
+     * @param \GL\Buffer\ShortBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttribI4sv(int $index, \GL\Buffer\ShortBuffer|array $v) : void {};
  
@@ -2722,7 +3377,9 @@ namespace {
      * glVertexAttribI4ubv
      * 
      * @param int $index 
-     * @param \GL\Buffer\UbyteBuffer|array $v
+     * @param \GL\Buffer\UbyteBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttribI4ubv(int $index, \GL\Buffer\UbyteBuffer|array $v) : void {};
  
@@ -2730,7 +3387,9 @@ namespace {
      * glVertexAttribI4usv
      * 
      * @param int $index 
-     * @param \GL\Buffer\UShortBuffer|array $v
+     * @param \GL\Buffer\UShortBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttribI4usv(int $index, \GL\Buffer\UShortBuffer|array $v) : void {};
  
@@ -2739,7 +3398,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetUniformuiv(int $program, int $location, int &$params) : void {};
  
@@ -2751,6 +3412,8 @@ namespace {
      * @param int $color 
      * @param string $name The name of the user-defined varying out variable whose
      * binding to modify
+     * 
+     * @return void
      */ 
     function glBindFragDataLocation(int $program, int $color, string $name) : void {};
  
@@ -2761,6 +3424,8 @@ namespace {
      * whose binding to query
      * @param string $name The name of the user-defined varying out variable whose
      * binding to query
+     * 
+     * @return int
      */ 
     function glGetFragDataLocation(int $program, string $name) : int {};
  
@@ -2768,7 +3433,9 @@ namespace {
      * glUniform1ui
      * 
      * @param int $location 
-     * @param int $v0
+     * @param int $v0 
+     * 
+     * @return void
      */ 
     function glUniform1ui(int $location, int $v0) : void {};
  
@@ -2777,7 +3444,9 @@ namespace {
      * 
      * @param int $location 
      * @param int $v0 
-     * @param int $v1
+     * @param int $v1 
+     * 
+     * @return void
      */ 
     function glUniform2ui(int $location, int $v0, int $v1) : void {};
  
@@ -2787,7 +3456,9 @@ namespace {
      * @param int $location 
      * @param int $v0 
      * @param int $v1 
-     * @param int $v2
+     * @param int $v2 
+     * 
+     * @return void
      */ 
     function glUniform3ui(int $location, int $v0, int $v1, int $v2) : void {};
  
@@ -2798,7 +3469,9 @@ namespace {
      * @param int $v0 
      * @param int $v1 
      * @param int $v2 
-     * @param int $v3
+     * @param int $v3 
+     * 
+     * @return void
      */ 
     function glUniform4ui(int $location, int $v0, int $v1, int $v2, int $v3) : void {};
  
@@ -2806,7 +3479,9 @@ namespace {
      * glUniform1uiv
      * 
      * @param int $location 
-     * @param \GL\Buffer\UIntBuffer|array $value
+     * @param \GL\Buffer\UIntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniform1uiv(int $location, \GL\Buffer\UIntBuffer|array $value) : void {};
  
@@ -2814,7 +3489,9 @@ namespace {
      * glUniform2uiv
      * 
      * @param int $location 
-     * @param \GL\Buffer\UIntBuffer|array $value
+     * @param \GL\Buffer\UIntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniform2uiv(int $location, \GL\Buffer\UIntBuffer|array $value) : void {};
  
@@ -2822,7 +3499,9 @@ namespace {
      * glUniform3uiv
      * 
      * @param int $location 
-     * @param \GL\Buffer\UIntBuffer|array $value
+     * @param \GL\Buffer\UIntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniform3uiv(int $location, \GL\Buffer\UIntBuffer|array $value) : void {};
  
@@ -2830,7 +3509,9 @@ namespace {
      * glUniform4uiv
      * 
      * @param int $location 
-     * @param \GL\Buffer\UIntBuffer|array $value
+     * @param \GL\Buffer\UIntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniform4uiv(int $location, \GL\Buffer\UIntBuffer|array $value) : void {};
  
@@ -2839,7 +3520,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $pname 
-     * @param \GL\Buffer\IntBuffer|array $params
+     * @param \GL\Buffer\IntBuffer|array $params 
+     * 
+     * @return void
      */ 
     function glTexParameterIiv(int $target, int $pname, \GL\Buffer\IntBuffer|array $params) : void {};
  
@@ -2848,7 +3531,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $pname 
-     * @param \GL\Buffer\UIntBuffer|array $params
+     * @param \GL\Buffer\UIntBuffer|array $params 
+     * 
+     * @return void
      */ 
     function glTexParameterIuiv(int $target, int $pname, \GL\Buffer\UIntBuffer|array $params) : void {};
  
@@ -2857,7 +3542,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $pname 
-     * @param ?bool &...$params
+     * @param ?bool &...$params 
+     * 
+     * @return void
      */ 
     function glGetTexParameterIiv(int $target, int $pname, ?bool &...$params) : void {};
  
@@ -2866,7 +3553,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $pname 
-     * @param ?bool &...$params
+     * @param ?bool &...$params 
+     * 
+     * @return void
      */ 
     function glGetTexParameterIuiv(int $target, int $pname, ?bool &...$params) : void {};
  
@@ -2875,7 +3564,9 @@ namespace {
      * 
      * @param int $buffer 
      * @param int $drawbuffer 
-     * @param \GL\Buffer\IntBuffer|array $value
+     * @param \GL\Buffer\IntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glClearBufferiv(int $buffer, int $drawbuffer, \GL\Buffer\IntBuffer|array $value) : void {};
  
@@ -2884,7 +3575,9 @@ namespace {
      * 
      * @param int $buffer 
      * @param int $drawbuffer 
-     * @param \GL\Buffer\UIntBuffer|array $value
+     * @param \GL\Buffer\UIntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glClearBufferuiv(int $buffer, int $drawbuffer, \GL\Buffer\UIntBuffer|array $value) : void {};
  
@@ -2893,7 +3586,9 @@ namespace {
      * 
      * @param int $buffer 
      * @param int $drawbuffer 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glClearBufferfv(int $buffer, int $drawbuffer, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -2903,7 +3598,9 @@ namespace {
      * @param int $buffer 
      * @param int $drawbuffer 
      * @param float $depth 
-     * @param int $stencil
+     * @param int $stencil 
+     * 
+     * @return void
      */ 
     function glClearBufferfi(int $buffer, int $drawbuffer, float $depth, int $stencil) : void {};
  
@@ -2911,7 +3608,9 @@ namespace {
      * glGetStringi
      * 
      * @param int $name 
-     * @param int $index
+     * @param int $index 
+     * 
+     * @return string
      */ 
     function glGetStringi(int $name, int $index) : string {};
  
@@ -2920,6 +3619,8 @@ namespace {
      * 
      * @param int $renderbuffer Specifies a value that may be the name of a
      * renderbuffer object.
+     * 
+     * @return bool
      */ 
     function glIsRenderbuffer(int $renderbuffer) : bool {};
  
@@ -2930,6 +3631,8 @@ namespace {
      * operation. target must be <constant>GL_RENDERBUFFER</constant>.
      * @param int $renderbuffer Specifies the name of the renderbuffer object to
      * bind.
+     * 
+     * @return void
      */ 
     function glBindRenderbuffer(int $target, int $renderbuffer) : void {};
  
@@ -2937,7 +3640,9 @@ namespace {
      * delete renderbuffer objects
      * 
      * @param int $n Specifies the number of renderbuffer objects to be deleted.
-     * @param ?int ...$renderbuffers
+     * @param ?int ...$renderbuffers 
+     * 
+     * @return void
      */ 
     function glDeleteRenderbuffers(int $n, ?int ...$renderbuffers) : void {};
  
@@ -2945,7 +3650,9 @@ namespace {
      * generate renderbuffer object names
      * 
      * @param int $n Specifies the number of renderbuffer object names to generate.
-     * @param ?int &...$renderbuffers
+     * @param ?int &...$renderbuffers 
+     * 
+     * @return void
      */ 
     function glGenRenderbuffers(int $n, ?int &...$renderbuffers) : void {};
  
@@ -2959,6 +3666,8 @@ namespace {
      * renderbuffer object's image.
      * @param int $width Specifies the width of the renderbuffer, in pixels.
      * @param int $height Specifies the height of the renderbuffer, in pixels.
+     * 
+     * @return void
      */ 
     function glRenderbufferStorage(int $target, int $internalformat, int $width, int $height) : void {};
  
@@ -2967,7 +3676,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetRenderbufferParameteriv(int $target, int $pname, int &$params) : void {};
  
@@ -2976,6 +3687,8 @@ namespace {
      * 
      * @param int $framebuffer Specifies a value that may be the name of a
      * framebuffer object.
+     * 
+     * @return bool
      */ 
     function glIsFramebuffer(int $framebuffer) : bool {};
  
@@ -2984,6 +3697,8 @@ namespace {
      * 
      * @param int $target Specifies the framebuffer target of the binding operation.
      * @param int $framebuffer Specifies the name of the framebuffer object to bind.
+     * 
+     * @return void
      */ 
     function glBindFramebuffer(int $target, int $framebuffer) : void {};
  
@@ -2991,7 +3706,9 @@ namespace {
      * delete framebuffer objects
      * 
      * @param int $n Specifies the number of framebuffer objects to be deleted.
-     * @param ?int ...$framebuffers
+     * @param ?int ...$framebuffers 
+     * 
+     * @return void
      */ 
     function glDeleteFramebuffers(int $n, ?int ...$framebuffers) : void {};
  
@@ -2999,7 +3716,9 @@ namespace {
      * generate framebuffer object names
      * 
      * @param int $n Specifies the number of framebuffer object names to generate.
-     * @param ?int &...$framebuffers
+     * @param ?int &...$framebuffers 
+     * 
+     * @return void
      */ 
     function glGenFramebuffers(int $n, ?int &...$framebuffers) : void {};
  
@@ -3009,6 +3728,8 @@ namespace {
      * @param int $target Specify the target to which the framebuffer is bound for
      * glCheckFramebufferStatus, and the target against which framebuffer
      * completeness of framebuffer is checked for glCheckNamedFramebufferStatus.
+     * 
+     * @return int
      */ 
     function glCheckFramebufferStatus(int $target) : int {};
  
@@ -3019,7 +3740,9 @@ namespace {
      * @param int $attachment 
      * @param int $textarget 
      * @param int $texture 
-     * @param int $level
+     * @param int $level 
+     * 
+     * @return void
      */ 
     function glFramebufferTexture1D(int $target, int $attachment, int $textarget, int $texture, int $level) : void {};
  
@@ -3030,7 +3753,9 @@ namespace {
      * @param int $attachment 
      * @param int $textarget 
      * @param int $texture 
-     * @param int $level
+     * @param int $level 
+     * 
+     * @return void
      */ 
     function glFramebufferTexture2D(int $target, int $attachment, int $textarget, int $texture, int $level) : void {};
  
@@ -3042,7 +3767,9 @@ namespace {
      * @param int $textarget 
      * @param int $texture 
      * @param int $level 
-     * @param int $zoffset
+     * @param int $zoffset 
+     * 
+     * @return void
      */ 
     function glFramebufferTexture3D(int $target, int $attachment, int $textarget, int $texture, int $level, int $zoffset) : void {};
  
@@ -3056,6 +3783,8 @@ namespace {
      * <constant>GL_RENDERBUFFER</constant>.
      * @param int $renderbuffer Specifies the name of an existing renderbuffer
      * object of type renderbuffertarget to attach.
+     * 
+     * @return void
      */ 
     function glFramebufferRenderbuffer(int $target, int $attachment, int $renderbuffertarget, int $renderbuffer) : void {};
  
@@ -3068,6 +3797,8 @@ namespace {
      * query.
      * @param int $pname Specifies the parameter of attachment to query.
      * @param int &$params Returns the value of parameter pname for attachment.
+     * 
+     * @return void
      */ 
     function glGetFramebufferAttachmentParameteriv(int $target, int $attachment, int $pname, int &$params) : void {};
  
@@ -3081,6 +3812,8 @@ namespace {
      * <constant>GL_TEXTURE_2D_ARRAY</constant>,
      * <constant>GL_TEXTURE_CUBE_MAP</constant>, or
      * <constant>GL_TEXTURE_CUBE_MAP_ARRAY</constant>.
+     * 
+     * @return void
      */ 
     function glGenerateMipmap(int $target) : void {};
  
@@ -3104,6 +3837,8 @@ namespace {
      * @param int $filter Specifies the interpolation to be applied if the image is
      * stretched. Must be <constant>GL_NEAREST</constant> or
      * <constant>GL_LINEAR</constant>.
+     * 
+     * @return void
      */ 
     function glBlitFramebuffer(int $srcX0, int $srcY0, int $srcX1, int $srcY1, int $dstX0, int $dstY0, int $dstX1, int $dstY1, int $mask, int $filter) : void {};
  
@@ -3120,6 +3855,8 @@ namespace {
      * renderbuffer object's image.
      * @param int $width Specifies the width of the renderbuffer, in pixels.
      * @param int $height Specifies the height of the renderbuffer, in pixels.
+     * 
+     * @return void
      */ 
     function glRenderbufferStorageMultisample(int $target, int $samples, int $internalformat, int $width, int $height) : void {};
  
@@ -3134,6 +3871,8 @@ namespace {
      * attach.
      * @param int $level Specifies the mipmap level of the texture object to attach.
      * @param int $layer Specifies the layer of the texture object to attach.
+     * 
+     * @return void
      */ 
     function glFramebufferTextureLayer(int $target, int $attachment, int $texture, int $level, int $layer) : void {};
  
@@ -3147,6 +3886,8 @@ namespace {
      * machine units.
      * @param int $length Specifies the length of the buffer subrange, in basic
      * machine units.
+     * 
+     * @return void
      */ 
     function glFlushMappedBufferRange(int $target, int $offset, int $length) : void {};
  
@@ -3154,6 +3895,8 @@ namespace {
      * bind a vertex array object
      * 
      * @param int $array Specifies the name of the vertex array to bind.
+     * 
+     * @return void
      */ 
     function glBindVertexArray(int $array) : void {};
  
@@ -3161,7 +3904,9 @@ namespace {
      * delete vertex array objects
      * 
      * @param int $n Specifies the number of vertex array objects to be deleted.
-     * @param ?int ...$arrays
+     * @param ?int ...$arrays 
+     * 
+     * @return void
      */ 
     function glDeleteVertexArrays(int $n, ?int ...$arrays) : void {};
  
@@ -3169,7 +3914,9 @@ namespace {
      * generate vertex array object names
      * 
      * @param int $n Specifies the number of vertex array object names to generate.
-     * @param ?int &...$arrays
+     * @param ?int &...$arrays 
+     * 
+     * @return void
      */ 
     function glGenVertexArrays(int $n, ?int &...$arrays) : void {};
  
@@ -3178,6 +3925,8 @@ namespace {
      * 
      * @param int $array Specifies a value that may be the name of a vertex array
      * object.
+     * 
+     * @return bool
      */ 
     function glIsVertexArray(int $array) : bool {};
  
@@ -3197,6 +3946,8 @@ namespace {
      * @param int $count Specifies the number of indices to be rendered.
      * @param int $instancecount Specifies the number of instances of the specified
      * range of indices to be rendered.
+     * 
+     * @return void
      */ 
     function glDrawArraysInstanced(int $mode, int $first, int $count, int $instancecount) : void {};
  
@@ -3209,6 +3960,8 @@ namespace {
      * store belonging to buffer.
      * @param int $buffer Specifies the name of the buffer object whose storage to
      * attach to the active buffer texture.
+     * 
+     * @return void
      */ 
     function glTexBuffer(int $target, int $internalformat, int $buffer) : void {};
  
@@ -3217,6 +3970,8 @@ namespace {
      * 
      * @param int $index Specifies the value to be interpreted as the primitive
      * restart index.
+     * 
+     * @return void
      */ 
     function glPrimitiveRestartIndex(int $index) : void {};
  
@@ -3235,6 +3990,8 @@ namespace {
      * written.
      * @param int $size Specifies the size, in basic machine units, of the data to
      * be copied from the source buffer object to the destination buffer object.
+     * 
+     * @return void
      */ 
     function glCopyBufferSubData(int $readTarget, int $writeTarget, int $readOffset, int $writeOffset, int $size) : void {};
  
@@ -3245,6 +4002,8 @@ namespace {
      * block.
      * @param string $uniformBlockName Specifies the address an array of characters
      * to containing the name of the uniform block whose index to retrieve.
+     * 
+     * @return int
      */ 
     function glGetUniformBlockIndex(int $program, string $uniformBlockName) : int {};
  
@@ -3254,7 +4013,9 @@ namespace {
      * @param int $program 
      * @param int $uniformBlockIndex 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetActiveUniformBlockiv(int $program, int $uniformBlockIndex, int $pname, int &$params) : void {};
  
@@ -3267,13 +4028,17 @@ namespace {
      * program whose binding to assign.
      * @param int $uniformBlockBinding Specifies the binding point to which to bind
      * the uniform block with index uniformBlockIndex within program.
+     * 
+     * @return void
      */ 
     function glUniformBlockBinding(int $program, int $uniformBlockIndex, int $uniformBlockBinding) : void {};
  
     /**
      * specifiy the vertex to be used as the source of data for flat shaded varyings
      * 
-     * @param int $mode
+     * @param int $mode 
+     * 
+     * @return void
      */ 
     function glProvokingVertex(int $mode) : void {};
  
@@ -3287,6 +4052,8 @@ namespace {
      * behavior of the sync object. No flags are presently defined for this
      * operation and flags must be zero. flags is a placeholder for anticipated
      * future extensions of fence sync object capabilities.
+     * 
+     * @return int
      */ 
     function glFenceSync(int $condition, int $flags) : int {};
  
@@ -3294,6 +4061,8 @@ namespace {
      * determine if a name corresponds to a sync object
      * 
      * @param int $sync Specifies a value that may be the name of a sync object.
+     * 
+     * @return bool
      */ 
     function glIsSync(int $sync) : bool {};
  
@@ -3301,6 +4070,8 @@ namespace {
      * delete a sync object
      * 
      * @param int $sync The sync object to be deleted.
+     * 
+     * @return void
      */ 
     function glDeleteSync(int $sync) : void {};
  
@@ -3312,6 +4083,8 @@ namespace {
      * may be <constant>GL_SYNC_FLUSH_COMMANDS_BIT</constant>.
      * @param int $timeout The timeout, specified in nanoseconds, for which the
      * implementation should wait for sync to become signaled.
+     * 
+     * @return int
      */ 
     function glClientWaitSync(int $sync, int $flags, int $timeout) : int {};
  
@@ -3324,6 +4097,8 @@ namespace {
      * may be zero.
      * @param int $timeout Specifies the timeout that the server should wait before
      * continuing. timeout must be <constant>GL_TIMEOUT_IGNORED</constant>.
+     * 
+     * @return void
      */ 
     function glWaitSync(int $sync, int $flags, int $timeout) : void {};
  
@@ -3331,7 +4106,9 @@ namespace {
      * glGetInteger64v
      * 
      * @param int $pname 
-     * @param int &$data
+     * @param int &$data 
+     * 
+     * @return void
      */ 
     function glGetInteger64v(int $pname, int &$data) : void {};
  
@@ -3346,6 +4123,8 @@ namespace {
      * number of integers placed in values.
      * @param int &$values Specifies the address of an array to receive the values
      * of the queried parameter.
+     * 
+     * @return void
      */ 
     function glGetSynciv(int $sync, int $pname, int $count, int &$length, int &$values) : void {};
  
@@ -3354,7 +4133,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $index 
-     * @param int &$data
+     * @param int &$data 
+     * 
+     * @return void
      */ 
     function glGetInteger64i_v(int $target, int $index, int &$data) : void {};
  
@@ -3363,7 +4144,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetBufferParameteri64v(int $target, int $pname, int &$params) : void {};
  
@@ -3377,6 +4160,8 @@ namespace {
      * @param int $texture Specifies the name of an existing texture object to
      * attach.
      * @param int $level Specifies the mipmap level of the texture object to attach.
+     * 
+     * @return void
      */ 
     function glFramebufferTexture(int $target, int $attachment, int $texture, int $level) : void {};
  
@@ -3397,6 +4182,8 @@ namespace {
      * identical sample locations and the same number of samples for all texels in
      * the image, and the sample locations will not depend on the internal format or
      * size of the image.
+     * 
+     * @return void
      */ 
     function glTexImage2DMultisample(int $target, int $samples, int $internalformat, int $width, int $height, bool $fixedsamplelocations) : void {};
  
@@ -3418,6 +4205,8 @@ namespace {
      * identical sample locations and the same number of samples for all texels in
      * the image, and the sample locations will not depend on the internal format or
      * size of the image.
+     * 
+     * @return void
      */ 
     function glTexImage3DMultisample(int $target, int $samples, int $internalformat, int $width, int $height, int $depth, bool $fixedsamplelocations) : void {};
  
@@ -3429,6 +4218,8 @@ namespace {
      * @param int $index Specifies the index of the sample whose position to query.
      * @param float &$val Specifies the address of an array to receive the position
      * of the sample.
+     * 
+     * @return void
      */ 
     function glGetMultisamplefv(int $pname, int $index, float &$val) : void {};
  
@@ -3438,6 +4229,8 @@ namespace {
      * @param int $maskNumber Specifies which 32-bit sub-word of the sample mask to
      * update.
      * @param int $mask Specifies the new value of the mask sub-word.
+     * 
+     * @return void
      */ 
     function glSampleMaski(int $maskNumber, int $mask) : void {};
  
@@ -3453,6 +4246,8 @@ namespace {
      * varying out variable to
      * @param string $name The name of the user-defined varying out variable whose
      * binding to modify
+     * 
+     * @return void
      */ 
     function glBindFragDataLocationIndexed(int $program, int $colorNumber, int $index, string $name) : void {};
  
@@ -3463,6 +4258,8 @@ namespace {
      * whose binding to query
      * @param string $name The name of the user-defined varying out variable whose
      * index to query
+     * 
+     * @return int
      */ 
     function glGetFragDataIndex(int $program, string $name) : int {};
  
@@ -3470,7 +4267,9 @@ namespace {
      * generate sampler object names
      * 
      * @param int $count 
-     * @param ?int &...$samplers
+     * @param ?int &...$samplers 
+     * 
+     * @return void
      */ 
     function glGenSamplers(int $count, ?int &...$samplers) : void {};
  
@@ -3478,14 +4277,18 @@ namespace {
      * delete named sampler objects
      * 
      * @param int $count 
-     * @param ?int ...$samplers
+     * @param ?int ...$samplers 
+     * 
+     * @return void
      */ 
     function glDeleteSamplers(int $count, ?int ...$samplers) : void {};
  
     /**
      * determine if a name corresponds to a sampler object
      * 
-     * @param int $sampler
+     * @param int $sampler 
+     * 
+     * @return bool
      */ 
     function glIsSampler(int $sampler) : bool {};
  
@@ -3495,6 +4298,8 @@ namespace {
      * @param int $unit Specifies the index of the texture unit to which the sampler
      * is bound.
      * @param int $sampler Specifies the name of a sampler.
+     * 
+     * @return void
      */ 
     function glBindSampler(int $unit, int $sampler) : void {};
  
@@ -3503,7 +4308,9 @@ namespace {
      * 
      * @param int $sampler 
      * @param int $pname 
-     * @param int $param
+     * @param int $param 
+     * 
+     * @return void
      */ 
     function glSamplerParameteri(int $sampler, int $pname, int $param) : void {};
  
@@ -3512,7 +4319,9 @@ namespace {
      * 
      * @param int $sampler 
      * @param int $pname 
-     * @param \GL\Buffer\IntBuffer|array $param
+     * @param \GL\Buffer\IntBuffer|array $param 
+     * 
+     * @return void
      */ 
     function glSamplerParameteriv(int $sampler, int $pname, \GL\Buffer\IntBuffer|array $param) : void {};
  
@@ -3521,7 +4330,9 @@ namespace {
      * 
      * @param int $sampler 
      * @param int $pname 
-     * @param float $param
+     * @param float $param 
+     * 
+     * @return void
      */ 
     function glSamplerParameterf(int $sampler, int $pname, float $param) : void {};
  
@@ -3530,7 +4341,9 @@ namespace {
      * 
      * @param int $sampler 
      * @param int $pname 
-     * @param \GL\Buffer\FloatBuffer|array $param
+     * @param \GL\Buffer\FloatBuffer|array $param 
+     * 
+     * @return void
      */ 
     function glSamplerParameterfv(int $sampler, int $pname, \GL\Buffer\FloatBuffer|array $param) : void {};
  
@@ -3539,7 +4352,9 @@ namespace {
      * 
      * @param int $sampler 
      * @param int $pname 
-     * @param \GL\Buffer\IntBuffer|array $param
+     * @param \GL\Buffer\IntBuffer|array $param 
+     * 
+     * @return void
      */ 
     function glSamplerParameterIiv(int $sampler, int $pname, \GL\Buffer\IntBuffer|array $param) : void {};
  
@@ -3548,7 +4363,9 @@ namespace {
      * 
      * @param int $sampler 
      * @param int $pname 
-     * @param \GL\Buffer\UIntBuffer|array $param
+     * @param \GL\Buffer\UIntBuffer|array $param 
+     * 
+     * @return void
      */ 
     function glSamplerParameterIuiv(int $sampler, int $pname, \GL\Buffer\UIntBuffer|array $param) : void {};
  
@@ -3557,7 +4374,9 @@ namespace {
      * 
      * @param int $sampler 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetSamplerParameteriv(int $sampler, int $pname, int &$params) : void {};
  
@@ -3566,7 +4385,9 @@ namespace {
      * 
      * @param int $sampler 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetSamplerParameterIiv(int $sampler, int $pname, int &$params) : void {};
  
@@ -3575,7 +4396,9 @@ namespace {
      * 
      * @param int $sampler 
      * @param int $pname 
-     * @param float &$params
+     * @param float &$params 
+     * 
+     * @return void
      */ 
     function glGetSamplerParameterfv(int $sampler, int $pname, float &$params) : void {};
  
@@ -3584,7 +4407,9 @@ namespace {
      * 
      * @param int $sampler 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetSamplerParameterIuiv(int $sampler, int $pname, int &$params) : void {};
  
@@ -3596,6 +4421,8 @@ namespace {
      * time.
      * @param int $target Specify the counter to query. target must be
      * <constant>GL_TIMESTAMP</constant>.
+     * 
+     * @return void
      */ 
     function glQueryCounter(int $id, int $target) : void {};
  
@@ -3604,7 +4431,9 @@ namespace {
      * 
      * @param int $id 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetQueryObjecti64v(int $id, int $pname, int &$params) : void {};
  
@@ -3613,7 +4442,9 @@ namespace {
      * 
      * @param int $id 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetQueryObjectui64v(int $id, int $pname, int &$params) : void {};
  
@@ -3624,6 +4455,8 @@ namespace {
      * @param int $index Specify the index of the generic vertex attribute.
      * @param int $divisor Specify the number of instances that will pass between
      * updates of the generic attribute at slot index.
+     * 
+     * @return void
      */ 
     function glVertexAttribDivisor(int $index, int $divisor) : void {};
  
@@ -3633,7 +4466,9 @@ namespace {
      * @param int $index 
      * @param int $type 
      * @param bool $normalized 
-     * @param int $value
+     * @param int $value 
+     * 
+     * @return void
      */ 
     function glVertexAttribP1ui(int $index, int $type, bool $normalized, int $value) : void {};
  
@@ -3643,7 +4478,9 @@ namespace {
      * @param int $index 
      * @param int $type 
      * @param bool $normalized 
-     * @param \GL\Buffer\UIntBuffer|array $value
+     * @param \GL\Buffer\UIntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glVertexAttribP1uiv(int $index, int $type, bool $normalized, \GL\Buffer\UIntBuffer|array $value) : void {};
  
@@ -3653,7 +4490,9 @@ namespace {
      * @param int $index 
      * @param int $type 
      * @param bool $normalized 
-     * @param int $value
+     * @param int $value 
+     * 
+     * @return void
      */ 
     function glVertexAttribP2ui(int $index, int $type, bool $normalized, int $value) : void {};
  
@@ -3663,7 +4502,9 @@ namespace {
      * @param int $index 
      * @param int $type 
      * @param bool $normalized 
-     * @param \GL\Buffer\UIntBuffer|array $value
+     * @param \GL\Buffer\UIntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glVertexAttribP2uiv(int $index, int $type, bool $normalized, \GL\Buffer\UIntBuffer|array $value) : void {};
  
@@ -3673,7 +4514,9 @@ namespace {
      * @param int $index 
      * @param int $type 
      * @param bool $normalized 
-     * @param int $value
+     * @param int $value 
+     * 
+     * @return void
      */ 
     function glVertexAttribP3ui(int $index, int $type, bool $normalized, int $value) : void {};
  
@@ -3683,7 +4526,9 @@ namespace {
      * @param int $index 
      * @param int $type 
      * @param bool $normalized 
-     * @param \GL\Buffer\UIntBuffer|array $value
+     * @param \GL\Buffer\UIntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glVertexAttribP3uiv(int $index, int $type, bool $normalized, \GL\Buffer\UIntBuffer|array $value) : void {};
  
@@ -3693,7 +4538,9 @@ namespace {
      * @param int $index 
      * @param int $type 
      * @param bool $normalized 
-     * @param int $value
+     * @param int $value 
+     * 
+     * @return void
      */ 
     function glVertexAttribP4ui(int $index, int $type, bool $normalized, int $value) : void {};
  
@@ -3703,7 +4550,9 @@ namespace {
      * @param int $index 
      * @param int $type 
      * @param bool $normalized 
-     * @param \GL\Buffer\UIntBuffer|array $value
+     * @param \GL\Buffer\UIntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glVertexAttribP4uiv(int $index, int $type, bool $normalized, \GL\Buffer\UIntBuffer|array $value) : void {};
  
@@ -3711,7 +4560,9 @@ namespace {
      * glVertexP2ui
      * 
      * @param int $type 
-     * @param int $value
+     * @param int $value 
+     * 
+     * @return void
      */ 
     function glVertexP2ui(int $type, int $value) : void {};
  
@@ -3719,7 +4570,9 @@ namespace {
      * glVertexP2uiv
      * 
      * @param int $type 
-     * @param \GL\Buffer\UIntBuffer|array $value
+     * @param \GL\Buffer\UIntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glVertexP2uiv(int $type, \GL\Buffer\UIntBuffer|array $value) : void {};
  
@@ -3727,7 +4580,9 @@ namespace {
      * glVertexP3ui
      * 
      * @param int $type 
-     * @param int $value
+     * @param int $value 
+     * 
+     * @return void
      */ 
     function glVertexP3ui(int $type, int $value) : void {};
  
@@ -3735,7 +4590,9 @@ namespace {
      * glVertexP3uiv
      * 
      * @param int $type 
-     * @param \GL\Buffer\UIntBuffer|array $value
+     * @param \GL\Buffer\UIntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glVertexP3uiv(int $type, \GL\Buffer\UIntBuffer|array $value) : void {};
  
@@ -3743,7 +4600,9 @@ namespace {
      * glVertexP4ui
      * 
      * @param int $type 
-     * @param int $value
+     * @param int $value 
+     * 
+     * @return void
      */ 
     function glVertexP4ui(int $type, int $value) : void {};
  
@@ -3751,7 +4610,9 @@ namespace {
      * glVertexP4uiv
      * 
      * @param int $type 
-     * @param \GL\Buffer\UIntBuffer|array $value
+     * @param \GL\Buffer\UIntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glVertexP4uiv(int $type, \GL\Buffer\UIntBuffer|array $value) : void {};
  
@@ -3759,7 +4620,9 @@ namespace {
      * glTexCoordP1ui
      * 
      * @param int $type 
-     * @param int $coords
+     * @param int $coords 
+     * 
+     * @return void
      */ 
     function glTexCoordP1ui(int $type, int $coords) : void {};
  
@@ -3767,7 +4630,9 @@ namespace {
      * glTexCoordP1uiv
      * 
      * @param int $type 
-     * @param \GL\Buffer\UIntBuffer|array $coords
+     * @param \GL\Buffer\UIntBuffer|array $coords 
+     * 
+     * @return void
      */ 
     function glTexCoordP1uiv(int $type, \GL\Buffer\UIntBuffer|array $coords) : void {};
  
@@ -3775,7 +4640,9 @@ namespace {
      * glTexCoordP2ui
      * 
      * @param int $type 
-     * @param int $coords
+     * @param int $coords 
+     * 
+     * @return void
      */ 
     function glTexCoordP2ui(int $type, int $coords) : void {};
  
@@ -3783,7 +4650,9 @@ namespace {
      * glTexCoordP2uiv
      * 
      * @param int $type 
-     * @param \GL\Buffer\UIntBuffer|array $coords
+     * @param \GL\Buffer\UIntBuffer|array $coords 
+     * 
+     * @return void
      */ 
     function glTexCoordP2uiv(int $type, \GL\Buffer\UIntBuffer|array $coords) : void {};
  
@@ -3791,7 +4660,9 @@ namespace {
      * glTexCoordP3ui
      * 
      * @param int $type 
-     * @param int $coords
+     * @param int $coords 
+     * 
+     * @return void
      */ 
     function glTexCoordP3ui(int $type, int $coords) : void {};
  
@@ -3799,7 +4670,9 @@ namespace {
      * glTexCoordP3uiv
      * 
      * @param int $type 
-     * @param \GL\Buffer\UIntBuffer|array $coords
+     * @param \GL\Buffer\UIntBuffer|array $coords 
+     * 
+     * @return void
      */ 
     function glTexCoordP3uiv(int $type, \GL\Buffer\UIntBuffer|array $coords) : void {};
  
@@ -3807,7 +4680,9 @@ namespace {
      * glTexCoordP4ui
      * 
      * @param int $type 
-     * @param int $coords
+     * @param int $coords 
+     * 
+     * @return void
      */ 
     function glTexCoordP4ui(int $type, int $coords) : void {};
  
@@ -3815,7 +4690,9 @@ namespace {
      * glTexCoordP4uiv
      * 
      * @param int $type 
-     * @param \GL\Buffer\UIntBuffer|array $coords
+     * @param \GL\Buffer\UIntBuffer|array $coords 
+     * 
+     * @return void
      */ 
     function glTexCoordP4uiv(int $type, \GL\Buffer\UIntBuffer|array $coords) : void {};
  
@@ -3824,7 +4701,9 @@ namespace {
      * 
      * @param int $texture 
      * @param int $type 
-     * @param int $coords
+     * @param int $coords 
+     * 
+     * @return void
      */ 
     function glMultiTexCoordP1ui(int $texture, int $type, int $coords) : void {};
  
@@ -3833,7 +4712,9 @@ namespace {
      * 
      * @param int $texture 
      * @param int $type 
-     * @param \GL\Buffer\UIntBuffer|array $coords
+     * @param \GL\Buffer\UIntBuffer|array $coords 
+     * 
+     * @return void
      */ 
     function glMultiTexCoordP1uiv(int $texture, int $type, \GL\Buffer\UIntBuffer|array $coords) : void {};
  
@@ -3842,7 +4723,9 @@ namespace {
      * 
      * @param int $texture 
      * @param int $type 
-     * @param int $coords
+     * @param int $coords 
+     * 
+     * @return void
      */ 
     function glMultiTexCoordP2ui(int $texture, int $type, int $coords) : void {};
  
@@ -3851,7 +4734,9 @@ namespace {
      * 
      * @param int $texture 
      * @param int $type 
-     * @param \GL\Buffer\UIntBuffer|array $coords
+     * @param \GL\Buffer\UIntBuffer|array $coords 
+     * 
+     * @return void
      */ 
     function glMultiTexCoordP2uiv(int $texture, int $type, \GL\Buffer\UIntBuffer|array $coords) : void {};
  
@@ -3860,7 +4745,9 @@ namespace {
      * 
      * @param int $texture 
      * @param int $type 
-     * @param int $coords
+     * @param int $coords 
+     * 
+     * @return void
      */ 
     function glMultiTexCoordP3ui(int $texture, int $type, int $coords) : void {};
  
@@ -3869,7 +4756,9 @@ namespace {
      * 
      * @param int $texture 
      * @param int $type 
-     * @param \GL\Buffer\UIntBuffer|array $coords
+     * @param \GL\Buffer\UIntBuffer|array $coords 
+     * 
+     * @return void
      */ 
     function glMultiTexCoordP3uiv(int $texture, int $type, \GL\Buffer\UIntBuffer|array $coords) : void {};
  
@@ -3878,7 +4767,9 @@ namespace {
      * 
      * @param int $texture 
      * @param int $type 
-     * @param int $coords
+     * @param int $coords 
+     * 
+     * @return void
      */ 
     function glMultiTexCoordP4ui(int $texture, int $type, int $coords) : void {};
  
@@ -3887,7 +4778,9 @@ namespace {
      * 
      * @param int $texture 
      * @param int $type 
-     * @param \GL\Buffer\UIntBuffer|array $coords
+     * @param \GL\Buffer\UIntBuffer|array $coords 
+     * 
+     * @return void
      */ 
     function glMultiTexCoordP4uiv(int $texture, int $type, \GL\Buffer\UIntBuffer|array $coords) : void {};
  
@@ -3895,7 +4788,9 @@ namespace {
      * glNormalP3ui
      * 
      * @param int $type 
-     * @param int $coords
+     * @param int $coords 
+     * 
+     * @return void
      */ 
     function glNormalP3ui(int $type, int $coords) : void {};
  
@@ -3903,7 +4798,9 @@ namespace {
      * glNormalP3uiv
      * 
      * @param int $type 
-     * @param \GL\Buffer\UIntBuffer|array $coords
+     * @param \GL\Buffer\UIntBuffer|array $coords 
+     * 
+     * @return void
      */ 
     function glNormalP3uiv(int $type, \GL\Buffer\UIntBuffer|array $coords) : void {};
  
@@ -3911,7 +4808,9 @@ namespace {
      * glColorP3ui
      * 
      * @param int $type 
-     * @param int $color
+     * @param int $color 
+     * 
+     * @return void
      */ 
     function glColorP3ui(int $type, int $color) : void {};
  
@@ -3919,7 +4818,9 @@ namespace {
      * glColorP3uiv
      * 
      * @param int $type 
-     * @param \GL\Buffer\UIntBuffer|array $color
+     * @param \GL\Buffer\UIntBuffer|array $color 
+     * 
+     * @return void
      */ 
     function glColorP3uiv(int $type, \GL\Buffer\UIntBuffer|array $color) : void {};
  
@@ -3927,7 +4828,9 @@ namespace {
      * glColorP4ui
      * 
      * @param int $type 
-     * @param int $color
+     * @param int $color 
+     * 
+     * @return void
      */ 
     function glColorP4ui(int $type, int $color) : void {};
  
@@ -3935,7 +4838,9 @@ namespace {
      * glColorP4uiv
      * 
      * @param int $type 
-     * @param \GL\Buffer\UIntBuffer|array $color
+     * @param \GL\Buffer\UIntBuffer|array $color 
+     * 
+     * @return void
      */ 
     function glColorP4uiv(int $type, \GL\Buffer\UIntBuffer|array $color) : void {};
  
@@ -3943,7 +4848,9 @@ namespace {
      * glSecondaryColorP3ui
      * 
      * @param int $type 
-     * @param int $color
+     * @param int $color 
+     * 
+     * @return void
      */ 
     function glSecondaryColorP3ui(int $type, int $color) : void {};
  
@@ -3951,7 +4858,9 @@ namespace {
      * glSecondaryColorP3uiv
      * 
      * @param int $type 
-     * @param \GL\Buffer\UIntBuffer|array $color
+     * @param \GL\Buffer\UIntBuffer|array $color 
+     * 
+     * @return void
      */ 
     function glSecondaryColorP3uiv(int $type, \GL\Buffer\UIntBuffer|array $color) : void {};
  
@@ -3960,6 +4869,8 @@ namespace {
      * 
      * @param float $value Specifies the rate at which samples are shaded within
      * each covered pixel.
+     * 
+     * @return void
      */ 
     function glMinSampleShading(float $value) : void {};
  
@@ -3967,7 +4878,9 @@ namespace {
      * glBlendEquationi
      * 
      * @param int $buf 
-     * @param int $mode
+     * @param int $mode 
+     * 
+     * @return void
      */ 
     function glBlendEquationi(int $buf, int $mode) : void {};
  
@@ -3976,7 +4889,9 @@ namespace {
      * 
      * @param int $buf 
      * @param int $modeRGB 
-     * @param int $modeAlpha
+     * @param int $modeAlpha 
+     * 
+     * @return void
      */ 
     function glBlendEquationSeparatei(int $buf, int $modeRGB, int $modeAlpha) : void {};
  
@@ -3985,7 +4900,9 @@ namespace {
      * 
      * @param int $buf 
      * @param int $src 
-     * @param int $dst
+     * @param int $dst 
+     * 
+     * @return void
      */ 
     function glBlendFunci(int $buf, int $src, int $dst) : void {};
  
@@ -3996,7 +4913,9 @@ namespace {
      * @param int $srcRGB 
      * @param int $dstRGB 
      * @param int $srcAlpha 
-     * @param int $dstAlpha
+     * @param int $dstAlpha 
+     * 
+     * @return void
      */ 
     function glBlendFuncSeparatei(int $buf, int $srcRGB, int $dstRGB, int $srcAlpha, int $dstAlpha) : void {};
  
@@ -4004,7 +4923,9 @@ namespace {
      * glUniform1d
      * 
      * @param int $location 
-     * @param float $x
+     * @param float $x 
+     * 
+     * @return void
      */ 
     function glUniform1d(int $location, float $x) : void {};
  
@@ -4013,7 +4934,9 @@ namespace {
      * 
      * @param int $location 
      * @param float $x 
-     * @param float $y
+     * @param float $y 
+     * 
+     * @return void
      */ 
     function glUniform2d(int $location, float $x, float $y) : void {};
  
@@ -4023,7 +4946,9 @@ namespace {
      * @param int $location 
      * @param float $x 
      * @param float $y 
-     * @param float $z
+     * @param float $z 
+     * 
+     * @return void
      */ 
     function glUniform3d(int $location, float $x, float $y, float $z) : void {};
  
@@ -4034,7 +4959,9 @@ namespace {
      * @param float $x 
      * @param float $y 
      * @param float $z 
-     * @param float $w
+     * @param float $w 
+     * 
+     * @return void
      */ 
     function glUniform4d(int $location, float $x, float $y, float $z, float $w) : void {};
  
@@ -4042,7 +4969,9 @@ namespace {
      * glUniform1dv
      * 
      * @param int $location 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniform1dv(int $location, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4050,7 +4979,9 @@ namespace {
      * glUniform2dv
      * 
      * @param int $location 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniform2dv(int $location, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4058,7 +4989,9 @@ namespace {
      * glUniform3dv
      * 
      * @param int $location 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniform3dv(int $location, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4066,7 +4999,9 @@ namespace {
      * glUniform4dv
      * 
      * @param int $location 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniform4dv(int $location, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4075,7 +5010,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix2dv(int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4084,7 +5021,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix3dv(int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4093,7 +5032,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix4dv(int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4102,7 +5043,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix2x3dv(int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4111,7 +5054,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix2x4dv(int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4120,7 +5065,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix3x2dv(int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4129,7 +5076,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix3x4dv(int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4138,7 +5087,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix4x2dv(int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4147,7 +5098,9 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glUniformMatrix4x3dv(int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4156,7 +5109,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param float &$params
+     * @param float &$params 
+     * 
+     * @return void
      */ 
     function glGetUniformdv(int $program, int $location, float &$params) : void {};
  
@@ -4175,6 +5130,8 @@ namespace {
      * <constant>GL_FRAGMENT_SHADER</constant>.
      * @param string $name Specifies the name of the subroutine uniform whose index
      * to query.
+     * 
+     * @return int
      */ 
     function glGetSubroutineUniformLocation(int $program, int $shadertype, string $name) : int {};
  
@@ -4193,6 +5150,8 @@ namespace {
      * <constant>GL_FRAGMENT_SHADER</constant>.
      * @param string $name Specifies the name of the subroutine uniform whose index
      * to query.
+     * 
+     * @return int
      */ 
     function glGetSubroutineIndex(int $program, int $shadertype, string $name) : int {};
  
@@ -4203,7 +5162,9 @@ namespace {
      * @param int $shadertype 
      * @param int $index 
      * @param int $pname 
-     * @param int &$values
+     * @param int &$values 
+     * 
+     * @return void
      */ 
     function glGetActiveSubroutineUniformiv(int $program, int $shadertype, int $index, int $pname, int &$values) : void {};
  
@@ -4211,7 +5172,9 @@ namespace {
      * glUniformSubroutinesuiv
      * 
      * @param int $shadertype 
-     * @param \GL\Buffer\UIntBuffer|array $indices
+     * @param \GL\Buffer\UIntBuffer|array $indices 
+     * 
+     * @return void
      */ 
     function glUniformSubroutinesuiv(int $shadertype, \GL\Buffer\UIntBuffer|array $indices) : void {};
  
@@ -4220,7 +5183,9 @@ namespace {
      * 
      * @param int $shadertype 
      * @param int $location 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetUniformSubroutineuiv(int $shadertype, int $location, int &$params) : void {};
  
@@ -4230,7 +5195,9 @@ namespace {
      * @param int $program 
      * @param int $shadertype 
      * @param int $pname 
-     * @param int &$values
+     * @param int &$values 
+     * 
+     * @return void
      */ 
     function glGetProgramStageiv(int $program, int $shadertype, int $pname, int &$values) : void {};
  
@@ -4238,7 +5205,9 @@ namespace {
      * glPatchParameteri
      * 
      * @param int $pname 
-     * @param int $value
+     * @param int $value 
+     * 
+     * @return void
      */ 
     function glPatchParameteri(int $pname, int $value) : void {};
  
@@ -4246,7 +5215,9 @@ namespace {
      * glPatchParameterfv
      * 
      * @param int $pname 
-     * @param \GL\Buffer\FloatBuffer|array $values
+     * @param \GL\Buffer\FloatBuffer|array $values 
+     * 
+     * @return void
      */ 
     function glPatchParameterfv(int $pname, \GL\Buffer\FloatBuffer|array $values) : void {};
  
@@ -4258,6 +5229,8 @@ namespace {
      * <constant>GL_TRANSFORM_FEEDBACK</constant>.
      * @param int $id Specifies the name of a transform feedback object reserved by
      * glGenTransformFeedbacks.
+     * 
+     * @return void
      */ 
     function glBindTransformFeedback(int $target, int $id) : void {};
  
@@ -4265,7 +5238,9 @@ namespace {
      * delete transform feedback objects
      * 
      * @param int $n Specifies the number of transform feedback objects to delete.
-     * @param ?int ...$ids
+     * @param ?int ...$ids 
+     * 
+     * @return void
      */ 
     function glDeleteTransformFeedbacks(int $n, ?int ...$ids) : void {};
  
@@ -4274,7 +5249,9 @@ namespace {
      * 
      * @param int $n Specifies the number of transform feedback object names to
      * reserve.
-     * @param ?int &...$ids
+     * @param ?int &...$ids 
+     * 
+     * @return void
      */ 
     function glGenTransformFeedbacks(int $n, ?int &...$ids) : void {};
  
@@ -4283,16 +5260,20 @@ namespace {
      * 
      * @param int $id Specifies a value that may be the name of a transform feedback
      * object.
+     * 
+     * @return bool
      */ 
     function glIsTransformFeedback(int $id) : bool {};
  
     /**
      * pause transform feedback operations
+     * @return void
      */ 
     function glPauseTransformFeedback() : void {};
  
     /**
      * resume transform feedback operations
+     * @return void
      */ 
     function glResumeTransformFeedback() : void {};
  
@@ -4311,6 +5292,8 @@ namespace {
      * <constant>GL_PATCHES</constant> are accepted.
      * @param int $id Specifies the name of a transform feedback object from which
      * to retrieve a primitive count.
+     * 
+     * @return void
      */ 
     function glDrawTransformFeedback(int $mode, int $id) : void {};
  
@@ -4332,6 +5315,8 @@ namespace {
      * to retrieve a primitive count.
      * @param int $stream Specifies the index of the transform feedback stream from
      * which to retrieve a primitive count.
+     * 
+     * @return void
      */ 
     function glDrawTransformFeedbackStream(int $mode, int $id, int $stream) : void {};
  
@@ -4340,7 +5325,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $index 
-     * @param int $id
+     * @param int $id 
+     * 
+     * @return void
      */ 
     function glBeginQueryIndexed(int $target, int $index, int $id) : void {};
  
@@ -4348,7 +5335,9 @@ namespace {
      * glEndQueryIndexed
      * 
      * @param int $target 
-     * @param int $index
+     * @param int $index 
+     * 
+     * @return void
      */ 
     function glEndQueryIndexed(int $target, int $index) : void {};
  
@@ -4367,11 +5356,14 @@ namespace {
      * parameter. Accepted values are <constant>GL_CURRENT_QUERY</constant> or
      * <constant>GL_QUERY_COUNTER_BITS</constant>.
      * @param int &$params Returns the requested data.
+     * 
+     * @return void
      */ 
     function glGetQueryIndexediv(int $target, int $index, int $pname, int &$params) : void {};
  
     /**
      * release resources consumed by the implementation's shader compiler
+     * @return void
      */ 
     function glReleaseShaderCompiler() : void {};
  
@@ -4385,6 +5377,8 @@ namespace {
      * encodings of the implementation's numeric range are returned.
      * @param int &$precision Specifies the address of an integer into which the
      * numeric precision of the implementation is written.
+     * 
+     * @return void
      */ 
     function glGetShaderPrecisionFormat(int $shadertype, int $precisiontype, int &$range, int &$precision) : void {};
  
@@ -4392,14 +5386,18 @@ namespace {
      * glDepthRangef
      * 
      * @param float $n 
-     * @param float $f
+     * @param float $f 
+     * 
+     * @return void
      */ 
     function glDepthRangef(float $n, float $f) : void {};
  
     /**
      * glClearDepthf
      * 
-     * @param float $d
+     * @param float $d 
+     * 
+     * @return void
      */ 
     function glClearDepthf(float $d) : void {};
  
@@ -4408,7 +5406,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $pname 
-     * @param int $value
+     * @param int $value 
+     * 
+     * @return void
      */ 
     function glProgramParameteri(int $program, int $pname, int $value) : void {};
  
@@ -4421,6 +5421,8 @@ namespace {
      * pipeline object.
      * @param int $program Specifies the program object containing the shader
      * executables to use in pipeline.
+     * 
+     * @return void
      */ 
     function glUseProgramStages(int $pipeline, int $stages, int $program) : void {};
  
@@ -4431,6 +5433,8 @@ namespace {
      * program object for.
      * @param int $program Specifies the program object to set as the active program
      * pipeline object pipeline.
+     * 
+     * @return void
      */ 
     function glActiveShaderProgram(int $pipeline, int $program) : void {};
  
@@ -4439,6 +5443,8 @@ namespace {
      * 
      * @param int $pipeline Specifies the name of the pipeline object to bind to the
      * context.
+     * 
+     * @return void
      */ 
     function glBindProgramPipeline(int $pipeline) : void {};
  
@@ -4446,7 +5452,9 @@ namespace {
      * delete program pipeline objects
      * 
      * @param int $n Specifies the number of program pipeline objects to delete.
-     * @param ?int ...$pipelines
+     * @param ?int ...$pipelines 
+     * 
+     * @return void
      */ 
     function glDeleteProgramPipelines(int $n, ?int ...$pipelines) : void {};
  
@@ -4455,7 +5463,9 @@ namespace {
      * 
      * @param int $n Specifies the number of program pipeline object names to
      * reserve.
-     * @param ?int &...$pipelines
+     * @param ?int &...$pipelines 
+     * 
+     * @return void
      */ 
     function glGenProgramPipelines(int $n, ?int &...$pipelines) : void {};
  
@@ -4464,6 +5474,8 @@ namespace {
      * 
      * @param int $pipeline Specifies a value that may be the name of a program
      * pipeline object.
+     * 
+     * @return bool
      */ 
     function glIsProgramPipeline(int $pipeline) : bool {};
  
@@ -4472,7 +5484,9 @@ namespace {
      * 
      * @param int $pipeline 
      * @param int $pname 
-     * @param int &$params
+     * @param int &$params 
+     * 
+     * @return void
      */ 
     function glGetProgramPipelineiv(int $pipeline, int $pname, int &$params) : void {};
  
@@ -4481,7 +5495,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param int $v0
+     * @param int $v0 
+     * 
+     * @return void
      */ 
     function glProgramUniform1i(int $program, int $location, int $v0) : void {};
  
@@ -4490,7 +5506,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param \GL\Buffer\IntBuffer|array $value
+     * @param \GL\Buffer\IntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniform1iv(int $program, int $location, \GL\Buffer\IntBuffer|array $value) : void {};
  
@@ -4499,7 +5517,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param float $v0
+     * @param float $v0 
+     * 
+     * @return void
      */ 
     function glProgramUniform1f(int $program, int $location, float $v0) : void {};
  
@@ -4508,7 +5528,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniform1fv(int $program, int $location, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -4517,7 +5539,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param float $v0
+     * @param float $v0 
+     * 
+     * @return void
      */ 
     function glProgramUniform1d(int $program, int $location, float $v0) : void {};
  
@@ -4526,7 +5550,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniform1dv(int $program, int $location, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4535,7 +5561,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param int $v0
+     * @param int $v0 
+     * 
+     * @return void
      */ 
     function glProgramUniform1ui(int $program, int $location, int $v0) : void {};
  
@@ -4544,7 +5572,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param \GL\Buffer\UIntBuffer|array $value
+     * @param \GL\Buffer\UIntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniform1uiv(int $program, int $location, \GL\Buffer\UIntBuffer|array $value) : void {};
  
@@ -4554,7 +5584,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param int $v0 
-     * @param int $v1
+     * @param int $v1 
+     * 
+     * @return void
      */ 
     function glProgramUniform2i(int $program, int $location, int $v0, int $v1) : void {};
  
@@ -4563,7 +5595,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param \GL\Buffer\IntBuffer|array $value
+     * @param \GL\Buffer\IntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniform2iv(int $program, int $location, \GL\Buffer\IntBuffer|array $value) : void {};
  
@@ -4573,7 +5607,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param float $v0 
-     * @param float $v1
+     * @param float $v1 
+     * 
+     * @return void
      */ 
     function glProgramUniform2f(int $program, int $location, float $v0, float $v1) : void {};
  
@@ -4582,7 +5618,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniform2fv(int $program, int $location, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -4592,7 +5630,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param float $v0 
-     * @param float $v1
+     * @param float $v1 
+     * 
+     * @return void
      */ 
     function glProgramUniform2d(int $program, int $location, float $v0, float $v1) : void {};
  
@@ -4601,7 +5641,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniform2dv(int $program, int $location, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4611,7 +5653,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param int $v0 
-     * @param int $v1
+     * @param int $v1 
+     * 
+     * @return void
      */ 
     function glProgramUniform2ui(int $program, int $location, int $v0, int $v1) : void {};
  
@@ -4620,7 +5664,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param \GL\Buffer\UIntBuffer|array $value
+     * @param \GL\Buffer\UIntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniform2uiv(int $program, int $location, \GL\Buffer\UIntBuffer|array $value) : void {};
  
@@ -4631,7 +5677,9 @@ namespace {
      * @param int $location 
      * @param int $v0 
      * @param int $v1 
-     * @param int $v2
+     * @param int $v2 
+     * 
+     * @return void
      */ 
     function glProgramUniform3i(int $program, int $location, int $v0, int $v1, int $v2) : void {};
  
@@ -4640,7 +5688,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param \GL\Buffer\IntBuffer|array $value
+     * @param \GL\Buffer\IntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniform3iv(int $program, int $location, \GL\Buffer\IntBuffer|array $value) : void {};
  
@@ -4651,7 +5701,9 @@ namespace {
      * @param int $location 
      * @param float $v0 
      * @param float $v1 
-     * @param float $v2
+     * @param float $v2 
+     * 
+     * @return void
      */ 
     function glProgramUniform3f(int $program, int $location, float $v0, float $v1, float $v2) : void {};
  
@@ -4660,7 +5712,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniform3fv(int $program, int $location, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -4671,7 +5725,9 @@ namespace {
      * @param int $location 
      * @param float $v0 
      * @param float $v1 
-     * @param float $v2
+     * @param float $v2 
+     * 
+     * @return void
      */ 
     function glProgramUniform3d(int $program, int $location, float $v0, float $v1, float $v2) : void {};
  
@@ -4680,7 +5736,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniform3dv(int $program, int $location, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4691,7 +5749,9 @@ namespace {
      * @param int $location 
      * @param int $v0 
      * @param int $v1 
-     * @param int $v2
+     * @param int $v2 
+     * 
+     * @return void
      */ 
     function glProgramUniform3ui(int $program, int $location, int $v0, int $v1, int $v2) : void {};
  
@@ -4700,7 +5760,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param \GL\Buffer\UIntBuffer|array $value
+     * @param \GL\Buffer\UIntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniform3uiv(int $program, int $location, \GL\Buffer\UIntBuffer|array $value) : void {};
  
@@ -4712,7 +5774,9 @@ namespace {
      * @param int $v0 
      * @param int $v1 
      * @param int $v2 
-     * @param int $v3
+     * @param int $v3 
+     * 
+     * @return void
      */ 
     function glProgramUniform4i(int $program, int $location, int $v0, int $v1, int $v2, int $v3) : void {};
  
@@ -4721,7 +5785,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param \GL\Buffer\IntBuffer|array $value
+     * @param \GL\Buffer\IntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniform4iv(int $program, int $location, \GL\Buffer\IntBuffer|array $value) : void {};
  
@@ -4733,7 +5799,9 @@ namespace {
      * @param float $v0 
      * @param float $v1 
      * @param float $v2 
-     * @param float $v3
+     * @param float $v3 
+     * 
+     * @return void
      */ 
     function glProgramUniform4f(int $program, int $location, float $v0, float $v1, float $v2, float $v3) : void {};
  
@@ -4742,7 +5810,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniform4fv(int $program, int $location, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -4754,7 +5824,9 @@ namespace {
      * @param float $v0 
      * @param float $v1 
      * @param float $v2 
-     * @param float $v3
+     * @param float $v3 
+     * 
+     * @return void
      */ 
     function glProgramUniform4d(int $program, int $location, float $v0, float $v1, float $v2, float $v3) : void {};
  
@@ -4763,7 +5835,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniform4dv(int $program, int $location, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4775,7 +5849,9 @@ namespace {
      * @param int $v0 
      * @param int $v1 
      * @param int $v2 
-     * @param int $v3
+     * @param int $v3 
+     * 
+     * @return void
      */ 
     function glProgramUniform4ui(int $program, int $location, int $v0, int $v1, int $v2, int $v3) : void {};
  
@@ -4784,7 +5860,9 @@ namespace {
      * 
      * @param int $program 
      * @param int $location 
-     * @param \GL\Buffer\UIntBuffer|array $value
+     * @param \GL\Buffer\UIntBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniform4uiv(int $program, int $location, \GL\Buffer\UIntBuffer|array $value) : void {};
  
@@ -4794,7 +5872,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix2fv(int $program, int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -4804,7 +5884,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix3fv(int $program, int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -4814,7 +5896,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix4fv(int $program, int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -4824,7 +5908,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix2dv(int $program, int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4834,7 +5920,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix3dv(int $program, int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4844,7 +5932,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix4dv(int $program, int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4854,7 +5944,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix2x3fv(int $program, int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -4864,7 +5956,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix3x2fv(int $program, int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -4874,7 +5968,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix2x4fv(int $program, int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -4884,7 +5980,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix4x2fv(int $program, int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -4894,7 +5992,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix3x4fv(int $program, int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -4904,7 +6004,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\FloatBuffer|array $value
+     * @param \GL\Buffer\FloatBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix4x3fv(int $program, int $location, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void {};
  
@@ -4914,7 +6016,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix2x3dv(int $program, int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4924,7 +6028,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix3x2dv(int $program, int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4934,7 +6040,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix2x4dv(int $program, int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4944,7 +6052,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix4x2dv(int $program, int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4954,7 +6064,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix3x4dv(int $program, int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4964,7 +6076,9 @@ namespace {
      * @param int $program 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Buffer\DoubleBuffer|array $value
+     * @param \GL\Buffer\DoubleBuffer|array $value 
+     * 
+     * @return void
      */ 
     function glProgramUniformMatrix4x3dv(int $program, int $location, bool $transpose, \GL\Buffer\DoubleBuffer|array $value) : void {};
  
@@ -4973,6 +6087,8 @@ namespace {
      * 
      * @param int $pipeline Specifies the name of a program pipeline object to
      * validate.
+     * 
+     * @return void
      */ 
     function glValidateProgramPipeline(int $pipeline) : void {};
  
@@ -4980,7 +6096,9 @@ namespace {
      * glVertexAttribL1d
      * 
      * @param int $index 
-     * @param float $x
+     * @param float $x 
+     * 
+     * @return void
      */ 
     function glVertexAttribL1d(int $index, float $x) : void {};
  
@@ -4989,7 +6107,9 @@ namespace {
      * 
      * @param int $index 
      * @param float $x 
-     * @param float $y
+     * @param float $y 
+     * 
+     * @return void
      */ 
     function glVertexAttribL2d(int $index, float $x, float $y) : void {};
  
@@ -4999,7 +6119,9 @@ namespace {
      * @param int $index 
      * @param float $x 
      * @param float $y 
-     * @param float $z
+     * @param float $z 
+     * 
+     * @return void
      */ 
     function glVertexAttribL3d(int $index, float $x, float $y, float $z) : void {};
  
@@ -5010,7 +6132,9 @@ namespace {
      * @param float $x 
      * @param float $y 
      * @param float $z 
-     * @param float $w
+     * @param float $w 
+     * 
+     * @return void
      */ 
     function glVertexAttribL4d(int $index, float $x, float $y, float $z, float $w) : void {};
  
@@ -5018,7 +6142,9 @@ namespace {
      * glVertexAttribL1dv
      * 
      * @param int $index 
-     * @param \GL\Buffer\DoubleBuffer|array $v
+     * @param \GL\Buffer\DoubleBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttribL1dv(int $index, \GL\Buffer\DoubleBuffer|array $v) : void {};
  
@@ -5026,7 +6152,9 @@ namespace {
      * glVertexAttribL2dv
      * 
      * @param int $index 
-     * @param \GL\Buffer\DoubleBuffer|array $v
+     * @param \GL\Buffer\DoubleBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttribL2dv(int $index, \GL\Buffer\DoubleBuffer|array $v) : void {};
  
@@ -5034,7 +6162,9 @@ namespace {
      * glVertexAttribL3dv
      * 
      * @param int $index 
-     * @param \GL\Buffer\DoubleBuffer|array $v
+     * @param \GL\Buffer\DoubleBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttribL3dv(int $index, \GL\Buffer\DoubleBuffer|array $v) : void {};
  
@@ -5042,7 +6172,9 @@ namespace {
      * glVertexAttribL4dv
      * 
      * @param int $index 
-     * @param \GL\Buffer\DoubleBuffer|array $v
+     * @param \GL\Buffer\DoubleBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glVertexAttribL4dv(int $index, \GL\Buffer\DoubleBuffer|array $v) : void {};
  
@@ -5051,7 +6183,9 @@ namespace {
      * 
      * @param int $index 
      * @param int $pname 
-     * @param float &$params
+     * @param float &$params 
+     * 
+     * @return void
      */ 
     function glGetVertexAttribLdv(int $index, int $pname, float &$params) : void {};
  
@@ -5059,7 +6193,9 @@ namespace {
      * glViewportArrayv
      * 
      * @param int $first 
-     * @param \GL\Buffer\FloatBuffer|array $v
+     * @param \GL\Buffer\FloatBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glViewportArrayv(int $first, \GL\Buffer\FloatBuffer|array $v) : void {};
  
@@ -5070,7 +6206,9 @@ namespace {
      * @param float $x 
      * @param float $y 
      * @param float $w 
-     * @param float $h
+     * @param float $h 
+     * 
+     * @return void
      */ 
     function glViewportIndexedf(int $index, float $x, float $y, float $w, float $h) : void {};
  
@@ -5078,7 +6216,9 @@ namespace {
      * glViewportIndexedfv
      * 
      * @param int $index 
-     * @param \GL\Buffer\FloatBuffer|array $v
+     * @param \GL\Buffer\FloatBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glViewportIndexedfv(int $index, \GL\Buffer\FloatBuffer|array $v) : void {};
  
@@ -5086,7 +6226,9 @@ namespace {
      * glScissorArrayv
      * 
      * @param int $first 
-     * @param \GL\Buffer\IntBuffer|array $v
+     * @param \GL\Buffer\IntBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glScissorArrayv(int $first, \GL\Buffer\IntBuffer|array $v) : void {};
  
@@ -5099,7 +6241,9 @@ namespace {
      * scissor box, in pixels.
      * @param int $bottom 
      * @param int $width Specify ths dimensions of the scissor box, in pixels.
-     * @param int $height
+     * @param int $height 
+     * 
+     * @return void
      */ 
     function glScissorIndexed(int $index, int $left, int $bottom, int $width, int $height) : void {};
  
@@ -5107,7 +6251,9 @@ namespace {
      * glScissorIndexedv
      * 
      * @param int $index 
-     * @param \GL\Buffer\IntBuffer|array $v
+     * @param \GL\Buffer\IntBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glScissorIndexedv(int $index, \GL\Buffer\IntBuffer|array $v) : void {};
  
@@ -5115,7 +6261,9 @@ namespace {
      * glDepthRangeArrayv
      * 
      * @param int $first 
-     * @param \GL\Buffer\DoubleBuffer|array $v
+     * @param \GL\Buffer\DoubleBuffer|array $v 
+     * 
+     * @return void
      */ 
     function glDepthRangeArrayv(int $first, \GL\Buffer\DoubleBuffer|array $v) : void {};
  
@@ -5126,7 +6274,9 @@ namespace {
      * @param int $index Specifies the index of the viewport whose depth range to
      * update.
      * @param float $n 
-     * @param float $f
+     * @param float $f 
+     * 
+     * @return void
      */ 
     function glDepthRangeIndexed(int $index, float $n, float $f) : void {};
  
@@ -5135,7 +6285,9 @@ namespace {
      * 
      * @param int $target 
      * @param int $index 
-     * @param ?bool &...$data
+     * @param ?bool &...$data 
+     * 
+     * @return void
      */ 
     function glGetFloati_v(int $target, int $index, ?bool &...$data) : void {};
  
@@ -5144,17 +6296,21 @@ namespace {
      * 
      * @param int $target 
      * @param int $index 
-     * @param ?bool &...$data
+     * @param ?bool &...$data 
+     * 
+     * @return void
      */ 
     function glGetDoublei_v(int $target, int $index, ?bool &...$data) : void {};
  
     /**
      * glfwInit
+     * @return int
      */ 
     function glfwInit() : int {};
  
     /**
      * glfwTerminate
+     * @return void
      */ 
     function glfwTerminate() : void {};
  
@@ -5162,7 +6318,9 @@ namespace {
      * glfwInitHint
      * 
      * @param int $hint 
-     * @param int $value
+     * @param int $value 
+     * 
+     * @return void
      */ 
     function glfwInitHint(int $hint, int $value) : void {};
  
@@ -5171,17 +6329,21 @@ namespace {
      * 
      * @param int &$major 
      * @param int &$minor 
-     * @param int &$rev
+     * @param int &$rev 
+     * 
+     * @return void
      */ 
     function glfwGetVersion(int &$major, int &$minor, int &$rev) : void {};
  
     /**
      * glfwGetVersionString
+     * @return string
      */ 
     function glfwGetVersionString() : string {};
  
     /**
      * glfwGetPrimaryMonitor
+     * @return GLFWmonitor
      */ 
     function glfwGetPrimaryMonitor() : GLFWmonitor {};
  
@@ -5190,7 +6352,9 @@ namespace {
      * 
      * @param GLFWmonitor $monitor 
      * @param int &$xpos 
-     * @param int &$ypos
+     * @param int &$ypos 
+     * 
+     * @return void
      */ 
     function glfwGetMonitorPos(GLFWmonitor $monitor, int &$xpos, int &$ypos) : void {};
  
@@ -5201,7 +6365,9 @@ namespace {
      * @param int &$xpos 
      * @param int &$ypos 
      * @param int &$width 
-     * @param int &$height
+     * @param int &$height 
+     * 
+     * @return void
      */ 
     function glfwGetMonitorWorkarea(GLFWmonitor $monitor, int &$xpos, int &$ypos, int &$width, int &$height) : void {};
  
@@ -5210,7 +6376,9 @@ namespace {
      * 
      * @param GLFWmonitor $monitor 
      * @param int &$widthMM 
-     * @param int &$heightMM
+     * @param int &$heightMM 
+     * 
+     * @return void
      */ 
     function glfwGetMonitorPhysicalSize(GLFWmonitor $monitor, int &$widthMM, int &$heightMM) : void {};
  
@@ -5219,14 +6387,18 @@ namespace {
      * 
      * @param GLFWmonitor $monitor 
      * @param float &$xscale 
-     * @param float &$yscale
+     * @param float &$yscale 
+     * 
+     * @return void
      */ 
     function glfwGetMonitorContentScale(GLFWmonitor $monitor, float &$xscale, float &$yscale) : void {};
  
     /**
      * glfwGetMonitorName
      * 
-     * @param GLFWmonitor $monitor
+     * @param GLFWmonitor $monitor 
+     * 
+     * @return string
      */ 
     function glfwGetMonitorName(GLFWmonitor $monitor) : string {};
  
@@ -5234,12 +6406,15 @@ namespace {
      * glfwSetGamma
      * 
      * @param GLFWmonitor $monitor 
-     * @param float $gamma
+     * @param float $gamma 
+     * 
+     * @return void
      */ 
     function glfwSetGamma(GLFWmonitor $monitor, float $gamma) : void {};
  
     /**
      * glfwDefaultWindowHints
+     * @return void
      */ 
     function glfwDefaultWindowHints() : void {};
  
@@ -5247,7 +6422,9 @@ namespace {
      * glfwWindowHint
      * 
      * @param int $hint 
-     * @param int $value
+     * @param int $value 
+     * 
+     * @return void
      */ 
     function glfwWindowHint(int $hint, int $value) : void {};
  
@@ -5255,7 +6432,9 @@ namespace {
      * glfwWindowHintString
      * 
      * @param int $hint 
-     * @param string $value
+     * @param string $value 
+     * 
+     * @return void
      */ 
     function glfwWindowHintString(int $hint, string $value) : void {};
  
@@ -5266,21 +6445,27 @@ namespace {
      * @param int $height 
      * @param string $title 
      * @param ?GLFWmonitor $monitor 
-     * @param ?GLFWwindow $share
+     * @param ?GLFWwindow $share 
+     * 
+     * @return GLFWwindow
      */ 
     function glfwCreateWindow(int $width, int $height, string $title, ?GLFWmonitor $monitor = NULL, ?GLFWwindow $share = NULL) : GLFWwindow {};
  
     /**
      * glfwDestroyWindow
      * 
-     * @param GLFWwindow $window
+     * @param GLFWwindow $window 
+     * 
+     * @return void
      */ 
     function glfwDestroyWindow(GLFWwindow $window) : void {};
  
     /**
      * glfwWindowShouldClose
      * 
-     * @param GLFWwindow $window
+     * @param GLFWwindow $window 
+     * 
+     * @return int
      */ 
     function glfwWindowShouldClose(GLFWwindow $window) : int {};
  
@@ -5288,7 +6473,9 @@ namespace {
      * glfwSetWindowShouldClose
      * 
      * @param GLFWwindow $window 
-     * @param int $value
+     * @param int $value 
+     * 
+     * @return void
      */ 
     function glfwSetWindowShouldClose(GLFWwindow $window, int $value) : void {};
  
@@ -5296,7 +6483,9 @@ namespace {
      * glfwSetWindowTitle
      * 
      * @param GLFWwindow $window 
-     * @param string $title
+     * @param string $title 
+     * 
+     * @return void
      */ 
     function glfwSetWindowTitle(GLFWwindow $window, string $title) : void {};
  
@@ -5305,7 +6494,9 @@ namespace {
      * 
      * @param GLFWwindow $window 
      * @param int &$xpos 
-     * @param int &$ypos
+     * @param int &$ypos 
+     * 
+     * @return void
      */ 
     function glfwGetWindowPos(GLFWwindow $window, int &$xpos, int &$ypos) : void {};
  
@@ -5314,7 +6505,9 @@ namespace {
      * 
      * @param GLFWwindow $window 
      * @param int $xpos 
-     * @param int $ypos
+     * @param int $ypos 
+     * 
+     * @return void
      */ 
     function glfwSetWindowPos(GLFWwindow $window, int $xpos, int $ypos) : void {};
  
@@ -5323,7 +6516,9 @@ namespace {
      * 
      * @param GLFWwindow $window 
      * @param int &$width 
-     * @param int &$height
+     * @param int &$height 
+     * 
+     * @return void
      */ 
     function glfwGetWindowSize(GLFWwindow $window, int &$width, int &$height) : void {};
  
@@ -5334,7 +6529,9 @@ namespace {
      * @param int $minwidth 
      * @param int $minheight 
      * @param int $maxwidth 
-     * @param int $maxheight
+     * @param int $maxheight 
+     * 
+     * @return void
      */ 
     function glfwSetWindowSizeLimits(GLFWwindow $window, int $minwidth, int $minheight, int $maxwidth, int $maxheight) : void {};
  
@@ -5343,7 +6540,9 @@ namespace {
      * 
      * @param GLFWwindow $window 
      * @param int $numer 
-     * @param int $denom
+     * @param int $denom 
+     * 
+     * @return void
      */ 
     function glfwSetWindowAspectRatio(GLFWwindow $window, int $numer, int $denom) : void {};
  
@@ -5352,7 +6551,9 @@ namespace {
      * 
      * @param GLFWwindow $window 
      * @param int $width 
-     * @param int $height
+     * @param int $height 
+     * 
+     * @return void
      */ 
     function glfwSetWindowSize(GLFWwindow $window, int $width, int $height) : void {};
  
@@ -5361,7 +6562,9 @@ namespace {
      * 
      * @param GLFWwindow $window 
      * @param int &$width 
-     * @param int &$height
+     * @param int &$height 
+     * 
+     * @return void
      */ 
     function glfwGetFramebufferSize(GLFWwindow $window, int &$width, int &$height) : void {};
  
@@ -5372,7 +6575,9 @@ namespace {
      * @param int &$left 
      * @param int &$top 
      * @param int &$right 
-     * @param int &$bottom
+     * @param int &$bottom 
+     * 
+     * @return void
      */ 
     function glfwGetWindowFrameSize(GLFWwindow $window, int &$left, int &$top, int &$right, int &$bottom) : void {};
  
@@ -5381,14 +6586,18 @@ namespace {
      * 
      * @param GLFWwindow $window 
      * @param float &$xscale 
-     * @param float &$yscale
+     * @param float &$yscale 
+     * 
+     * @return void
      */ 
     function glfwGetWindowContentScale(GLFWwindow $window, float &$xscale, float &$yscale) : void {};
  
     /**
      * glfwGetWindowOpacity
      * 
-     * @param GLFWwindow $window
+     * @param GLFWwindow $window 
+     * 
+     * @return float
      */ 
     function glfwGetWindowOpacity(GLFWwindow $window) : float {};
  
@@ -5396,63 +6605,81 @@ namespace {
      * glfwSetWindowOpacity
      * 
      * @param GLFWwindow $window 
-     * @param float $opacity
+     * @param float $opacity 
+     * 
+     * @return void
      */ 
     function glfwSetWindowOpacity(GLFWwindow $window, float $opacity) : void {};
  
     /**
      * glfwIconifyWindow
      * 
-     * @param GLFWwindow $window
+     * @param GLFWwindow $window 
+     * 
+     * @return void
      */ 
     function glfwIconifyWindow(GLFWwindow $window) : void {};
  
     /**
      * glfwRestoreWindow
      * 
-     * @param GLFWwindow $window
+     * @param GLFWwindow $window 
+     * 
+     * @return void
      */ 
     function glfwRestoreWindow(GLFWwindow $window) : void {};
  
     /**
      * glfwMaximizeWindow
      * 
-     * @param GLFWwindow $window
+     * @param GLFWwindow $window 
+     * 
+     * @return void
      */ 
     function glfwMaximizeWindow(GLFWwindow $window) : void {};
  
     /**
      * glfwShowWindow
      * 
-     * @param GLFWwindow $window
+     * @param GLFWwindow $window 
+     * 
+     * @return void
      */ 
     function glfwShowWindow(GLFWwindow $window) : void {};
  
     /**
      * glfwHideWindow
      * 
-     * @param GLFWwindow $window
+     * @param GLFWwindow $window 
+     * 
+     * @return void
      */ 
     function glfwHideWindow(GLFWwindow $window) : void {};
  
     /**
      * glfwFocusWindow
      * 
-     * @param GLFWwindow $window
+     * @param GLFWwindow $window 
+     * 
+     * @return void
      */ 
     function glfwFocusWindow(GLFWwindow $window) : void {};
  
     /**
      * glfwRequestWindowAttention
      * 
-     * @param GLFWwindow $window
+     * @param GLFWwindow $window 
+     * 
+     * @return void
      */ 
     function glfwRequestWindowAttention(GLFWwindow $window) : void {};
  
     /**
      * glfwGetWindowMonitor
      * 
-     * @param GLFWwindow $window
+     * @param GLFWwindow $window 
+     * 
+     * @return GLFWmonitor
      */ 
     function glfwGetWindowMonitor(GLFWwindow $window) : GLFWmonitor {};
  
@@ -5465,7 +6692,9 @@ namespace {
      * @param int $ypos 
      * @param int $width 
      * @param int $height 
-     * @param int $refreshRate
+     * @param int $refreshRate 
+     * 
+     * @return void
      */ 
     function glfwSetWindowMonitor(GLFWwindow $window, GLFWmonitor $monitor, int $xpos, int $ypos, int $width, int $height, int $refreshRate) : void {};
  
@@ -5473,7 +6702,9 @@ namespace {
      * glfwGetWindowAttrib
      * 
      * @param GLFWwindow $window 
-     * @param int $attrib
+     * @param int $attrib 
+     * 
+     * @return int
      */ 
     function glfwGetWindowAttrib(GLFWwindow $window, int $attrib) : int {};
  
@@ -5482,29 +6713,36 @@ namespace {
      * 
      * @param GLFWwindow $window 
      * @param int $attrib 
-     * @param int $value
+     * @param int $value 
+     * 
+     * @return void
      */ 
     function glfwSetWindowAttrib(GLFWwindow $window, int $attrib, int $value) : void {};
  
     /**
      * glfwPollEvents
+     * @return void
      */ 
     function glfwPollEvents() : void {};
  
     /**
      * glfwWaitEvents
+     * @return void
      */ 
     function glfwWaitEvents() : void {};
  
     /**
      * glfwWaitEventsTimeout
      * 
-     * @param float $timeout
+     * @param float $timeout 
+     * 
+     * @return void
      */ 
     function glfwWaitEventsTimeout(float $timeout) : void {};
  
     /**
      * glfwPostEmptyEvent
+     * @return void
      */ 
     function glfwPostEmptyEvent() : void {};
  
@@ -5512,7 +6750,9 @@ namespace {
      * glfwGetInputMode
      * 
      * @param GLFWwindow $window 
-     * @param int $mode
+     * @param int $mode 
+     * 
+     * @return int
      */ 
     function glfwGetInputMode(GLFWwindow $window, int $mode) : int {};
  
@@ -5521,12 +6761,15 @@ namespace {
      * 
      * @param GLFWwindow $window 
      * @param int $mode 
-     * @param int $value
+     * @param int $value 
+     * 
+     * @return void
      */ 
     function glfwSetInputMode(GLFWwindow $window, int $mode, int $value) : void {};
  
     /**
      * glfwRawMouseMotionSupported
+     * @return int
      */ 
     function glfwRawMouseMotionSupported() : int {};
  
@@ -5534,14 +6777,18 @@ namespace {
      * glfwGetKeyName
      * 
      * @param int $key 
-     * @param int $scancode
+     * @param int $scancode 
+     * 
+     * @return string
      */ 
     function glfwGetKeyName(int $key, int $scancode) : string {};
  
     /**
      * glfwGetKeyScancode
      * 
-     * @param int $key
+     * @param int $key 
+     * 
+     * @return int
      */ 
     function glfwGetKeyScancode(int $key) : int {};
  
@@ -5549,7 +6796,9 @@ namespace {
      * glfwGetKey
      * 
      * @param GLFWwindow $window 
-     * @param int $key
+     * @param int $key 
+     * 
+     * @return int
      */ 
     function glfwGetKey(GLFWwindow $window, int $key) : int {};
  
@@ -5557,7 +6806,9 @@ namespace {
      * glfwGetMouseButton
      * 
      * @param GLFWwindow $window 
-     * @param int $button
+     * @param int $button 
+     * 
+     * @return int
      */ 
     function glfwGetMouseButton(GLFWwindow $window, int $button) : int {};
  
@@ -5566,7 +6817,9 @@ namespace {
      * 
      * @param GLFWwindow $window 
      * @param float &$xpos 
-     * @param float &$ypos
+     * @param float &$ypos 
+     * 
+     * @return void
      */ 
     function glfwGetCursorPos(GLFWwindow $window, float &$xpos, float &$ypos) : void {};
  
@@ -5575,21 +6828,27 @@ namespace {
      * 
      * @param GLFWwindow $window 
      * @param float $xpos 
-     * @param float $ypos
+     * @param float $ypos 
+     * 
+     * @return void
      */ 
     function glfwSetCursorPos(GLFWwindow $window, float $xpos, float $ypos) : void {};
  
     /**
      * glfwCreateStandardCursor
      * 
-     * @param int $shape
+     * @param int $shape 
+     * 
+     * @return GLFWcursor
      */ 
     function glfwCreateStandardCursor(int $shape) : GLFWcursor {};
  
     /**
      * glfwDestroyCursor
      * 
-     * @param GLFWcursor $cursor
+     * @param GLFWcursor $cursor 
+     * 
+     * @return void
      */ 
     function glfwDestroyCursor(GLFWcursor $cursor) : void {};
  
@@ -5597,7 +6856,9 @@ namespace {
      * glfwSetCursor
      * 
      * @param GLFWwindow $window 
-     * @param GLFWcursor $cursor
+     * @param GLFWcursor $cursor 
+     * 
+     * @return void
      */ 
     function glfwSetCursor(GLFWwindow $window, GLFWcursor $cursor) : void {};
  
@@ -5634,49 +6895,63 @@ namespace {
      * scancode may be zero.
      * 
      * @param GLFWwindow $window 
-     * @param callable $callback
+     * @param callable $callback 
+     * 
+     * @return void
      */ 
     function glfwSetKeyCallback(GLFWwindow $window, callable $callback) : void {};
  
     /**
      * glfwJoystickPresent
      * 
-     * @param int $jid
+     * @param int $jid 
+     * 
+     * @return int
      */ 
     function glfwJoystickPresent(int $jid) : int {};
  
     /**
      * glfwGetJoystickName
      * 
-     * @param int $jid
+     * @param int $jid 
+     * 
+     * @return string
      */ 
     function glfwGetJoystickName(int $jid) : string {};
  
     /**
      * glfwGetJoystickGUID
      * 
-     * @param int $jid
+     * @param int $jid 
+     * 
+     * @return string
      */ 
     function glfwGetJoystickGUID(int $jid) : string {};
  
     /**
      * glfwJoystickIsGamepad
      * 
-     * @param int $jid
+     * @param int $jid 
+     * 
+     * @return int
      */ 
     function glfwJoystickIsGamepad(int $jid) : int {};
  
     /**
      * glfwUpdateGamepadMappings
      * 
-     * @param string $string
+     * @param string $string 
+     * 
+     * @return int
      */ 
     function glfwUpdateGamepadMappings(string $string) : int {};
  
     /**
      * glfwGetGamepadName
      * 
-     * @param int $jid
+     * @param int $jid 
+     * 
+     * @return string
      */ 
     function glfwGetGamepadName(int $jid) : string {};
  
@@ -5684,64 +6959,81 @@ namespace {
      * glfwSetClipboardString
      * 
      * @param GLFWwindow $window 
-     * @param string $string
+     * @param string $string 
+     * 
+     * @return void
      */ 
     function glfwSetClipboardString(GLFWwindow $window, string $string) : void {};
  
     /**
      * glfwGetClipboardString
      * 
-     * @param GLFWwindow $window
+     * @param GLFWwindow $window 
+     * 
+     * @return string
      */ 
     function glfwGetClipboardString(GLFWwindow $window) : string {};
  
     /**
      * glfwGetTime
+     * @return float
      */ 
     function glfwGetTime() : float {};
  
     /**
      * glfwSetTime
      * 
-     * @param float $time
+     * @param float $time 
+     * 
+     * @return void
      */ 
     function glfwSetTime(float $time) : void {};
  
     /**
      * glfwMakeContextCurrent
      * 
-     * @param GLFWwindow $window
+     * @param GLFWwindow $window 
+     * 
+     * @return void
      */ 
     function glfwMakeContextCurrent(GLFWwindow $window) : void {};
  
     /**
      * glfwGetCurrentContext
+     * @return GLFWwindow
      */ 
     function glfwGetCurrentContext() : GLFWwindow {};
  
     /**
      * glfwSwapBuffers
      * 
-     * @param GLFWwindow $window
+     * @param GLFWwindow $window 
+     * 
+     * @return void
      */ 
     function glfwSwapBuffers(GLFWwindow $window) : void {};
  
     /**
      * glfwSwapInterval
      * 
-     * @param int $interval
+     * @param int $interval 
+     * 
+     * @return void
      */ 
     function glfwSwapInterval(int $interval) : void {};
  
     /**
      * glfwExtensionSupported
      * 
-     * @param string $extension
+     * @param string $extension 
+     * 
+     * @return int
      */ 
     function glfwExtensionSupported(string $extension) : int {};
  
     /**
      * glfwVulkanSupported
+     * @return int
      */ 
     function glfwVulkanSupported() : int {};
  
@@ -5756,6 +7048,8 @@ namespace {
      * code is to be replaced.
      * @param string $source Specifies a string containing the source code to be
      * loaded into the shader.
+     * 
+     * @return void
      */ 
     function glShaderSource(int $shader, string $source) : void {};
  
@@ -5791,6 +7085,8 @@ namespace {
      * symbolic constant must be GL_STREAM_DRAW, GL_STREAM_READ, GL_STREAM_COPY,
      * GL_STATIC_DRAW, GL_STATIC_READ, GL_STATIC_COPY, GL_DYNAMIC_DRAW,
      * GL_DYNAMIC_READ, or GL_DYNAMIC_COPY.
+     * 
+     * @return void
      */ 
     function glBufferData(int $target, \GL\Buffer\BufferInterface $buffer, int $usage) : void {};
  
@@ -5802,9 +7098,50 @@ namespace {
      * 
      * @param int $location 
      * @param bool $transpose 
-     * @param \GL\Math\Mat4 $matrix
+     * @param \GL\Math\Mat4 $matrix 
+     * 
+     * @return void
      */ 
     function glUniformMatrix4f(int $location, bool $transpose, \GL\Math\Mat4 $matrix) : void {};
+ 
+    /**
+     * Sets a vector (vec2) uniform value to the current shader program.
+     * 
+     * @PHP-GLFW: This method is specifc to the php extension and not part of the
+     * original OpenGL API.
+     * 
+     * @param int $location 
+     * @param \GL\Math\Vec2 $vec 
+     * 
+     * @return void
+     */ 
+    function glUniformVec2f(int $location, \GL\Math\Vec2 $vec) : void {};
+ 
+    /**
+     * Sets a vector (vec3) uniform value to the current shader program.
+     * 
+     * @PHP-GLFW: This method is specifc to the php extension and not part of the
+     * original OpenGL API.
+     * 
+     * @param int $location 
+     * @param \GL\Math\Vec3 $vec 
+     * 
+     * @return void
+     */ 
+    function glUniformVec3f(int $location, \GL\Math\Vec3 $vec) : void {};
+ 
+    /**
+     * Sets a vector (vec4) uniform value to the current shader program.
+     * 
+     * @PHP-GLFW: This method is specifc to the php extension and not part of the
+     * original OpenGL API.
+     * 
+     * @param int $location 
+     * @param \GL\Math\Vec4 $vec 
+     * 
+     * @return void
+     */ 
+    function glUniformVec4f(int $location, \GL\Math\Vec4 $vec) : void {};
  
  
 
