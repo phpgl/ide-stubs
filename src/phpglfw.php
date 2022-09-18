@@ -1,4 +1,49 @@
 <?php 
+namespace 
+{
+    /**
+     * GLFW Window resource 
+     * This class is used to store the GLFW window resource in PHP.
+     */
+    class GLFWwindow {}
+
+    /**
+     * GLFW Monitor resource
+     * This class is used to store the GLFW monitor resource in PHP.
+     */
+    class GLFWmonitor {}
+
+    /**
+     * GLFW Cursor resource
+     * This class is used to store the GLFW cursor resource in PHP.
+     */
+    class GLFWcursor {}
+
+    /**
+     * GLFW image resource
+     * This class is used to store the GLFW image resource in PHP.
+     */
+    class GLFWimage {}
+
+    /**
+     * GLFW video mode resource
+     * This class is used to store the GLFW video mode resource in PHP.
+     */
+    class GLFWvidmode {}
+
+    /**
+     * GLFW gamma ramp resource
+     * This class is used to store the GLFW gamma ramp resource in PHP.
+     */
+    class GLFWgammaramp {}
+
+    /**
+     * GLFW Gamepad state resource
+     * This class is used to store the GLFW gamepad state resource in PHP.
+     */
+    class GLFWgamepadstate {}
+}
+
 namespace GL\Math 
 {
      
@@ -301,6 +346,15 @@ namespace GL\Buffer
         public function push(float $value) : void {}
 
         /**
+         * pushes an array of values into the buffer. This works the same as when you pass inital data to the constructor.
+         *
+         * @param array<float> $values The values to be pushed into the buffer.
+         *
+         * @return void
+         */
+        public function pushArray(array $values) : void {}
+
+        /**
          * Pushes the values of a Vec2 object into the buffer
          */
         public function pushVec2(\GL\Math\Vec2 $vec) : void {}
@@ -380,6 +434,15 @@ namespace GL\Buffer
          */
         public function push(float $value) : void {}
 
+        /**
+         * pushes an array of values into the buffer. This works the same as when you pass inital data to the constructor.
+         *
+         * @param array<float> $values The values to be pushed into the buffer.
+         *
+         * @return void
+         */
+        public function pushArray(array $values) : void {}
+
 
         /**
          * Fills the buffer with $count amount of values. The second argument is the value that is filled in.
@@ -440,6 +503,15 @@ namespace GL\Buffer
          * @return void 
          */
         public function push(float $value) : void {}
+
+        /**
+         * pushes an array of values into the buffer. This works the same as when you pass inital data to the constructor.
+         *
+         * @param array<float> $values The values to be pushed into the buffer.
+         *
+         * @return void
+         */
+        public function pushArray(array $values) : void {}
 
 
         /**
@@ -502,6 +574,15 @@ namespace GL\Buffer
          */
         public function push(int $value) : void {}
 
+        /**
+         * pushes an array of values into the buffer. This works the same as when you pass inital data to the constructor.
+         *
+         * @param array<int> $values The values to be pushed into the buffer.
+         *
+         * @return void
+         */
+        public function pushArray(array $values) : void {}
+
 
         /**
          * Fills the buffer with $count amount of values. The second argument is the value that is filled in.
@@ -562,6 +643,15 @@ namespace GL\Buffer
          * @return void 
          */
         public function push(int $value) : void {}
+
+        /**
+         * pushes an array of values into the buffer. This works the same as when you pass inital data to the constructor.
+         *
+         * @param array<int> $values The values to be pushed into the buffer.
+         *
+         * @return void
+         */
+        public function pushArray(array $values) : void {}
 
 
         /**
@@ -624,6 +714,15 @@ namespace GL\Buffer
          */
         public function push(int $value) : void {}
 
+        /**
+         * pushes an array of values into the buffer. This works the same as when you pass inital data to the constructor.
+         *
+         * @param array<int> $values The values to be pushed into the buffer.
+         *
+         * @return void
+         */
+        public function pushArray(array $values) : void {}
+
 
         /**
          * Fills the buffer with $count amount of values. The second argument is the value that is filled in.
@@ -684,6 +783,15 @@ namespace GL\Buffer
          * @return void 
          */
         public function push(int $value) : void {}
+
+        /**
+         * pushes an array of values into the buffer. This works the same as when you pass inital data to the constructor.
+         *
+         * @param array<int> $values The values to be pushed into the buffer.
+         *
+         * @return void
+         */
+        public function pushArray(array $values) : void {}
 
 
         /**
@@ -746,6 +854,15 @@ namespace GL\Buffer
          */
         public function push(int $value) : void {}
 
+        /**
+         * pushes an array of values into the buffer. This works the same as when you pass inital data to the constructor.
+         *
+         * @param array<int> $values The values to be pushed into the buffer.
+         *
+         * @return void
+         */
+        public function pushArray(array $values) : void {}
+
 
         /**
          * Fills the buffer with $count amount of values. The second argument is the value that is filled in.
@@ -806,6 +923,15 @@ namespace GL\Buffer
          * @return void 
          */
         public function push(int $value) : void {}
+
+        /**
+         * pushes an array of values into the buffer. This works the same as when you pass inital data to the constructor.
+         *
+         * @param array<int> $values The values to be pushed into the buffer.
+         *
+         * @return void
+         */
+        public function pushArray(array $values) : void {}
 
 
         /**
@@ -7171,6 +7297,36 @@ namespace {
      * @return void
      */ 
     function glfwSetKeyCallback(GLFWwindow $window, callable $callback) : void {};
+ 
+    /**
+     * This function sets the character callback of the specified window, which is
+     * called when a Unicode character is input.
+     * 
+     * Example:
+     * ```php
+     * glfwSetCharCallback($window, function($codepoint) {
+     *     echo "Character: " . mb_chr($codepoint) . PHP_EOL;
+     * });
+     * ```
+     * 
+     * The character callback is intended for Unicode text input. As it deals with
+     * characters, it is keyboard layout dependent, whereas the key callback is not.
+     * Characters do not map 1:1 to physical keys, as a key may produce zero, one or
+     * more characters. If you want to know whether a specific physical key was
+     * pressed or released, see the key callback instead.
+     * 
+     * The character callback behaves as system text input normally does and will
+     * not be called if modifier keys are held down that would prevent normal text
+     * input on that platform, for example a Super (Command) key on macOS or Alt key
+     * on Windows.
+     * 
+     * 
+     * @param GLFWwindow $window 
+     * @param callable $callback 
+     * 
+     * @return void
+     */ 
+    function glfwSetCharCallback(GLFWwindow $window, callable $callback) : void {};
  
     /**
      * glfwJoystickPresent
