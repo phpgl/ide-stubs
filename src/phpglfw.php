@@ -7493,8 +7493,9 @@ namespace {
      * previously restored. If the window is already iconified, this function does
      * nothing.
      * 
-     * If the specified window is a full screen window, the original monitor
-     * resolution is restored until the window is restored.
+     * If the specified window is a full screen window, GLFW restores the original
+     * video mode of the monitor. The window's desired video mode is set again
+     * when the window is restored.
      * 
      * @param GLFWwindow $window The window to iconify.
      * 
@@ -7509,8 +7510,8 @@ namespace {
      * (minimized) or maximized. If the window is already restored, this function
      * does nothing.
      * 
-     * If the specified window is a full screen window, the resolution chosen for
-     * the window is restored on the selected monitor.
+     * If the specified window is an iconified full screen window, its desired
+     * video mode is set again for its monitor when the window is restored.
      * 
      * @param GLFWwindow $window The window to restore.
      * 
@@ -7973,8 +7974,8 @@ namespace {
      * 
      * This function returns the last state reported for the specified key to the
      * specified window. The returned state is one of `GLFW_PRESS` or
-     * `GLFW_RELEASE`. The higher-level action `GLFW_REPEAT` is only reported to
-     * the key callback.
+     * `GLFW_RELEASE`. The action `GLFW_REPEAT` is only reported to the key
+     * callback.
      * 
      * If the `GLFW_STICKY_KEYS` input mode is enabled, this function returns
      * `GLFW_PRESS` the first time you call it for a key that was pressed, even if
@@ -8640,17 +8641,17 @@ namespace {
      * Constants
      * ----------------------------------------------------------------------------
      */
-//define('a', 'stable');
-//define('a', 'stable');
-//define('a', 'stable');
-//define('a', 'stable');
-//define('a', 'stable');
-//define('a', 'stable');
-//define('a', 'stable');
-//define('a', 'stable');
-//define('a', 'stable');
-//define('a', 'stable');
-//define('a', 'stable');
+    define('PHPGLFW_COMPILED_API', 'gl');
+    define('PHPGLFW_COMPILED_API_VERSION', '4.1');
+    define('GL_SIZEOF_BYTE', 1);
+    define('GL_SIZEOF_UNSIGNED_BYTE', 1);
+    define('GL_SIZEOF_SHORT', 2);
+    define('GL_SIZEOF_UNSIGNED_SHORT', 2);
+    define('GL_SIZEOF_INT', 4);
+    define('GL_SIZEOF_UNSIGNED_INT', 4);
+    define('GL_SIZEOF_FLOAT', 4);
+    define('GL_SIZEOF_HALF_FLOAT', 2);
+    define('GL_SIZEOF_DOUBLE', 8);
     define('GL_DEPTH_BUFFER_BIT', 0x00000100);
     define('GL_STENCIL_BUFFER_BIT', 0x00000400);
     define('GL_COLOR_BUFFER_BIT', 0x00004000);
@@ -10015,7 +10016,7 @@ namespace {
     define('GL_ALL_SHADER_BITS', 0xFFFFFFFF);
     define('GLFW_VERSION_MAJOR', 3);
     define('GLFW_VERSION_MINOR', 3);
-    define('GLFW_VERSION_REVISION', 5);
+    define('GLFW_VERSION_REVISION', 8);
     define('GLFW_TRUE', 1);
     define('GLFW_FALSE', GLFW_FALSE);
     define('GLFW_RELEASE', GLFW_RELEASE);
