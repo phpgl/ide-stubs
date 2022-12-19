@@ -46,6 +46,35 @@ namespace
 
 namespace GL\Math 
 {
+    class GLM 
+    {
+        /**
+         * Returns the given degrees in radians.
+         *
+         * @param float $degrees The degrees to convert to radians.
+         * @return float radians.
+         */
+        public static function radians(float $degrees) : float {}
+
+        /**
+         * Returns the given radians in degrees.
+         *
+         * @param float $radians The radians to convert to degrees.
+         * @return float degrees.
+         */
+        public static function angle(float $radians) : float {}
+
+        public static function triangleNormal(GL\Math\Vec3 $p1, \GL\Math\Vec3 $p2, \GL\Math\Vec3 $p3) : \GL\Math\Vec3 {}
+
+        /**
+         * Returns a normalized vector from the given vector. (Vec2, Vec3, Vec4)
+         *
+         * @param GL\Math\Vec2|GL\Math\Vec3|GL\Math\Vec4 $vec The vector to normalize.
+         * @return GL\Math\Vec2|GL\Math\Vec3|GL\Math\Vec4 The normalized vector.
+         */
+        public static function normalize(GL\Math\Vec2|GL\Math\Vec3|GL\Math\Vec4 $vec) : GL\Math\Vec2|GL\Math\Vec3|GL\Math\Vec4 {}
+    }
+
      
     class Vec2 
     {
@@ -105,13 +134,16 @@ namespace GL\Math
 
         /**
          * Returns a normalized version of this vector
-         */
+         * 
+         * @return Vec2         */
         public function normalize() : Vec2 {}
 
         /**
          * Creates a new Vec2 where each component is x if x >= 0; otherwise, -x
-         */
+         * 
+         * @return Vec2         */
         public function abs() : Vec2 {}
+        
         public function __toString() : string {}
     }
  
@@ -183,13 +215,21 @@ namespace GL\Math
 
         /**
          * Returns a normalized version of this vector
-         */
+         * 
+         * @return Vec3         */
         public function normalize() : Vec3 {}
 
         /**
          * Creates a new Vec3 where each component is x if x >= 0; otherwise, -x
-         */
+         * 
+         * @return Vec3         */
         public function abs() : Vec3 {}
+        
+        /**
+         * Returns the cross product of this vector and another
+         * 
+         * @return Vec3         */
+        public function cross(Vec3 $right) : Vec3 {}
         public function __toString() : string {}
     }
  
@@ -271,13 +311,16 @@ namespace GL\Math
 
         /**
          * Returns a normalized version of this vector
-         */
+         * 
+         * @return Vec4         */
         public function normalize() : Vec4 {}
 
         /**
          * Creates a new Vec4 where each component is x if x >= 0; otherwise, -x
-         */
+         * 
+         * @return Vec4         */
         public function abs() : Vec4 {}
+        
         public function __toString() : string {}
     }
  
@@ -1105,6 +1148,69 @@ namespace GL\Geometry\ObjFileParser
         public readonly int $illuminationModel;
 
         /**
+         * The ambient texture of the material
+         *
+         * @var \GL\Geometry\ObjFileParser\Texture|null $ambientTexture
+         */
+        public readonly ?Texture $ambientTexture;
+
+        /**
+         * The diffuse texture of the material
+         *
+         * @var \GL\Geometry\ObjFileParser\Texture|null $diffuseTexture
+         */
+        public readonly ?Texture $diffuseTexture;
+
+        /**
+         * The specular texture of the material
+         *
+         * @var \GL\Geometry\ObjFileParser\Texture|null $specularTexture
+         */
+        public readonly ?Texture $specularTexture;
+
+        /**
+         * The emissive texture of the material
+         *
+         * @var \GL\Geometry\ObjFileParser\Texture|null $emissiveTexture
+         */
+        public readonly ?Texture $emissiveTexture;
+
+        /**
+         * The transmittance texture of the material
+         *
+         * @var \GL\Geometry\ObjFileParser\Texture|null $transmittanceTexture
+         */
+        public readonly ?Texture $transmittanceTexture;
+
+        /**
+         * The shininess texture of the material
+         *
+         * @var \GL\Geometry\ObjFileParser\Texture|null $shininessTexture
+         */
+        public readonly ?Texture $shininessTexture;
+
+        /**
+         * The index of refraction texture of the material
+         *
+         * @var \GL\Geometry\ObjFileParser\Texture|null $indexOfRefractionTexture
+         */
+        public readonly ?Texture $indexOfRefractionTexture;
+
+        /**
+         * The dissolve texture of the material
+         *
+         * @var \GL\Geometry\ObjFileParser\Texture|null $dissolveTexture
+         */
+        public readonly ?Texture $dissolveTexture;
+
+        /**
+         * The bump texture of the material
+         *
+         * @var \GL\Geometry\ObjFileParser\Texture|null $bumpTexture
+         */
+        public readonly ?Texture $bumpTexture;
+
+        /**
          * Parser materials should not be constructed from user land.
          * calling this method will throw an exception.
          */
@@ -1156,6 +1262,20 @@ namespace GL\Geometry\ObjFileParser
      */
     class Texture
     {
+        /**
+         * The name of the texture file
+         * 
+         * @var string $name|null
+         */
+        public readonly ?string $name;
+
+        /**
+         * The path to the texture file on the filesystem (absolute)
+         * 
+         * @var string $path|null
+         */
+        public readonly ?string $path;
+
         public function __construct() {}
     }
 
@@ -1555,11 +1675,11 @@ namespace {
      * <constant>GL_UNSIGNED_INT_8_8_8_8_REV</constant>,
      * <constant>GL_UNSIGNED_INT_10_10_10_2</constant>, and
      * <constant>GL_UNSIGNED_INT_2_10_10_10_REV</constant>.
-     * @param \GL\Buffer\BufferInterface $data 
+     * @param ?\GL\Buffer\BufferInterface $data 
      * 
      * @return void
      */ 
-    function glTexImage2D(int $target, int $level, int $internalformat, int $width, int $height, int $border, int $format, int $type, \GL\Buffer\BufferInterface $data) : void {};
+    function glTexImage2D(int $target, int $level, int $internalformat, int $width, int $height, int $border, int $format, int $type, ?\GL\Buffer\BufferInterface $data) : void {};
  
     /**
      * specify which color buffers are to be drawn into
