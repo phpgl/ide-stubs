@@ -99,10 +99,61 @@ namespace GL\Math
         public float $g;
 
         
+
         /**
          * Constructor
          */
         public function __construct(?float $x = null, ?float $y = null) {}
+
+        /**
+         * Returns the distance between the left and right vectors
+         * 
+         * ```php    
+         * $distance = Vec2::distance($left, $right);
+         * ```
+         *
+         * @param Vec2 $left The left vector.
+         * @param Vec2 $right The right vector.
+         * @return float The distance between the left and right vectors.
+         */
+        public static function distance(Vec2 $left, Vec2 $right) : float {}
+        
+        /**
+         * Returns the squared distance between the left and right vectors
+         *
+         * ```php
+         * $distance = Vec2::distance2($left, $right);
+         * ```
+         *
+         * @param Vec2 $left The left vector.
+         * @param Vec2 $right The right vector.
+         * @return float The squared distance between the left and right vectors.
+         */
+        public static function distance2(Vec2 $left, Vec2 $right) : float {}
+
+        /**
+         * Retruns a normalized version of the given Vec2         * 
+         * ```php
+         * $normalized = Vec2::normalize(new Vec2($x, $y, $z));
+         * ```
+         * 
+         * @param Vec2 $vec The vector to normalize.
+         * @return Vec2 The normalized vector.
+         */
+        public static function normalized(Vec2 $vec) : Vec2 {}
+        
+        /**
+         * Returns the dot product of the left and right vectors
+         * 
+         * ```php
+         * $dot = Vec2::dot($left, $right);
+         * ```
+         * 
+         * @param Vec2 $left The left vector.
+         * @param Vec2 $right The right vector.
+         * @return float The dot product of the left and right vectors.
+         */
+        public static function dot(Vec2 $left, Vec2 $right) : float {}
 
         /**
          * Returns the length of the vector
@@ -110,39 +161,34 @@ namespace GL\Math
          * @return float
          */
         public function length() : float {}
-        
-        /**
-         * Returns the dot product of this vector and another
-         * 
-         * @return float
-         */
-        public function dot(Vec2 $right) : float {}
 
         /**
          * Returns the distance between this vector and another
          * 
          * @return float
          */
-        public function distance(Vec2 $right) : float {}
+        public function distanceTo(Vec2 $right) : float {}
 
         /**
          * Returns squared distance between this vector and another
          * 
          * @return float
          */
-        public function distance2(Vec2 $right) : float {}
+        public function distance2To(Vec2 $right) : float {}
 
         /**
-         * Returns a normalized version of this vector
+         * normalizes the current vector
          * 
-         * @return Vec2         */
-        public function normalize() : Vec2 {}
+         * @return void
+         */
+        public function normalize() : void {}
 
         /**
-         * Creates a new Vec2 where each component is x if x >= 0; otherwise, -x
+         * Makes each component x if x >= 0; otherwise, -x
          * 
-         * @return Vec2         */
-        public function abs() : Vec2 {}
+         * @return void
+         */
+        public function abs() : void {}
         
         public function __toString() : string {}
     }
@@ -180,10 +226,61 @@ namespace GL\Math
         public float $b;
 
         
+
         /**
          * Constructor
          */
         public function __construct(?float $x = null, ?float $y = null, ?float $z = null) {}
+
+        /**
+         * Returns the distance between the left and right vectors
+         * 
+         * ```php    
+         * $distance = Vec3::distance($left, $right);
+         * ```
+         *
+         * @param Vec3 $left The left vector.
+         * @param Vec3 $right The right vector.
+         * @return float The distance between the left and right vectors.
+         */
+        public static function distance(Vec3 $left, Vec3 $right) : float {}
+        
+        /**
+         * Returns the squared distance between the left and right vectors
+         *
+         * ```php
+         * $distance = Vec3::distance2($left, $right);
+         * ```
+         *
+         * @param Vec3 $left The left vector.
+         * @param Vec3 $right The right vector.
+         * @return float The squared distance between the left and right vectors.
+         */
+        public static function distance2(Vec3 $left, Vec3 $right) : float {}
+
+        /**
+         * Retruns a normalized version of the given Vec3         * 
+         * ```php
+         * $normalized = Vec3::normalize(new Vec3($x, $y, $z));
+         * ```
+         * 
+         * @param Vec3 $vec The vector to normalize.
+         * @return Vec3 The normalized vector.
+         */
+        public static function normalized(Vec3 $vec) : Vec3 {}
+        
+        /**
+         * Returns the dot product of the left and right vectors
+         * 
+         * ```php
+         * $dot = Vec3::dot($left, $right);
+         * ```
+         * 
+         * @param Vec3 $left The left vector.
+         * @param Vec3 $right The right vector.
+         * @return float The dot product of the left and right vectors.
+         */
+        public static function dot(Vec3 $left, Vec3 $right) : float {}
 
         /**
          * Returns the length of the vector
@@ -191,45 +288,47 @@ namespace GL\Math
          * @return float
          */
         public function length() : float {}
-        
-        /**
-         * Returns the dot product of this vector and another
-         * 
-         * @return float
-         */
-        public function dot(Vec3 $right) : float {}
 
         /**
          * Returns the distance between this vector and another
          * 
          * @return float
          */
-        public function distance(Vec3 $right) : float {}
+        public function distanceTo(Vec3 $right) : float {}
 
         /**
          * Returns squared distance between this vector and another
          * 
          * @return float
          */
-        public function distance2(Vec3 $right) : float {}
+        public function distance2To(Vec3 $right) : float {}
 
         /**
-         * Returns a normalized version of this vector
+         * normalizes the current vector
          * 
-         * @return Vec3         */
-        public function normalize() : Vec3 {}
+         * @return void
+         */
+        public function normalize() : void {}
 
         /**
-         * Creates a new Vec3 where each component is x if x >= 0; otherwise, -x
+         * Makes each component x if x >= 0; otherwise, -x
          * 
-         * @return Vec3         */
-        public function abs() : Vec3 {}
+         * @return void
+         */
+        public function abs() : void {}
         
         /**
          * Returns the cross product of this vector and another
          * 
-         * @return Vec3         */
-        public function cross(Vec3 $right) : Vec3 {}
+         * ```php
+         * $cross = Vec3::cross($left, $right);
+         * ```
+         * 
+         * @param Vec3 $right The right vector.  
+         * @param Vec3 $left The left vector.       
+         * @return Vec3 The cross product of the left and right vectors.
+         */
+        public static function cross(Vec3 $right) : Vec3 {}
         public function __toString() : string {}
     }
  
@@ -276,10 +375,61 @@ namespace GL\Math
         public float $a;
 
         
+
         /**
          * Constructor
          */
         public function __construct(?float $x = null, ?float $y = null, ?float $z = null, ?float $w = null) {}
+
+        /**
+         * Returns the distance between the left and right vectors
+         * 
+         * ```php    
+         * $distance = Vec4::distance($left, $right);
+         * ```
+         *
+         * @param Vec4 $left The left vector.
+         * @param Vec4 $right The right vector.
+         * @return float The distance between the left and right vectors.
+         */
+        public static function distance(Vec4 $left, Vec4 $right) : float {}
+        
+        /**
+         * Returns the squared distance between the left and right vectors
+         *
+         * ```php
+         * $distance = Vec4::distance2($left, $right);
+         * ```
+         *
+         * @param Vec4 $left The left vector.
+         * @param Vec4 $right The right vector.
+         * @return float The squared distance between the left and right vectors.
+         */
+        public static function distance2(Vec4 $left, Vec4 $right) : float {}
+
+        /**
+         * Retruns a normalized version of the given Vec4         * 
+         * ```php
+         * $normalized = Vec4::normalize(new Vec4($x, $y, $z));
+         * ```
+         * 
+         * @param Vec4 $vec The vector to normalize.
+         * @return Vec4 The normalized vector.
+         */
+        public static function normalized(Vec4 $vec) : Vec4 {}
+        
+        /**
+         * Returns the dot product of the left and right vectors
+         * 
+         * ```php
+         * $dot = Vec4::dot($left, $right);
+         * ```
+         * 
+         * @param Vec4 $left The left vector.
+         * @param Vec4 $right The right vector.
+         * @return float The dot product of the left and right vectors.
+         */
+        public static function dot(Vec4 $left, Vec4 $right) : float {}
 
         /**
          * Returns the length of the vector
@@ -287,56 +437,186 @@ namespace GL\Math
          * @return float
          */
         public function length() : float {}
-        
-        /**
-         * Returns the dot product of this vector and another
-         * 
-         * @return float
-         */
-        public function dot(Vec4 $right) : float {}
 
         /**
          * Returns the distance between this vector and another
          * 
          * @return float
          */
-        public function distance(Vec4 $right) : float {}
+        public function distanceTo(Vec4 $right) : float {}
 
         /**
          * Returns squared distance between this vector and another
          * 
          * @return float
          */
-        public function distance2(Vec4 $right) : float {}
+        public function distance2To(Vec4 $right) : float {}
 
         /**
-         * Returns a normalized version of this vector
+         * normalizes the current vector
          * 
-         * @return Vec4         */
-        public function normalize() : Vec4 {}
+         * @return void
+         */
+        public function normalize() : void {}
 
         /**
-         * Creates a new Vec4 where each component is x if x >= 0; otherwise, -x
+         * Makes each component x if x >= 0; otherwise, -x
          * 
-         * @return Vec4         */
-        public function abs() : Vec4 {}
+         * @return void
+         */
+        public function abs() : void {}
         
+        public function __toString() : string {}
+    }
+ 
+    class Quat 
+    {
+        
+
+
+        /**
+         * Constructor
+         */
+        public function __construct(?float $w = null, ?float $x = null, ?float $y = null, ?float $z = null) {}
+
+        /**
+         * Constructs and returns a new quaternion based on the given Mat4 matrix
+         *
+         * ```php
+         * $quat = Quat::fromMat4($matrix);
+         * ```
+         *
+         * @param Mat4 $matrix The matrix to construct the quaternion from.
+         * @return Quat The constructed quaternion.
+         */
+        public static function fromMat4(Mat4 $matrix) : Quat {}
+
+        /**
+         * Constructs and returns a new quaternion based on the given Vec4 vector.
+         * The quaternion is arragned as (w, x, y, z), while the vector is arranged as (x, y, z, w).
+         * This method will swap the x and w components.
+         *
+         * ```php
+         * $quat = Quat::fromVec4($vector);
+         * ```
+         *
+         * @param Vec4 $vector The vector to construct the quaternion from.
+         * @return Quat The constructed quaternion.
+         */
+        public static function fromVec4(Vec4 $vec) : Quat {}
+
+        /**
+         * Constructs and returns a normalized quaternion based on the given one
+         *
+         * ```php
+         * $normalized = Quat::normalized($quat);
+         * ```
+         *
+         * @param Quat $quat The quaternion to normalize.
+         * @return Quat The normalized quaternion.
+         */
+        public static function normalized(Quat $quat) : Quat {} 
+
+        /**
+         * The same as `normalized()`, but modifies the current quaternion instead of creating a new one.
+         *
+         * ```php
+         * $quat->normalize();
+         * ```
+         */
+        public function normalize() : void {}
+
+        /**
+         * Returns the length of the quaternion
+         * 
+         * ```php
+         * $length = $quat->length();
+         * ```
+         */
+        public function length() : float {}
+
+        /**
+         * Returns the quaternion represented as euler angles (in radians)
+         * 
+         * ```php
+         * $euler = $quat->eulerAngles();
+         * ```
+         *
+         * @return Vec3 The euler angles.
+         */
+        public function eulerAngles() : Vec3 {}
+
+        /**
+         * Rotates the quaternion by the given angle (in radians) around the given axis
+         * 
+         * ```php
+         * $quat->rotate(GLM::radians(45.0), new Vec3(0, 1, 0));
+         * ```
+         * 
+         * @param float $angle The angle to rotate by (in radians)
+         * @param Vec3 $axis The axis to rotate around
+         */
+        public function rotate(float $angle, Vec3 $axis) : void {}
+
+        /**
+         * Constructs a Mat4 matrix based on the current quaternion
+         *
+         * ```php
+         * $matrix = $quat->mat4();
+         * ```
+         *
+         * @return Mat4 The matrix representation of the quaternion.
+         */
+        public function mat4() : Mat4 {}
         public function __toString() : string {}
     }
  
     class Mat4 
     {
         
+
+
         /**
-         * Constructor
+         * Constructucts a new Mat4 matrix
+         * Does not take any arguments and always returns an identity matrix.
+         * aka: 
+         * ```
+         * 1 0 0 0
+         * 0 1 0 0
+         * 0 0 1 0
+         * 0 0 0 1         
+         * ```
          */
         public function __construct() {}
 
-
         /**
          * Constructs and returns a new matrix based on the given array of values
+         * 
+         * ```php
+         * $matrix = Mat4::fromArray([
+         *     1, 0, 0, 0,
+         *     0, 1, 0, 0,
+         *     0, 0, 1, 0,
+         *     0, 0, 0, 1
+         * ]);
+         * ```
+         *
+         * @param array $values The values to use for the matrix. (flat)
+         * @return Mat4 The new matrix.
          */
         public static function fromArray(array $values) : Mat4 {}
+
+        /**
+         * Constructs and returns an inverse of the given matrix
+         * 
+         * ```php
+         * $inverse = Mat4::inverse($matrix);
+         * ```
+         *
+         * @param Mat4 $matrix The matrix to invert.
+         * @return Mat4 The inverted matrix.
+         */
+        public static function inverted(Mat4 $matrix) : Mat4 {}
 
         /**
          * Creates and returns a copy of the current matrix
@@ -352,7 +632,7 @@ namespace GL\Math
         public function transpose() : void {}
         public function inverse() : void {}
         public function scale(Vec3 $scale) : void {}
-        public function translate(Vec3 $scale) : void {}
+        public function translate(Vec3 $translation) : void {}
         public function rotate(float $angle, Vec3 $axis) : void {}
         public function determinant() : float {}
         public function __toString() : string {}
