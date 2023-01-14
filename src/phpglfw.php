@@ -1589,6 +1589,20 @@ namespace GL\Geometry\ObjFileParser
          * @var \GL\Buffer\UIntBuffer|null
          */
         public readonly ?UIntBuffer $indices; 
+
+        /**
+         * The min of the axis aligned bounding box of the mesh.
+         * 
+         * @var \GL\Buffer\Vec3|null
+         */
+        public readonly ?\GL\Buffer\Vec3 $aabbMin;
+
+        /**
+         * The max of the axis aligned bounding box of the mesh.
+         * 
+         * @var \GL\Buffer\Vec3|null
+         */
+        public readonly ?\GL\Buffer\Vec3 $aabbMax;
     }
 
     class Material
@@ -2474,6 +2488,21 @@ namespace {
      * @return void
      */ 
     function glReadBuffer(int $src) : void {};
+ 
+    /**
+     * glReadPixels
+     * 
+     * @param int $x 
+     * @param int $y 
+     * @param int $width 
+     * @param int $height 
+     * @param int $format 
+     * @param int $type 
+     * @param \GL\Buffer\BufferInterface $pixels 
+     * 
+     * @return void
+     */ 
+    function glReadPixels(int $x, int $y, int $width, int $height, int $format, int $type, \GL\Buffer\BufferInterface $pixels) : void {};
  
     /**
      * glGetBooleanv
