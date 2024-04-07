@@ -1227,6 +1227,13 @@ namespace GL\Buffer
          * @return int buffer space in element count (not bytes)
          */
         public function capacity() : int {}
+
+        /**
+         * Returns the internal data of the buffer as a binary string.
+         * 
+         * @return string The binary string of the buffer.
+         */
+        public function dump() : string {}
     }
 
     class HFloatBuffer implements BufferInterface {
@@ -1297,6 +1304,13 @@ namespace GL\Buffer
          * @return int buffer space in element count (not bytes)
          */
         public function capacity() : int {}
+
+        /**
+         * Returns the internal data of the buffer as a binary string.
+         * 
+         * @return string The binary string of the buffer.
+         */
+        public function dump() : string {}
     }
 
     class DoubleBuffer implements BufferInterface {
@@ -1367,6 +1381,13 @@ namespace GL\Buffer
          * @return int buffer space in element count (not bytes)
          */
         public function capacity() : int {}
+
+        /**
+         * Returns the internal data of the buffer as a binary string.
+         * 
+         * @return string The binary string of the buffer.
+         */
+        public function dump() : string {}
     }
 
     class IntBuffer implements BufferInterface {
@@ -1437,6 +1458,13 @@ namespace GL\Buffer
          * @return int buffer space in element count (not bytes)
          */
         public function capacity() : int {}
+
+        /**
+         * Returns the internal data of the buffer as a binary string.
+         * 
+         * @return string The binary string of the buffer.
+         */
+        public function dump() : string {}
     }
 
     class UIntBuffer implements BufferInterface {
@@ -1507,6 +1535,13 @@ namespace GL\Buffer
          * @return int buffer space in element count (not bytes)
          */
         public function capacity() : int {}
+
+        /**
+         * Returns the internal data of the buffer as a binary string.
+         * 
+         * @return string The binary string of the buffer.
+         */
+        public function dump() : string {}
     }
 
     class ShortBuffer implements BufferInterface {
@@ -1577,6 +1612,13 @@ namespace GL\Buffer
          * @return int buffer space in element count (not bytes)
          */
         public function capacity() : int {}
+
+        /**
+         * Returns the internal data of the buffer as a binary string.
+         * 
+         * @return string The binary string of the buffer.
+         */
+        public function dump() : string {}
     }
 
     class UShortBuffer implements BufferInterface {
@@ -1647,6 +1689,13 @@ namespace GL\Buffer
          * @return int buffer space in element count (not bytes)
          */
         public function capacity() : int {}
+
+        /**
+         * Returns the internal data of the buffer as a binary string.
+         * 
+         * @return string The binary string of the buffer.
+         */
+        public function dump() : string {}
     }
 
     class ByteBuffer implements BufferInterface {
@@ -1717,6 +1766,13 @@ namespace GL\Buffer
          * @return int buffer space in element count (not bytes)
          */
         public function capacity() : int {}
+
+        /**
+         * Returns the internal data of the buffer as a binary string.
+         * 
+         * @return string The binary string of the buffer.
+         */
+        public function dump() : string {}
     }
 
     class UByteBuffer implements BufferInterface {
@@ -1787,6 +1843,13 @@ namespace GL\Buffer
          * @return int buffer space in element count (not bytes)
          */
         public function capacity() : int {}
+
+        /**
+         * Returns the internal data of the buffer as a binary string.
+         * 
+         * @return string The binary string of the buffer.
+         */
+        public function dump() : string {}
     }
 };
 
@@ -2317,6 +2380,19 @@ namespace GL\VectorGraphics
         //public static function fromVec4(\GL\Math\Vec4 $vec) : VGColor {}
         //public static function fromVec3(\GL\Math\Vec3 $vec) : VGColor {}
 
+        /**
+         * Hex color constructor
+         * You can pass a hex string with or without the `#` prefix. (e.g. `#FF0000` or `FF0000`)
+         * 
+         * Example:
+         *     $color = VGColor::hex('#FF0000');
+         *     $color = VGColor::hex('FF0000');
+         *     $color = VGColor::hex('#000');
+         * 
+         * @param string $hex The hex string to convert to a color.
+         */
+        public static function hex(string $hex) : VGColor {}
+
         public static function red() : VGColor {}
         public static function green() : VGColor {}
         public static function blue() : VGColor {}
@@ -2416,6 +2492,15 @@ namespace GL\VectorGraphics
 
         public const CCW = 1;
         public const CW = 2;
+
+        public const SOLID = 1;
+        public const HOLE = 2;
+
+        public const LINECAP_BUTT = 0;
+        public const LINECAP_ROUND = 1;
+        public const LINECAP_SQUARE = 2;
+        public const LINECAP_BEVEL = 3;
+        public const LINECAP_MITER = 4;
 
         public function __construct(int $flags = 0) {}
 
@@ -3067,6 +3152,19 @@ namespace {
      * @return string
      */ 
     function glGetString(int $name) : string {}
+ 
+    /**
+     * glGetTexImage
+     * 
+     * @param int $target 
+     * @param int $level 
+     * @param int $format 
+     * @param int $type 
+     * @param \GL\Buffer\BufferInterface $pixels 
+     * 
+     * @return void
+     */ 
+    function glGetTexImage(int $target, int $level, int $format, int $type, \GL\Buffer\BufferInterface $pixels) : void {}
  
     /**
      * glGetTexParameterfv
@@ -5782,6 +5880,42 @@ namespace {
      * @return bool
      */ 
     function glIsSync(int $sync) : bool {}
+ 
+    /**
+     * delete a sync object
+     * 
+     * @param int $sync The sync object to be deleted.
+     * 
+     * @return void
+     */ 
+    function glDeleteSync(int $sync) : void {}
+ 
+    /**
+     * block and wait for a sync object to become signaled
+     * 
+     * @param int $sync The sync object whose status to wait on.
+     * @param int $flags A bitfield controlling the command flushing behavior. flags
+     * may be <constant>GL_SYNC_FLUSH_COMMANDS_BIT</constant>.
+     * @param int $timeout The timeout, specified in nanoseconds, for which the
+     * implementation should wait for sync to become signaled.
+     * 
+     * @return int
+     */ 
+    function glClientWaitSync(int $sync, int $flags, int $timeout) : int {}
+ 
+    /**
+     * instruct the GL server to block until the specified sync object becomes
+     * signaled
+     * 
+     * @param int $sync Specifies the sync object whose status to wait on.
+     * @param int $flags A bitfield controlling the command flushing behavior. flags
+     * may be zero.
+     * @param int $timeout Specifies the timeout that the server should wait before
+     * continuing. timeout must be <constant>GL_TIMEOUT_IGNORED</constant>.
+     * 
+     * @return void
+     */ 
+    function glWaitSync(int $sync, int $flags, int $timeout) : void {}
  
     /**
      * glGetInteger64v
