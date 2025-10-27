@@ -2253,6 +2253,205 @@ namespace GL\Geometry
     }
 }
 
+namespace GL\Geometry\VoxFileParser
+{
+    /** @internal Vox parser scene resource */
+    class Resource {}
+
+    /**
+     * Palette helper that owns a 256-entry RGBA byte buffer and exposes convenience helpers
+     * for manipulating MagicaVoxel color data.
+     */
+    class Palette
+    {
+        /**
+         * @param ?\GL\Buffer\UByteBuffer $buffer Optional existing buffer to wrap. When omitted a default palette is created.
+         */
+        public function __construct(?\GL\Buffer\UByteBuffer $buffer = null) {}
+
+        /**
+         * Retrieve the underlying RGBA byte buffer (256 * 4 entries).
+         */
+        public function getBuffer() : \GL\Buffer\UByteBuffer {}
+
+        /**
+         * Assign a color at the given palette index using a Vec4 color.
+         */
+        public function setColor(int $index, \GL\Math\Vec4 $color) : void {}
+
+        /**
+         * Assign a color at the given palette index using individual float components.
+         * Components are expected in the 0..1 range.
+         */
+        public function setColorf(int $index, float $r, float $g, float $b, float $a = 1.0) : void {}
+
+        /**
+         * Fetch a color at the given palette index as a Vec4 object in the 0..1 range.
+         */
+        public function getColor(int $index) : \GL\Math\Vec4 {}
+
+        /**
+         * Replace the palette contents from another buffer. Accepts RGBA byte or float layouts.
+         */
+        public function replaceFromBuffer(\GL\Buffer\UByteBuffer|\GL\Buffer\FloatBuffer $buffer) : void {}
+
+        /**
+         * Replace palette entries from an array of colors. Each color may be [r, g, b] or [r, g, b, a] in 0..1 range.
+         *
+         * @param array<int, array{0:float,1:float,2:float,3?:float}> $colors
+         */
+        public function replaceFromArray(array $colors) : void {}
+
+        /**
+         * Reset the palette to the default MagicaVoxel color table.
+         */
+        public function fillDefault() : void {}
+    }
+
+    /**
+     * Represents a voxel model parsed from a MagicaVoxel scene.
+     */
+    class Model
+    {
+        /** @var int */
+        public const MODE_SIMPLE = 0;
+        /** @var int */
+        public const MODE_GREEDY = 1;
+        /** @var int */
+        public const MODE_POLYGON = 2;
+
+        /** Sequential model index inside the scene */
+        public readonly int $index;
+        /** Grid width */
+        public readonly int $sizeX;
+        /** Grid height */
+        public readonly int $sizeY;
+        /** Grid depth */
+        public readonly int $sizeZ;
+        /** Hash identifying the voxel contents */
+        public readonly int $voxelHash;
+        /** Number of voxels contained in the grid */
+        public readonly int $voxelCount;
+        /** Raw voxel palette indices */
+        public readonly ?\GL\Buffer\UByteBuffer $voxelData;
+        /** Back reference to parser resource */
+        public readonly ?Resource $resource;
+
+        public function __construct() {}
+
+        /**
+         * Generate a triangle mesh for this voxel grid.
+         *
+         * @param \GL\Buffer\FloatBuffer $vertices Destination buffer for vertex attributes (position, normal, colors).
+         * @param \GL\Buffer\UIntBuffer  $indices Destination buffer for triangle indices.
+         * @param Palette|null $palette Optional palette override or editor instance.
+         * @param string $mode Mesh generation mode name (simple, greedy, polygon).
+         * @param array{
+         *     colors?: 'rgb'|'rgba'|'none',
+         *     includePaletteIndex?: bool,
+         *     origin?: 'corner'|'center',
+         *     originOffset?: array<int, float>,
+         *     stats?: array{vertexCount:int,indexCount:int}|null
+         * }|null $options Additional mesh generation controls. When provided, this array receives a `stats` entry on success.
+         *
+         * @return bool True on success, false otherwise.
+         */
+        public function generateTriangleMesh(
+            \GL\Buffer\FloatBuffer $vertices,
+            \GL\Buffer\UIntBuffer $indices,
+            ?Palette $palette = null,
+            string $mode = 'simple',
+            ?array $options = null
+        ) : bool {}
+
+        /** Retrieve the palette index stored at the given voxel coordinate. */
+        public function getVoxel(int $x, int $y, int $z) : ?int {}
+    }
+
+    /** Placement of a voxel model in the scene */
+    class Instance
+    {
+        /** Sequential instance index */
+        public readonly int $index;
+        public readonly ?string $name;
+        public readonly int $modelIndex;
+        public readonly int $layerIndex;
+        public readonly int $groupIndex;
+        public readonly bool $hidden;
+        /** Full transform matrix in scene space */
+        public readonly ?\GL\Math\Mat4 $transform;
+        /** Local transform relative to the parent group */
+        public readonly ?\GL\Math\Mat4 $localTransform;
+
+        public function __construct() {}
+    }
+
+    /** Scene layer metadata */
+    class Layer
+    {
+        /** Sequential layer index */
+        public readonly int $index;
+        public readonly ?string $name;
+        public readonly ?\GL\Math\Vec4 $color;
+        public readonly bool $hidden;
+
+        public function __construct() {}
+    }
+
+    /** Group hierarchy entry */
+    class Group
+    {
+        /** Sequential group index */
+        public readonly int $index;
+        public readonly ?string $name;
+        public readonly int $parentGroupIndex;
+        public readonly int $layerIndex;
+        public readonly bool $hidden;
+        /** Full transform matrix in scene space */
+        public readonly ?\GL\Math\Mat4 $transform;
+        /** Local transform relative to the parent group */
+        public readonly ?\GL\Math\Mat4 $localTransform;
+
+        public function __construct() {}
+    }
+}
+
+namespace GL\Geometry
+{
+    /**
+     * MagicaVoxel file parser that exposes scene data and mesh generation utilities.
+     */
+    class VoxFileParser
+    {
+        /** @var ?VoxFileParser\Resource internal parser resource */
+        public readonly ?VoxFileParser\Resource $resource;
+        /** @var array<int, VoxFileParser\Model> loaded voxel models */
+        public readonly array $models;
+        /** @var array<int, VoxFileParser\Instance> placed instances */
+        public readonly array $instances;
+        /** @var array<int, VoxFileParser\Layer> scene layers */
+        public readonly array $layers;
+        /** @var array<int, VoxFileParser\Group> scene groups */
+        public readonly array $groups;
+        /** @var ?VoxFileParser\Palette Palette helper providing color utilities */
+        public readonly ?VoxFileParser\Palette $palette;
+        /** Total number of voxel models */
+        public readonly int $modelCount;
+        /** Total number of instances */
+        public readonly int $instanceCount;
+        /** Total number of layers */
+        public readonly int $layerCount;
+        /** Total number of groups */
+        public readonly int $groupCount;
+
+        public function __construct(string $file) {}
+
+        public function getModel(int $modelIndex) : ?VoxFileParser\Model {}
+
+        public function getPaletteColor(int $colorIndex) : ?\GL\Math\Vec4 {}
+    }
+}
+
 namespace GL\Texture
 {
     /**
@@ -2530,6 +2729,293 @@ namespace GL
     }
 }
 
+namespace GL\Audio
+{
+    /**
+     * The Engine class is the main audio engine that manages all audio playback.
+     * It provides methods for loading sounds, controlling master volume, and 3D audio positioning.
+     */
+    class Engine
+    {
+        /**
+         * Creates a new audio engine instance.
+         * 
+         * @param array $options Optional configuration array with the following keys:
+         *   - listenerCount: int - Number of listeners (1 to 4, default is system dependent)
+         *   - channels: int - Number of output channels (0 = use device default)
+         *   - sampleRate: int - Sample rate in Hz (0 = use device default)
+         *   - periodSizeInFrames: int - Period size in frames for low-latency (0 = use default)
+         *   - periodSizeInMilliseconds: int - Period size in milliseconds (used if periodSizeInFrames is 0)
+         *   - gainSmoothTimeInFrames: int - Smoothing time for gain changes in frames
+         *   - gainSmoothTimeInMilliseconds: int - Smoothing time for gain changes in ms
+         *   - defaultVolumeSmoothTimeInPCMFrames: int - Default volume smoothing time
+         *   - noAutoStart: bool - Don't start the engine automatically (false by default)
+         *   - monoExpansionMode: int - How to expand mono to multi-channel (use GL_MA_MONO_EXPANSION_MODE_* constants)
+         */
+        public function __construct(array $options = []) {}
+
+        /**
+         * Starts the audio engine.
+         * 
+         * @return void
+         * @throws Error if the engine fails to start
+         */
+        public function start() : void {}
+
+        /**
+         * Stops the audio engine.
+         * 
+         * @return void
+         * @throws Error if the engine fails to stop
+         */
+        public function stop() : void {}
+
+        /**
+         * Loads a sound from a file path.
+         * 
+         * @param string $filePath The path to the audio file to load.
+         * @return Sound The loaded sound object.
+         */
+        public function load(string $filePath) : Sound {}
+        
+        /**
+         * Loads a sound from a file path.
+         * Alias for load() method.
+         * 
+         * @param string $filePath The path to the audio file to load.
+         * @return Sound The loaded sound object.
+         */
+        public function soundFromDisk(string $filePath) : Sound {}
+
+        /**
+         * Sets the master volume for all sounds.
+         * 
+         * @param float $volume The master volume level (0.0 to 1.0).
+         * @return void
+         */
+        public function setMasterVolume(float $volume) : void {}
+
+        /**
+         * Gets the current master volume.
+         * 
+         * @return float The current master volume level.
+         */
+        public function getMasterVolume() : float {}
+
+        /**
+         * Sets the listener position for 3D audio.
+         * 
+         * @param Vec3 $position The position vector of the listener.
+         * @return void
+         */
+        public function setListenerPosition(\GL\Math\Vec3 $position) : void {}
+
+        /**
+         * Sets the listener direction for 3D audio.
+         * 
+         * @param Vec3 $direction The direction vector the listener is facing.
+         * @return void
+         */
+        public function setListenerDirection(\GL\Math\Vec3 $direction) : void {}
+
+        /**
+         * Sets the listener world up vector for 3D audio.
+         * 
+         * @param Vec3 $worldUp The up vector defining the listener's orientation.
+         * @return void
+         */
+        public function setListenerWorldUp(\GL\Math\Vec3 $worldUp) : void {}
+    }
+
+    /**
+     * The Sound class represents an individual audio sound that can be played, paused, and controlled.
+     */
+    class Sound
+    {
+        /**
+         * Plays the sound.
+         * 
+         * @return void
+         */
+        public function play() : void {}
+
+        /**
+         * Stops the sound and resets it to the beginning.
+         * 
+         * @return void
+         */
+        public function stop() : void {}
+
+        /**
+         * Sets the volume of the sound.
+         * 
+         * @param float $volume The volume level (0.0 to 1.0).
+         * @return void
+         */
+        public function setVolume(float $volume) : void {}
+
+        /**
+         * Gets the current volume of the sound.
+         * 
+         * @return float The current volume level.
+         */
+        public function getVolume() : float {}
+
+        /**
+         * Sets the pitch of the sound.
+         * 
+         * @param float $pitch The pitch multiplier (1.0 = normal pitch).
+         * @return void
+         */
+        public function setPitch(float $pitch) : void {}
+
+        /**
+         * Gets the current pitch of the sound.
+         * 
+         * @return float The current pitch multiplier.
+         */
+        public function getPitch() : float {}
+
+        /**
+         * Sets whether the sound should loop.
+         * 
+         * @param bool $loop Whether to loop the sound.
+         * @return void
+         */
+        public function setLoop(bool $loop) : void {}
+
+        /**
+         * Gets whether the sound is set to loop.
+         * 
+         * @return bool Whether the sound is set to loop.
+         */
+        public function getLoop() : bool {}
+
+        /**
+         * Sets the pan (stereo positioning) of the sound.
+         * 
+         * @param float $pan The pan value (-1.0 = left, 0.0 = center, 1.0 = right).
+         * @return void
+         */
+        public function setPan(float $pan) : void {}
+
+        /**
+         * Gets the current pan of the sound.
+         * 
+         * @return float The current pan value.
+         */
+        public function getPan() : float {}
+
+        /**
+         * Sets the 3D position of the sound in world space.
+         * 
+         * @param Vec3 $position The position vector (x, y, z).
+         * @return void
+         */
+        public function setPosition(\GL\Math\Vec3 $position) : void {}
+
+        /**
+         * Gets the current 3D position of the sound.
+         * 
+         * @return Vec3 The current position vector.
+         */
+        public function getPosition() : \GL\Math\Vec3 {}
+
+        /**
+         * Sets the minimum distance for 3D audio attenuation.
+         * 
+         * @param float $distance The minimum distance.
+         * @return void
+         */
+        public function setMinDistance(float $distance) : void {}
+
+        /**
+         * Gets the minimum distance for 3D audio attenuation.
+         * 
+         * @return float The minimum distance.
+         */
+        public function getMinDistance() : float {}
+
+        /**
+         * Sets the maximum distance for 3D audio rolloff.
+         * 
+         * @param float $distance The maximum distance.
+         * @return void
+         */
+        public function setMaxDistance(float $distance) : void {}
+
+        /**
+         * Gets the maximum distance for 3D audio rolloff.
+         * 
+         * @return float The maximum distance.
+         */
+        public function getMaxDistance() : float {}
+
+        /**
+         * Sets the direction of the sound for directional audio effects.
+         * 
+         * @param Vec3 $direction The direction vector.
+         * @return void
+         */
+        public function setDirection(\GL\Math\Vec3 $direction) : void {}
+
+        /**
+         * Gets the direction of the sound.
+         * 
+         * @return Vec3 The direction vector.
+         */
+        public function getDirection() : \GL\Math\Vec3 {}
+
+        /**
+         * Sets the velocity of the sound for Doppler effects.
+         * 
+         * @param Vec3 $velocity The velocity vector.
+         * @return void
+         */
+        public function setVelocity(\GL\Math\Vec3 $velocity) : void {}
+
+        /**
+         * Gets the velocity of the sound.
+         * 
+         * @return Vec3 The velocity vector.
+         */
+        public function getVelocity() : \GL\Math\Vec3 {}
+
+        /**
+         * Fades the sound in from 0 to full volume over the specified duration.
+         * 
+         * @param float $duration The fade duration in seconds.
+         * @return void
+         */
+        public function fadeIn(float $duration) : void {}
+
+        /**
+         * Fades the sound out from current volume to 0 over the specified duration.
+         * 
+         * @param float $duration The fade duration in seconds.
+         * @return void
+         */
+        public function fadeOut(float $duration) : void {}
+
+        /**
+         * Sets a custom fade from one volume to another over the specified duration.
+         * 
+         * @param float $fromVolume The starting volume (0.0 to 1.0).
+         * @param float $toVolume The target volume (0.0 to 1.0).
+         * @param float $duration The fade duration in seconds.
+         * @return void
+         */
+        public function setFade(float $fromVolume, float $toVolume, float $duration) : void {}
+
+        /**
+         * Gets the current fade volume.
+         * 
+         * @return float The current fade volume.
+         */
+        public function getCurrentFadeVolume() : float {}
+    }
+}
+
 namespace GL\VectorGraphics
 {
     class VGColor {
@@ -2674,6 +3160,30 @@ namespace GL\VectorGraphics
          * @return VGColor The inverted color.
          */
         public function invert() : VGColor {}
+
+        /**
+         * Returns a new color with modified alpha.
+         *
+         * @param float $alpha The new alpha value (0.0 to 1.0).
+         * @return VGColor A new color with the specified alpha.
+         */
+        public function withAlpha(float $alpha) : VGColor {}
+
+        /**
+         * Returns a copy of the color object.
+         *
+         * @return VGColor A copy of this color.
+         */
+        public function copy() : VGColor {}
+
+        /**
+         * Returns either black or white depending on what provides better contrast for this color.
+         * Uses perceived luminance to determine which color (black or white) would be more readable
+         * when displayed on top of this color.
+         *
+         * @return VGColor Either black or white color for optimal contrast.
+         */
+        public function contrast() : VGColor {}
     }
     
     class VGPaint {
@@ -3028,76 +3538,789 @@ namespace GL\VectorGraphics
         public function radialGradient(float $cx, float $cy, float $inr, float $outr, VGColor $icol, VGColor $ocol) : VGPaint {}
         //public function imagePattern(float $cx, float $cy, float $w, float $h, float $angle, float $alpha) : VGPaint {}
 
+        /**
+         * Begins drawing a new frame.
+         * 
+         * Example:
+         * 
+         * ```php
+         * $vg->beginFrame($windowWidth, $windowHeight, $devicePixelRatio);
+         * // draw commands here
+         * $vg->endFrame();
+         * ```
+         * 
+         * @param float $windowWidth The width of the window in pixels.
+         * @param float $windowHeight The height of the window in pixels.
+         * @param float $devicePixelRatio The device pixel ratio.
+         * 
+         * @return void
+         */ 
         public function beginFrame(float $windowWidth, float $windowHeight, float $devicePixelRatio) : void {}
+ 
+        /**
+         * cancelFrame
+         * @return void
+         */ 
         public function cancelFrame() : void {}
+ 
+        /**
+         * Ends drawing the current frame.
+         * 
+         * Example:
+         * 
+         * ```php
+         * $vg->beginFrame($windowWidth, $windowHeight, $devicePixelRatio);
+         * // draw commands here
+         * $vg->endFrame();
+         * ```
+         * @return void
+         */ 
         public function endFrame() : void {}
+ 
+        /**
+         * globalCompositeOperation
+         * 
+         * @param int $op 
+         * 
+         * @return void
+         */ 
         public function globalCompositeOperation(int $op) : void {}
+ 
+        /**
+         * globalCompositeBlendFunc
+         * 
+         * @param int $sfactor 
+         * @param int $dfactor 
+         * 
+         * @return void
+         */ 
         public function globalCompositeBlendFunc(int $sfactor, int $dfactor) : void {}
+ 
+        /**
+         * globalCompositeBlendFuncSeparate
+         * 
+         * @param int $srcRGB 
+         * @param int $dstRGB 
+         * @param int $srcAlpha 
+         * @param int $dstAlpha 
+         * 
+         * @return void
+         */ 
         public function globalCompositeBlendFuncSeparate(int $srcRGB, int $dstRGB, int $srcAlpha, int $dstAlpha) : void {}
+ 
+        /**
+         * Saves the current render state onto a state stack.
+         * 
+         * Example:
+         * 
+         * ```php
+         * $vg->save();
+         * // modify state here
+         * $vg->restore();
+         * ```
+         * @return void
+         */ 
         public function save() : void {}
+ 
+        /**
+         * Restores the render state from the state stack.
+         * 
+         * Example:
+         * 
+         * ```php
+         * $vg->save();
+         * // modify state here
+         * $vg->restore();
+         * ```
+         * @return void
+         */ 
         public function restore() : void {}
+ 
+        /**
+         * Resets the current render state to default values.
+         * @return void
+         */ 
         public function reset() : void {}
+ 
+        /**
+         * shapeAntiAlias
+         * 
+         * @param int $enabled 
+         * 
+         * @return void
+         */ 
         public function shapeAntiAlias(int $enabled) : void {}
+ 
+        /**
+         * Sets the stroke color.
+         * 
+         * Example:
+         * 
+         * ```php
+         * $color = new VGColor(0.0, 0.0, 0.0, 1.0);
+         * $vg->strokeColor($color);
+         * ```
+         * 
+         * @param \GL\VectorGraphics\VGColor $color The stroke color.
+         * 
+         * @return void
+         */ 
         public function strokeColor(\GL\VectorGraphics\VGColor $color) : void {}
+ 
+        /**
+         * strokePaint
+         * 
+         * @param \GL\VectorGraphics\VGPaint $paint 
+         * 
+         * @return void
+         */ 
         public function strokePaint(\GL\VectorGraphics\VGPaint $paint) : void {}
+ 
+        /**
+         * Sets the fill color.
+         * 
+         * Example:
+         * 
+         * ```php
+         * $color = new VGColor(1.0, 0.0, 0.0, 1.0);
+         * $vg->fillColor($color);
+         * ```
+         * 
+         * @param \GL\VectorGraphics\VGColor $color The fill color.
+         * 
+         * @return void
+         */ 
         public function fillColor(\GL\VectorGraphics\VGColor $color) : void {}
+ 
+        /**
+         * fillPaint
+         * 
+         * @param \GL\VectorGraphics\VGPaint $paint 
+         * 
+         * @return void
+         */ 
         public function fillPaint(\GL\VectorGraphics\VGPaint $paint) : void {}
+ 
+        /**
+         * miterLimit
+         * 
+         * @param float $limit 
+         * 
+         * @return void
+         */ 
         public function miterLimit(float $limit) : void {}
+ 
+        /**
+         * Sets the stroke width.
+         * 
+         * Example:
+         * 
+         * ```php
+         * $vg->strokeWidth(2.0);
+         * ```
+         * 
+         * @param float $size The stroke width.
+         * 
+         * @return void
+         */ 
         public function strokeWidth(float $size) : void {}
+ 
+        /**
+         * lineCap
+         * 
+         * @param int $cap 
+         * 
+         * @return void
+         */ 
         public function lineCap(int $cap) : void {}
+ 
+        /**
+         * lineJoin
+         * 
+         * @param int $join 
+         * 
+         * @return void
+         */ 
         public function lineJoin(int $join) : void {}
+ 
+        /**
+         * globalAlpha
+         * 
+         * @param float $alpha 
+         * 
+         * @return void
+         */ 
         public function globalAlpha(float $alpha) : void {}
+ 
+        /**
+         * resetTransform
+         * @return void
+         */ 
         public function resetTransform() : void {}
+ 
+        /**
+         * transform
+         * 
+         * @param float $a 
+         * @param float $b 
+         * @param float $c 
+         * @param float $d 
+         * @param float $e 
+         * @param float $f 
+         * 
+         * @return void
+         */ 
         public function transform(float $a, float $b, float $c, float $d, float $e, float $f) : void {}
+ 
+        /**
+         * translate
+         * 
+         * @param float $x 
+         * @param float $y 
+         * 
+         * @return void
+         */ 
         public function translate(float $x, float $y) : void {}
+ 
+        /**
+         * rotate
+         * 
+         * @param float $angle 
+         * 
+         * @return void
+         */ 
         public function rotate(float $angle) : void {}
+ 
+        /**
+         * skewX
+         * 
+         * @param float $angle 
+         * 
+         * @return void
+         */ 
         public function skewX(float $angle) : void {}
+ 
+        /**
+         * skewY
+         * 
+         * @param float $angle 
+         * 
+         * @return void
+         */ 
         public function skewY(float $angle) : void {}
+ 
+        /**
+         * scale
+         * 
+         * @param float $x 
+         * @param float $y 
+         * 
+         * @return void
+         */ 
         public function scale(float $x, float $y) : void {}
+ 
+        /**
+         * currentTransform
+         * 
+         * @param \GL\Buffer\FloatBuffer $buffer 
+         * 
+         * @return void
+         */ 
         public function currentTransform(\GL\Buffer\FloatBuffer $buffer) : void {}
+ 
+        /**
+         * transformPointCurrent
+         * 
+         * @param float &$dstx 
+         * @param float &$dsty 
+         * @param float $srcx 
+         * @param float $srcy 
+         * 
+         * @return void
+         */ 
         public function transformPointCurrent(float &$dstx, float &$dsty, float $srcx, float $srcy) : void {}
+ 
+        /**
+         * imageSize
+         * 
+         * @param int $image 
+         * @param int &$w 
+         * @param int &$h 
+         * 
+         * @return void
+         */ 
         public function imageSize(int $image, int &$w, int &$h) : void {}
+ 
+        /**
+         * deleteImage
+         * 
+         * @param int $image 
+         * 
+         * @return void
+         */ 
         public function deleteImage(int $image) : void {}
+ 
+        /**
+         * scissor
+         * 
+         * @param float $x 
+         * @param float $y 
+         * @param float $w 
+         * @param float $h 
+         * 
+         * @return void
+         */ 
         public function scissor(float $x, float $y, float $w, float $h) : void {}
+ 
+        /**
+         * intersectScissor
+         * 
+         * @param float $x 
+         * @param float $y 
+         * @param float $w 
+         * @param float $h 
+         * 
+         * @return void
+         */ 
         public function intersectScissor(float $x, float $y, float $w, float $h) : void {}
+ 
+        /**
+         * resetScissor
+         * @return void
+         */ 
         public function resetScissor() : void {}
+ 
+        /**
+         * Begins a new path.
+         * 
+         * Example:
+         * 
+         * ```php
+         * $vg->beginPath();
+         * $vg->rect(100, 100, 200, 100);
+         * $vg->fill();
+         * ```
+         * @return void
+         */ 
         public function beginPath() : void {}
+ 
+        /**
+         * moveTo
+         * 
+         * @param float $x 
+         * @param float $y 
+         * 
+         * @return void
+         */ 
         public function moveTo(float $x, float $y) : void {}
+ 
+        /**
+         * lineTo
+         * 
+         * @param float $x 
+         * @param float $y 
+         * 
+         * @return void
+         */ 
         public function lineTo(float $x, float $y) : void {}
+ 
+        /**
+         * bezierTo
+         * 
+         * @param float $c1x 
+         * @param float $c1y 
+         * @param float $c2x 
+         * @param float $c2y 
+         * @param float $x 
+         * @param float $y 
+         * 
+         * @return void
+         */ 
         public function bezierTo(float $c1x, float $c1y, float $c2x, float $c2y, float $x, float $y) : void {}
+ 
+        /**
+         * quadTo
+         * 
+         * @param float $cx 
+         * @param float $cy 
+         * @param float $x 
+         * @param float $y 
+         * 
+         * @return void
+         */ 
         public function quadTo(float $cx, float $cy, float $x, float $y) : void {}
+ 
+        /**
+         * arcTo
+         * 
+         * @param float $x1 
+         * @param float $y1 
+         * @param float $x2 
+         * @param float $y2 
+         * @param float $radius 
+         * 
+         * @return void
+         */ 
         public function arcTo(float $x1, float $y1, float $x2, float $y2, float $radius) : void {}
+ 
+        /**
+         * closePath
+         * @return void
+         */ 
         public function closePath() : void {}
+ 
+        /**
+         * pathWinding
+         * 
+         * @param int $dir 
+         * 
+         * @return void
+         */ 
         public function pathWinding(int $dir) : void {}
+ 
+        /**
+         * arc
+         * 
+         * @param float $cx 
+         * @param float $cy 
+         * @param float $r 
+         * @param float $a0 
+         * @param float $a1 
+         * @param int $dir 
+         * 
+         * @return void
+         */ 
         public function arc(float $cx, float $cy, float $r, float $a0, float $a1, int $dir) : void {}
+ 
+        /**
+         * Creates a rectangle path.
+         * 
+         * Example:
+         * 
+         * ```php
+         * $vg->beginPath();
+         * $vg->rect(100, 100, 200, 100);
+         * $vg->fill();
+         * ```
+         * 
+         * @param float $x The x-coordinate of the top-left corner.
+         * @param float $y The y-coordinate of the top-left corner.
+         * @param float $w The width of the rectangle.
+         * @param float $h The height of the rectangle.
+         * 
+         * @return void
+         */ 
         public function rect(float $x, float $y, float $w, float $h) : void {}
+ 
+        /**
+         * roundedRect
+         * 
+         * @param float $x 
+         * @param float $y 
+         * @param float $w 
+         * @param float $h 
+         * @param float $r 
+         * 
+         * @return void
+         */ 
         public function roundedRect(float $x, float $y, float $w, float $h, float $r) : void {}
+ 
+        /**
+         * roundedRectVarying
+         * 
+         * @param float $x 
+         * @param float $y 
+         * @param float $w 
+         * @param float $h 
+         * @param float $radTopLeft 
+         * @param float $radTopRight 
+         * @param float $radBottomRight 
+         * @param float $radBottomLeft 
+         * 
+         * @return void
+         */ 
         public function roundedRectVarying(float $x, float $y, float $w, float $h, float $radTopLeft, float $radTopRight, float $radBottomRight, float $radBottomLeft) : void {}
+ 
+        /**
+         * ellipse
+         * 
+         * @param float $cx 
+         * @param float $cy 
+         * @param float $rx 
+         * @param float $ry 
+         * 
+         * @return void
+         */ 
         public function ellipse(float $cx, float $cy, float $rx, float $ry) : void {}
+ 
+        /**
+         * Creates a circle path.
+         * 
+         * Example:
+         * 
+         * ```php
+         * $vg->beginPath();
+         * $vg->circle(150, 150, 50);
+         * $vg->fill();
+         * ```
+         * 
+         * @param float $cx The x-coordinate of the center.
+         * @param float $cy The y-coordinate of the center.
+         * @param float $r The radius of the circle.
+         * 
+         * @return void
+         */ 
         public function circle(float $cx, float $cy, float $r) : void {}
+ 
+        /**
+         * Fills the current path with the current fill color or paint.
+         * 
+         * Example:
+         * 
+         * ```php
+         * $vg->beginPath();
+         * $vg->rect(100, 100, 200, 100);
+         * $vg->fill();
+         * ```
+         * @return void
+         */ 
         public function fill() : void {}
+ 
+        /**
+         * Strokes the current path with the current stroke color or paint.
+         * 
+         * Example:
+         * 
+         * ```php
+         * $vg->beginPath();
+         * $vg->rect(100, 100, 200, 100);
+         * $vg->stroke();
+         * ```
+         * @return void
+         */ 
         public function stroke() : void {}
+ 
+        /**
+         * createFont
+         * 
+         * @param string $name 
+         * @param string $filename 
+         * 
+         * @return int
+         */ 
         public function createFont(string $name, string $filename) : int {}
+ 
+        /**
+         * createFontAtIndex
+         * 
+         * @param string $name 
+         * @param string $filename 
+         * @param int $fontIndex 
+         * 
+         * @return int
+         */ 
         public function createFontAtIndex(string $name, string $filename, int $fontIndex) : int {}
+ 
+        /**
+         * findFont
+         * 
+         * @param string $name 
+         * 
+         * @return int
+         */ 
         public function findFont(string $name) : int {}
+ 
+        /**
+         * addFallbackFontId
+         * 
+         * @param int $baseFont 
+         * @param int $fallbackFont 
+         * 
+         * @return int
+         */ 
         public function addFallbackFontId(int $baseFont, int $fallbackFont) : int {}
+ 
+        /**
+         * addFallbackFont
+         * 
+         * @param string $baseFont 
+         * @param string $fallbackFont 
+         * 
+         * @return int
+         */ 
         public function addFallbackFont(string $baseFont, string $fallbackFont) : int {}
+ 
+        /**
+         * resetFallbackFontsId
+         * 
+         * @param int $baseFont 
+         * 
+         * @return void
+         */ 
         public function resetFallbackFontsId(int $baseFont) : void {}
+ 
+        /**
+         * resetFallbackFonts
+         * 
+         * @param string $baseFont 
+         * 
+         * @return void
+         */ 
         public function resetFallbackFonts(string $baseFont) : void {}
+ 
+        /**
+         * fontSize
+         * 
+         * @param float $size 
+         * 
+         * @return void
+         */ 
         public function fontSize(float $size) : void {}
+ 
+        /**
+         * fontBlur
+         * 
+         * @param float $blur 
+         * 
+         * @return void
+         */ 
         public function fontBlur(float $blur) : void {}
+ 
+        /**
+         * textLetterSpacing
+         * 
+         * @param float $spacing 
+         * 
+         * @return void
+         */ 
         public function textLetterSpacing(float $spacing) : void {}
+ 
+        /**
+         * textLineHeight
+         * 
+         * @param float $lineHeight 
+         * 
+         * @return void
+         */ 
         public function textLineHeight(float $lineHeight) : void {}
+ 
+        /**
+         * textAlign
+         * 
+         * @param int $align 
+         * 
+         * @return void
+         */ 
         public function textAlign(int $align) : void {}
+ 
+        /**
+         * fontFaceId
+         * 
+         * @param int $font 
+         * 
+         * @return void
+         */ 
         public function fontFaceId(int $font) : void {}
+ 
+        /**
+         * fontFace
+         * 
+         * @param string $font 
+         * 
+         * @return void
+         */ 
         public function fontFace(string $font) : void {}
+ 
+        /**
+         * Draws text at the specified position.
+         * 
+         * Example:
+         * 
+         * ```php
+         * $vg->fontSize(18.0);
+         * $advance = $vg->text(100, 100, "Hello, World!");
+         * ```
+         * 
+         * @param float $x The x-coordinate of the text position.
+         * @param float $y The y-coordinate of the text position.
+         * @param string $string The text string to draw.
+         * 
+         * @return float float The horizontal advance of the text.
+         */ 
         public function text(float $x, float $y, string $string) : float {}
+ 
+        /**
+         * textBox
+         * 
+         * @param float $x 
+         * @param float $y 
+         * @param float $breakRowWidth 
+         * @param string $string 
+         * 
+         * @return void
+         */ 
         public function textBox(float $x, float $y, float $breakRowWidth, string $string) : void {}
+ 
+        /**
+         * Calculates the bounding box of the specified text and returns the horizontal
+         * advance.
+         * 
+         * Example: 
+         * 
+         * ```php
+         * $vg->fontSize(18.0);
+         * $bounds = new Vec4();
+         * $advance = $vg->textBounds(100, 100, "Hello, World!", $bounds);
+         * echo "Text bounds: " . $bounds . "\n";
+         * echo "Text advance: " . $advance . "\n";
+         * ```
+         * 
+         * @param float $x The x of the text position.
+         * @param float $y The y of the text position.
+         * @param string $string The text string to measure.
+         * @param ?\GL\Math\Vec4 &$bounds Vec4 object in which the calculated bounds are
+         * stored [xmin, ymin, xmax, ymax].
+         * 
+         * @return float The horizontal advance of the text.
+         */ 
         public function textBounds(float $x, float $y, string $string, ?\GL\Math\Vec4 &$bounds = NULL) : float {}
+ 
+        /**
+         * textBoxBounds
+         * 
+         * @param float $x 
+         * @param float $y 
+         * @param float $breakRowWidth 
+         * @param string $string 
+         * @param ?\GL\Math\Vec4 &$bounds 
+         * 
+         * @return void
+         */ 
         public function textBoxBounds(float $x, float $y, float $breakRowWidth, string $string, ?\GL\Math\Vec4 &$bounds = NULL) : void {}
+ 
+        /**
+         * textMetrics
+         * 
+         * @param float &$ascender 
+         * @param float &$descender 
+         * @param float &$lineh 
+         * 
+         * @return void
+         */ 
         public function textMetrics(float &$ascender, float &$descender, float &$lineh) : void {}
+ 
+        /**
+         * deleteInternal
+         * @return void
+         */ 
         public function deleteInternal() : void {}
+ 
+        /**
+         * debugDumpPathCache
+         * @return void
+         */ 
         public function debugDumpPathCache() : void {}
+ 
  
     }
 }
@@ -8849,7 +10072,8 @@ namespace {
      * 
      * @param GLFWmonitor $monitor The monitor to query.
      * 
-     * @return GLFWvidmode
+     * @return GLFWvidmode An array of video modes, or `NULL` if an
+     * `error` occurred.
      */ 
     function glfwGetVideoModes(GLFWmonitor $monitor) : GLFWvidmode {}
  
@@ -9022,7 +10246,8 @@ namespace {
      * or `NULL`
      * to not share resources.
      * 
-     * @return GLFWwindow
+     * @return GLFWwindow The handle of the created window, or `NULL` if an
+     * `error` occurred.
      */ 
     function glfwCreateWindow(int $width, int $height, string $title, ?GLFWmonitor $monitor = NULL, ?GLFWwindow $share = NULL) : GLFWwindow {}
  
@@ -10413,7 +11638,9 @@ namespace {
      * 
      * @param int $jid The `joystick` to query.
      * 
-     * @return array
+     * @return array An array of axis values, or `NULL` if the joystick is not
+     * present or
+     * an `error` occurred.
      */ 
     function glfwGetJoystickAxes(int $jid) : array {}
  
@@ -10436,7 +11663,9 @@ namespace {
      * 
      * @param int $jid The `joystick` to query.
      * 
-     * @return array
+     * @return array An array of button states, or `NULL` if the joystick is not
+     * present
+     * or an `error` occurred.
      */ 
     function glfwGetJoystickButtons(int $jid) : array {}
  
@@ -10859,6 +12088,67 @@ namespace {
      * @return void
      */ 
     function glBufferData(int $target, \GL\Buffer\BufferInterface $buffer, int $usage) : void {}
+ 
+    /**
+     * render primitives from array data using element indices
+     * 
+     * Example: 
+     * ```php
+     * // define vertices for a rectangle using two triangles
+     * $vertices = new GL\Buffer\FloatBuffer([
+     *     // positions     // colors
+     *     0.5,  0.5, 0.0,  1.0, 0.0, 0.0,  // top right
+     *     0.5, -0.5, 0.0,  0.0, 1.0, 0.0,  // bottom right
+     *    -0.5, -0.5, 0.0,  0.0, 0.0, 1.0,  // bottom left
+     *    -0.5,  0.5, 0.0,  1.0, 1.0, 0.0   // top left 
+     * ]);
+     * 
+     * // define indices to form two triangles
+     * $indices = new GL\Buffer\UIntBuffer([
+     *     0, 1, 3,  // first triangle
+     *     1, 2, 3   // second triangle
+     * ]);
+     * 
+     * glGenVertexArrays(1, $VAO);
+     * glGenBuffers(1, $VBO);
+     * glGenBuffers(1, $EBO);
+     * 
+     * glBindVertexArray($VAO);
+     * glBindBuffer(GL_ARRAY_BUFFER, $VBO);
+     * glBufferData(GL_ARRAY_BUFFER, $vertices, GL_STATIC_DRAW);
+     * 
+     * glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, $EBO);
+     * glBufferData(GL_ELEMENT_ARRAY_BUFFER, $indices, GL_STATIC_DRAW);
+     * 
+     * // ... set up vertex attributes ...
+     * 
+     * // draw the rectangle using indices
+     * glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+     * ```
+     * 
+     * @PHP-GLFW: In the PHP extension this method supports both buffer objects and
+     * integer offsets.
+     * When using an Element Array Buffer (bound to GL_ELEMENT_ARRAY_BUFFER), pass
+     * an integer offset.
+     * When drawing without binding an element buffer, pass a UIntBuffer,
+     * UShortBuffer, or UByteBuffer containing the indices.
+     * 
+     * @param int $mode Specifies what kind of primitives to render. Symbolic
+     * constants GL_POINTS, GL_LINE_STRIP, GL_LINE_LOOP, GL_LINES,
+     * GL_LINE_STRIP_ADJACENCY, GL_LINES_ADJACENCY, GL_TRIANGLE_STRIP,
+     * GL_TRIANGLE_FAN, GL_TRIANGLES, GL_TRIANGLE_STRIP_ADJACENCY,
+     * GL_TRIANGLES_ADJACENCY and GL_PATCHES are accepted.
+     * @param int $count Specifies the number of elements to be rendered.
+     * @param int $type Specifies the type of the values in indices. Must be one of
+     * GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, or GL_UNSIGNED_INT.
+     * @param
+     * int|\GL\Buffer\UIntBuffer|\GL\Buffer\UShortBuffer|\GL\Buffer\UByteBuffer
+     * $indices Specifies a buffer object containing the indices, or an offset into
+     * the currently bound element array buffer.
+     * 
+     * @return void
+     */ 
+    function glDrawElements(int $mode, int $count, int $type, int|\GL\Buffer\UIntBuffer|\GL\Buffer\UShortBuffer|\GL\Buffer\UByteBuffer $indices) : void {}
  
     /**
      * Sets a matrix (mat4x4) uniform value to the current shader program.
